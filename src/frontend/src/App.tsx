@@ -2020,31 +2020,31 @@ export default function App() {
                 {[
                   {
                     icon: Facebook,
-                    href: "#",
+                    href: "https://www.facebook.com/Srivasundharasolutions",
                     ocid: "footer.facebook_link",
                     label: "Facebook",
                   },
                   {
                     icon: Instagram,
-                    href: "#",
+                    href: "https://www.instagram.com/srivasundharasolutions/",
                     ocid: "footer.instagram_link",
                     label: "Instagram",
                   },
                   {
                     icon: Linkedin,
-                    href: "#",
+                    href: "https://www.linkedin.com/company/110518953/",
                     ocid: "footer.linkedin_link",
                     label: "LinkedIn",
                   },
                   {
                     icon: Youtube,
-                    href: "#",
+                    href: "https://www.youtube.com/@SriVasundharaSolutions",
                     ocid: "footer.youtube_link",
                     label: "YouTube",
                   },
                   {
                     icon: Twitter,
-                    href: "#",
+                    href: "https://x.com/SrivasundharaS",
                     ocid: "footer.twitter_link",
                     label: "Twitter",
                   },
@@ -2054,6 +2054,8 @@ export default function App() {
                     href={href}
                     data-ocid={ocid}
                     aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-9 h-9 bg-slate-800 hover:bg-brand-teal rounded-lg flex items-center justify-center transition-colors group"
                   >
                     <Icon className="h-4 w-4 text-slate-400 group-hover:text-white transition-colors" />
