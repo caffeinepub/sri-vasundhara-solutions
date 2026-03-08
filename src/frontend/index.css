@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Fonts ─────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ─────────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Brand: Teal #52C6C6 → oklch(0.76 0.1 196) */
+    --brand-teal: 0.76 0.1 196;
+    /* Brand: Green #1FAF5A → oklch(0.65 0.17 145) */
+    --brand-green: 0.65 0.17 145;
+    /* Brand: Red #E53935 → oklch(0.55 0.22 27) */
+    --brand-red: 0.55 0.22 27;
+
+    /* Semantic tokens */
+    --background: 0.99 0 0;
+    --foreground: 0.16 0 0;
+    --card: 1 0 0;
+    --card-foreground: 0.16 0 0;
+    --popover: 1 0 0;
+    --popover-foreground: 0.16 0 0;
+    --primary: 0.76 0.1 196;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.94 0.02 196;
+    --secondary-foreground: 0.3 0.05 196;
+    --muted: 0.96 0 0;
+    --muted-foreground: 0.5 0 0;
+    --accent: 0.94 0.02 196;
+    --accent-foreground: 0.3 0.05 196;
+    --destructive: 0.55 0.22 27;
+    --destructive-foreground: 1 0 0;
+    --border: 0.9 0.01 196;
+    --input: 0.9 0.01 196;
+    --ring: 0.76 0.1 196;
+    --chart-1: 0.76 0.1 196;
+    --chart-2: 0.65 0.17 145;
+    --chart-3: 0.55 0.22 27;
+    --chart-4: 0.646 0.222 41.116;
+    --chart-5: 0.6 0.118 184.704;
+    --sidebar: 0.985 0 0;
+    --sidebar-foreground: 0.145 0 0;
+    --sidebar-primary: 0.76 0.1 196;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.94 0.02 196;
+    --sidebar-accent-foreground: 0.3 0.05 196;
+    --sidebar-border: 0.9 0.01 196;
+    --sidebar-ring: 0.76 0.1 196;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Outfit", sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Cabinet Grotesk", sans-serif;
+  }
+}
+
+/* ─── Hero Gradient Animation ───────────────────────────────── */
+@keyframes hero-gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 oklch(0.65 0.17 145 / 0.5); }
+  70% { transform: scale(1); box-shadow: 0 0 0 12px oklch(0.65 0.17 145 / 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 oklch(0.65 0.17 145 / 0); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Utility Classes ───────────────────────────────────────── */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    oklch(0.94 0.05 196),
+    oklch(0.96 0.03 160),
+    oklch(0.98 0.02 196),
+    oklch(0.94 0.04 175)
+  );
+  background-size: 300% 300%;
+  animation: hero-gradient 8s ease infinite;
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+.whatsapp-pulse {
+  animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.section-heading {
+  font-family: "Cabinet Grotesk", sans-serif;
+  @apply font-bold tracking-tight;
+}
+
+.service-card {
+  @apply transition-all duration-300;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px oklch(0.76 0.1 196 / 0.2);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-3px);
+}
+
+.portfolio-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px oklch(0.76 0.1 196 / 0.15);
+}
+
+/* Teal gradient top border effect on cards */
+.card-teal-top {
+  position: relative;
+}
+.card-teal-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, oklch(0.76 0.1 196), oklch(0.65 0.17 145));
+  border-radius: var(--radius) var(--radius) 0 0;
+}
