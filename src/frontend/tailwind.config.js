@@ -16,8 +16,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Cabinet Grotesk"', "sans-serif"],
-        body: ['"Outfit"', "sans-serif"],
+        display: ['"Bricolage Grotesque"', "sans-serif"],
+        body: ['"Plus Jakarta Sans"', "sans-serif"],
       },
       colors: {
         border: "oklch(var(--border))",
@@ -53,14 +53,6 @@ export default {
           DEFAULT: "oklch(var(--card))",
           foreground: "oklch(var(--card-foreground))",
         },
-        brand: {
-          teal: "oklch(var(--brand-teal))",
-          "teal-light": "oklch(0.92 0.06 196)",
-          "teal-dark": "oklch(0.55 0.1 196)",
-          green: "oklch(var(--brand-green))",
-          "green-light": "oklch(0.92 0.06 145)",
-          red: "oklch(var(--brand-red))",
-        },
         chart: {
           1: "oklch(var(--chart-1))",
           2: "oklch(var(--chart-2))",
@@ -88,11 +80,10 @@ export default {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgba(0,0,0,0.05)",
-        teal: "0 8px 32px -4px oklch(0.76 0.1 196 / 0.25)",
-        "teal-lg": "0 16px 48px -8px oklch(0.76 0.1 196 / 0.3)",
-        green: "0 8px 32px -4px oklch(0.65 0.17 145 / 0.25)",
         card: "0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
         "card-hover": "0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06)",
+        blue: "0 8px 32px -4px oklch(0.38 0.14 264 / 0.3)",
+        orange: "0 8px 32px -4px oklch(0.72 0.19 50 / 0.3)",
       },
       keyframes: {
         "accordion-down": {
@@ -103,17 +94,15 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        shimmer: "shimmer 1.5s infinite linear",
-        float: "float 4s ease-in-out infinite",
-        "pulse-ring": "pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite",
+        "fade-up": "fade-up 0.5s ease-out forwards",
       },
     },
   },

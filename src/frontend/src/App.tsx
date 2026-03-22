@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -16,1293 +16,1656 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Toaster } from "@/components/ui/sonner";
 import { Textarea } from "@/components/ui/textarea";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   ArrowRight,
-  BarChart,
+  Award,
   BarChart2,
-  Building2,
   CheckCircle,
-  ExternalLink,
-  Facebook,
-  Filter,
+  ChevronDown,
+  ChevronUp,
+  Clock,
+  DollarSign,
   Globe,
-  Instagram,
-  Layout,
-  Linkedin,
-  Loader2,
   Mail,
   MapPin,
+  Megaphone,
   Menu,
   MessageCircle,
   Phone,
   Search,
-  Send,
-  Share2,
-  ShieldCheck,
   Star,
   Target,
   TrendingUp,
-  Twitter,
   Users,
   X,
-  Youtube,
+  Zap,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
-import type { BlogPost, PortfolioItem } from "./backend.d.ts";
-import { useActor } from "./hooks/useActor";
+import { useState } from "react";
+import {
+  SiFacebook,
+  SiInstagram,
+  SiLinkedin,
+  SiX,
+  SiYoutube,
+} from "react-icons/si";
 
-// ─── Translations ─────────────────────────────────────────────
-const translations = {
-  en: {
-    nav: {
-      home: "Home",
-      services: "Services",
-      pricing: "Pricing",
-      about: "About",
-      portfolio: "Portfolio",
-      blog: "Blog",
-      contact: "Contact",
-    },
-    hero: {
-      headline: "Digital Marketing Agency Helping Businesses Grow Online",
-      subheadline:
-        "Sri Vasundhara Solutions is your trusted digital marketing partner in Hyderabad and Guntur. We help businesses grow their online presence with data-driven SEO, Google Ads, social media marketing, website design, and lead generation strategies tailored for local markets.",
-      cta1: "Get Free Consultation",
-      cta2: "View Services",
-    },
-    about: {
-      heading: "About Sri Vasundhara Solutions",
-      story:
-        "Sri Vasundhara Solutions is a digital marketing freelancing agency founded in 2025, headquartered in KPHB Colony, Hyderabad, Telangana. We serve clients online across Hyderabad, Guntur, and throughout Andhra Pradesh and Telangana. With 1+ year of experience and 5+ successfully delivered projects, we specialize in SEO, social media marketing, Google Ads, website design, lead generation, and Google Business Profile optimization.",
-      stats: {
-        years: "Year Experience",
-        projects: "Projects Completed",
-        satisfaction: "Client Satisfaction",
-      },
-      trust:
-        "We're committed to delivering results that matter. Our data-driven approach ensures every rupee you invest in marketing works harder for your business.",
-    },
-    services: { heading: "Our Services" },
-    whyUs: { heading: "Why Choose Us" },
-    process: { heading: "Our Proven Process" },
-    pricing: { heading: "Simple, Transparent Pricing" },
-    testimonials: { heading: "What Our Clients Say" },
-    portfolio: { heading: "Our Work" },
-    blog: { heading: "Digital Marketing Insights" },
-    cta: {
-      headline: "Ready to Grow Your Business Online?",
-      sub: "Join 5+ businesses already growing with Sri Vasundhara Solutions.",
-      button: "Get Free Consultation",
-    },
-    contact: {
-      heading: "Get In Touch",
-      name: "Your Name",
-      email: "Email Address",
-      phone: "Phone Number",
-      service: "Service Interested In",
-      message: "Your Message",
-      submit: "Send Message",
-      successMsg: "Thank you! We'll get back to you within 24 hours.",
-      errorMsg: "Something went wrong. Please try again.",
-    },
-    footer: {
-      tagline:
-        "Your trusted digital marketing partner in Hyderabad & Guntur for growth-focused businesses.",
-      quickLinks: "Quick Links",
-      services: "Our Services",
-      contactInfo: "Contact Info",
-      copyright: "© 2026 Sri Vasundhara Solutions. All Rights Reserved.",
-      privacy: "Privacy Policy",
-      terms: "Terms & Conditions",
-    },
-    consultation: "Get Free Consultation",
-  },
-  te: {
-    nav: {
-      home: "హోమ్",
-      services: "సేవలు",
-      pricing: "ధరలు",
-      about: "మా గురించి",
-      portfolio: "పోర్ట్‌ఫోలియో",
-      blog: "బ్లాగ్",
-      contact: "సంప్రదించండి",
-    },
-    hero: {
-      headline: "వ్యాపారాలను ఆన్‌లైన్‌లో పెంచడంలో సహాయపడే డిజిటల్ మార్కెటింగ్ ఏజెన్సీ",
-      subheadline:
-        "శ్రీ వసుంధర సొల్యూషన్స్ హైదరాబాద్ మరియు గుంటూర్‌లో మీ నమ్మకమైన డిజిటల్ మార్కెటింగ్ భాగస్వామి. SEO, Google Ads, సోషల్ మీడియా మార్కెటింగ్, వెబ్‌సైట్ డిజైన్ మరియు లీడ్ జనరేషన్ వ్యూహాలతో స్థానిక మార్కెట్‌లకు అనుగుణంగా వ్యాపారాలు పెరగడంలో సహాయపడతాము.",
-      cta1: "ఉచిత సలహా పొందండి",
-      cta2: "సేవలు చూడండి",
-    },
-    about: {
-      heading: "శ్రీ వసుంధర సొల్యూషన్స్ గురించి",
-      story:
-        "శ్రీ వసుంధర సొల్యూషన్స్ 2025లో స్థాపించబడిన డిజిటల్ మార్కెటింగ్ ఫ్రీలాన్సింగ్ ఏజెన్సీ, KPHB కాలనీ, హైదరాబాద్, తెలంగాణలో ప్రధాన కార్యాలయం ఉంది. మేము హైదరాబాద్, గుంటూర్ మరియు ఆంధ్రప్రదేశ్, తెలంగాణ అంతటా ఆన్‌లైన్‌లో క్లయింట్లకు సేవలందిస్తాము.",
-      stats: {
-        years: "సంవత్సర అనుభవం",
-        projects: "విజయవంతమైన ప్రాజెక్టులు",
-        satisfaction: "క్లయింట్ సంతృప్తి",
-      },
-      trust: "మేము ఫలితాలు సాధించడానికి నిబద్ధులం. మీ వ్యాపార వృద్ధికి ఉత్తమ వ్యూహాలు అందిస్తాము.",
-    },
-    services: { heading: "మా సేవలు" },
-    whyUs: { heading: "మాను ఎందుకు ఎంచుకోవాలి" },
-    process: { heading: "మా నిరూపిత ప్రక్రియ" },
-    pricing: { heading: "సరళమైన, పారదర్శకమైన ధరలు" },
-    testimonials: { heading: "మా క్లయింట్లు చెప్పేది" },
-    portfolio: { heading: "మా పని" },
-    blog: { heading: "డిజిటల్ మార్కెటింగ్ అంతర్దృష్టులు" },
-    cta: {
-      headline: "మీ వ్యాపారాన్ని ఆన్‌లైన్‌లో పెంచుకోవడానికి సిద్ధంగా ఉన్నారా?",
-      sub: "5+ వ్యాపారాలు ఇప్పటికే మాతో పెరుగుతున్నాయి.",
-      button: "ఉచిత సలహా పొందండి",
-    },
-    contact: {
-      heading: "సంప్రదించండి",
-      name: "మీ పేరు",
-      email: "ఇమెయిల్ చిరునామా",
-      phone: "ఫోన్ నంబర్",
-      service: "ఆసక్తి ఉన్న సేవ",
-      message: "మీ సందేశం",
-      submit: "సందేశం పంపండి",
-      successMsg: "ధన్యవాదాలు! మేము 24 గంటల్లో మీకు తిరిగి వస్తాము.",
-      errorMsg: "ఏదో తప్పు జరిగింది. దయచేసి మళ్ళీ ప్రయత్నించండి.",
-    },
-    footer: {
-      tagline: "హైదరాబాద్ & గుంటూర్‌లో వ్యాపార వృద్ధికి నమ్మకమైన డిజిటల్ మార్కెటింగ్ భాగస్వామి.",
-      quickLinks: "త్వరిత లింక్‌లు",
-      services: "మా సేవలు",
-      contactInfo: "సంప్రదింపు సమాచారం",
-      copyright: "© 2026 శ్రీ వసుంధర సొల్యూషన్స్. అన్ని హక్కులూ రిజర్వ్ చేయబడ్డాయి.",
-      privacy: "గోప్యతా విధానం",
-      terms: "నిబంధనలు & షరతులు",
-    },
-    consultation: "ఉచిత సలహా పొందండి",
-  },
-};
-
-type Lang = "en" | "te";
-
-// ─── Static Data ──────────────────────────────────────────────
-const SERVICES = [
-  {
-    icon: Search,
-    title: "SEO",
-    description:
-      "Rank higher on Google with technical SEO, keyword research, on-page optimization, and link building strategies for Hyderabad & Guntur markets.",
-  },
-  {
-    icon: Share2,
-    title: "Social Media Marketing",
-    description:
-      "Build your brand and engage customers across Facebook, Instagram, and LinkedIn with content strategies tailored for Telugu-speaking markets.",
-  },
-  {
-    icon: Target,
-    title: "Google Ads",
-    description:
-      "Drive targeted leads with expertly managed Google Search, Display, and Shopping ad campaigns with transparent budget management.",
-  },
-  {
-    icon: Layout,
-    title: "Website Design",
-    description:
-      "Mobile-first, SEO-ready websites that load fast, look professional, and convert visitors into paying customers.",
-  },
-  {
-    icon: Filter,
-    title: "Lead Generation",
-    description:
-      "Multi-channel lead generation funnels using Google Ads, social media, landing pages, and WhatsApp to fill your sales pipeline.",
-  },
-  {
-    icon: MessageCircle,
-    title: "WhatsApp Marketing",
-    description:
-      "Reach customers directly with personalized WhatsApp broadcast campaigns and automated messaging sequences.",
-  },
-  {
-    icon: Mail,
-    title: "Email Marketing",
-    description:
-      "Nurture leads and retain customers with targeted email drip campaigns, newsletters, and promotional sequences.",
-  },
-  {
-    icon: Users,
-    title: "Influencer Marketing",
-    description:
-      "Partner with the right regional Telugu influencers on Instagram and YouTube to amplify your brand awareness.",
-  },
-  {
-    icon: MapPin,
-    title: "Google My Business",
-    description:
-      "Dominate local search results in Hyderabad and Guntur with complete Google Business Profile optimization and management.",
-  },
-  {
-    icon: BarChart2,
-    title: "Analytics & Reporting",
-    description:
-      "Make smarter marketing decisions with comprehensive Google Analytics 4 reporting, heatmaps, and conversion tracking.",
-  },
-];
-
-const WHY_US = [
-  {
-    icon: TrendingUp,
-    title: "Data-Driven Strategies",
-    description:
-      "Every campaign is backed by thorough market research, competitor analysis, and real-time performance data to maximize your ROI.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Affordable & Transparent",
-    description:
-      "Premium digital marketing services at prices built for growing Indian businesses. No hidden fees, clear monthly reporting.",
-  },
-  {
-    icon: BarChart,
-    title: "Local Market Expertise",
-    description:
-      "Deep understanding of Hyderabad and Guntur markets, Telugu-speaking audiences, and regional business culture.",
-  },
-  {
-    icon: Globe,
-    title: "Result-Focused Approach",
-    description:
-      "We measure success in your revenue growth, not vanity metrics. Every strategy is tied to tangible business outcomes.",
-  },
-];
-
-const PROCESS_STEPS = [
-  {
-    number: "01",
-    title: "Business Analysis",
-    description:
-      "We study your business, competition, and target audience to understand your unique market position.",
-  },
-  {
-    number: "02",
-    title: "Strategy Planning",
-    description:
-      "We create a customized digital marketing roadmap aligned with your specific business goals and budget.",
-  },
-  {
-    number: "03",
-    title: "Campaign Execution",
-    description:
-      "Our experts execute campaigns across SEO, social media, Google Ads, and other channels simultaneously.",
-  },
-  {
-    number: "04",
-    title: "Performance Optimization",
-    description:
-      "We monitor metrics in real-time and optimize campaigns for maximum ROI and conversions.",
-  },
-  {
-    number: "05",
-    title: "Growth Scaling",
-    description:
-      "Once performance goals are met, we scale winning strategies to accelerate your business growth.",
-  },
-];
-
-const PRICING_PLANS = [
-  {
-    name: "Starter",
-    price: "₹8,999",
-    period: "/month",
-    description: "Perfect for small businesses starting their digital journey",
-    popular: false,
-    features: [
-      "Google My Business setup & optimization",
-      "On-page SEO (up to 10 pages)",
-      "8 social media posts/month",
-      "Monthly performance report",
-      "WhatsApp support",
-      "Competitor analysis basics",
-    ],
-    cta: "Get Started",
-    ocid: "pricing.starter_button",
-  },
-  {
-    name: "Growth",
-    price: "₹17,999",
-    period: "/month",
-    description: "For growing brands ready to accelerate online",
-    popular: true,
-    features: [
-      "Everything in Starter",
-      "Google Ads management (up to ₹20k ad spend)",
-      "16 social media posts/month",
-      "Google Analytics 4 setup",
-      "Email marketing (2 campaigns/month)",
-      "Bi-weekly performance report",
-      "Priority email & phone support",
-      "Keyword rank tracking",
-    ],
-    cta: "Get Started",
-    ocid: "pricing.growth_button",
-  },
-  {
-    name: "Pro",
-    price: "₹29,999",
-    period: "/month",
-    description:
-      "Complete digital marketing solution for established businesses",
-    popular: false,
-    features: [
-      "Everything in Growth",
-      "Website design & maintenance",
-      "Lead generation campaigns",
-      "WhatsApp & email marketing automation",
-      "Influencer marketing coordination",
-      "Custom monthly reports",
-      "Dedicated account manager",
-      "24/7 priority support",
-      "Unlimited ad spend management",
-    ],
-    cta: "Get Started",
-    ocid: "pricing.pro_button",
-  },
-];
-
-const TESTIMONIALS = [
-  {
-    quote:
-      "Sri Vasundhara Solutions completely transformed our restaurant's online presence. Our Google rankings improved within 2 months and we started getting 30+ new customer inquiries every week through our Google Business Profile.",
-    name: "Rajesh Kumar",
-    role: "Restaurant Owner, Hyderabad",
-    initials: "RK",
-    color: "bg-brand-teal",
-  },
-  {
-    quote:
-      "Their Google Ads management is exceptional. We went from spending money with zero results to getting 50+ qualified real estate leads per month. The ROI has been outstanding and they're very transparent about results.",
-    name: "Priya Sharma",
-    role: "Real Estate Agent, Guntur",
-    initials: "PS",
-    color: "bg-brand-green",
-  },
-  {
-    quote:
-      "Very professional team. Our social media following grew from 500 to 5,200 in just 6 months and our website traffic tripled. They truly understand local Telugu business markets.",
-    name: "Venkat Reddy",
-    role: "Startup Founder, Hyderabad",
-    initials: "VR",
-    color: "bg-brand-teal/80",
-  },
-];
-
-const FALLBACK_PORTFOLIO: PortfolioItem[] = [
-  {
-    title: "Restaurant Website Redesign",
-    category: "Website Design",
-    clientType: "Food Industry",
-    result: "+150% online orders",
-    metric: "150%",
-    description:
-      "Complete redesign with online ordering and reservation system.",
-  },
-  {
-    title: "E-commerce SEO Campaign",
-    category: "SEO",
-    clientType: "Retail Store",
-    result: "+200% organic traffic",
-    metric: "200%",
-    description: "Comprehensive SEO strategy driving massive organic growth.",
-  },
-  {
-    title: "Real Estate Social Media",
-    category: "Social Media",
-    clientType: "Real Estate",
-    result: "+300% engagement",
-    metric: "300%",
-    description: "Full social media management with content strategy.",
-  },
-  {
-    title: "Clinic GMB Optimization",
-    category: "GMB Optimization",
-    clientType: "Healthcare",
-    result: "2x more calls",
-    metric: "2x",
-    description: "Google My Business optimization for local clinic visibility.",
-  },
-  {
-    title: "Startup Lead Generation",
-    category: "Lead Generation",
-    clientType: "SaaS Startup",
-    result: "80+ leads/month",
-    metric: "80+",
-    description: "Multi-channel lead generation funnel for B2B startup.",
-  },
-];
-
-const FALLBACK_BLOG: BlogPost[] = [
-  {
-    title: "Top 10 SEO Strategies to Rank Your Business on Google in 2026",
-    category: "SEO",
-    date: "Mar 2026",
-    readTime: BigInt(6),
-    excerpt:
-      "Discover the SEO tactics that are working right now for businesses in Hyderabad and Guntur. From local SEO and Google Business Profile optimization to technical on-page strategies — ranked and explained.",
-    slug: "top-seo-strategies-2026",
-  },
-  {
-    title:
-      "How to Build a Winning Social Media Strategy for Local Businesses in India",
-    category: "Social Media",
-    date: "Feb 2026",
-    readTime: BigInt(7),
-    excerpt:
-      "A practical guide to creating a social media strategy that drives real foot traffic and online sales for local businesses in Telangana and Andhra Pradesh.",
-    slug: "social-media-strategy-local-india",
-  },
-  {
-    title:
-      "Google Ads vs Facebook Ads: Which is Better for Small Businesses in Hyderabad?",
-    category: "Google Ads",
-    date: "Jan 2026",
-    readTime: BigInt(5),
-    excerpt:
-      "A deep comparison of Google Ads and Facebook Ads to help small business owners in Hyderabad and Guntur choose the right advertising platform for their goals and budget.",
-    slug: "google-ads-vs-facebook-ads-india",
-  },
-];
-
-const CATEGORY_COLORS: Record<string, string> = {
-  "Website Design":
-    "bg-brand-teal/10 text-brand-teal-dark border-brand-teal/20",
-  SEO: "bg-brand-green/10 text-green-700 border-brand-green/20",
-  "Social Media": "bg-purple-50 text-purple-700 border-purple-200",
-  "GMB Optimization": "bg-orange-50 text-orange-700 border-orange-200",
-  "Lead Generation": "bg-brand-red/10 text-red-700 border-brand-red/20",
-  "Google Ads": "bg-blue-50 text-blue-700 border-blue-200",
-};
-
-function getCategoryColor(cat: string) {
+// ─── FAQ Accordion ───────────────────────────────────────────────────────────
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
   return (
-    CATEGORY_COLORS[cat] ??
-    "bg-brand-teal/10 text-brand-teal-dark border-brand-teal/20"
-  );
-}
-
-// ─── Animated Counter ─────────────────────────────────────────
-function AnimatedStat({ value, label }: { value: string; label: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.5 },
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={ref} className="text-center">
-      <div
-        className={`text-5xl font-display font-black text-brand-teal transition-all duration-700 ${
-          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-        }`}
-        style={{ transitionDelay: "0.1s" }}
+    <div className="faq-item" data-ocid="faq.panel">
+      <button
+        type="button"
+        className="w-full flex justify-between items-center px-5 py-4 text-left font-semibold text-foreground hover:bg-secondary transition-colors"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
       >
-        {value}
-      </div>
-      <div className="text-muted-foreground mt-1 font-medium text-sm uppercase tracking-wide">
-        {label}
-      </div>
+        <span>{q}</span>
+        {open ? (
+          <ChevronUp className="h-4 w-4 shrink-0 text-primary" />
+        ) : (
+          <ChevronDown className="h-4 w-4 shrink-0 text-primary" />
+        )}
+      </button>
+      {open && (
+        <div className="px-5 pb-4 text-muted-foreground text-sm leading-relaxed border-t border-border">
+          {a}
+        </div>
+      )}
     </div>
   );
 }
 
-// ─── Skeleton Cards ───────────────────────────────────────────
-function PortfolioSkeleton() {
-  return (
-    <div
-      data-ocid="portfolio.loading_state"
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-    >
-      {[1, 2, 3].map((i) => (
-        <div key={i} className="rounded-xl border p-6 space-y-3">
-          <Skeleton className="h-4 w-20" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-4 w-3/4" />
-          <Skeleton className="h-8 w-24" />
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function BlogSkeleton() {
-  return (
-    <div
-      data-ocid="blog.loading_state"
-      className="grid grid-cols-1 md:grid-cols-3 gap-6"
-    >
-      {[1, 2, 3].map((i) => (
-        <div key={i} className="rounded-xl border p-6 space-y-3">
-          <Skeleton className="h-4 w-16" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-2/3" />
-          <Skeleton className="h-4 w-24" />
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// ─── Privacy Policy Dialog ────────────────────────────────────
-function PrivacyPolicyDialog({ trigger }: { trigger: React.ReactNode }) {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent
-        data-ocid="privacy.dialog"
-        className="max-w-2xl max-h-[80vh] overflow-y-auto"
-      >
-        <DialogHeader>
-          <DialogTitle className="font-display text-xl font-bold text-foreground">
-            Privacy Policy — Sri Vasundhara Solutions
-          </DialogTitle>
-          <DialogDescription className="text-sm text-muted-foreground">
-            Last updated: January 2026
-          </DialogDescription>
-        </DialogHeader>
-        <div className="space-y-5 text-sm text-foreground leading-relaxed mt-2">
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              1. Introduction
-            </h3>
-            <p className="text-muted-foreground">
-              Sri Vasundhara Solutions ("we", "our", or "us") is committed to
-              protecting your personal information. This Privacy Policy explains
-              how we collect, use, and safeguard information when you visit our
-              website or contact us regarding our digital marketing services.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              2. Information We Collect
-            </h3>
-            <p className="text-muted-foreground mb-2">
-              We collect information you voluntarily provide through our contact
-              form, including:
-            </p>
-            <ul className="list-disc list-inside text-muted-foreground space-y-1 pl-2">
-              <li>Full name</li>
-              <li>Email address</li>
-              <li>Phone number</li>
-              <li>Service interest</li>
-              <li>Messages and inquiries submitted via the contact form</li>
-            </ul>
-            <p className="text-muted-foreground mt-2">
-              We do not collect payment information directly. We may also
-              automatically collect technical data such as IP address, browser
-              type, and pages visited through analytics tools.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              3. How We Use Your Information
-            </h3>
-            <ul className="list-disc list-inside text-muted-foreground space-y-1 pl-2">
-              <li>To respond to your inquiries and service requests</li>
-              <li>To improve our website and services</li>
-              <li>
-                To send occasional marketing updates (you may opt out at any
-                time by contacting us)
-              </li>
-              <li>To comply with legal obligations</li>
-            </ul>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              4. Cookies & Analytics
-            </h3>
-            <p className="text-muted-foreground">
-              We use Google Analytics to analyze website traffic and user
-              behavior. Google Analytics uses cookies to collect anonymized
-              data. You can opt out of Google Analytics tracking by installing
-              the Google Analytics Opt-out Browser Add-on. We may use session
-              cookies to improve your browsing experience; these are deleted
-              when you close your browser.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              5. Data Security
-            </h3>
-            <p className="text-muted-foreground">
-              We implement reasonable technical and organizational measures to
-              protect your personal data against unauthorized access,
-              alteration, disclosure, or destruction. However, no internet
-              transmission is completely secure and we cannot guarantee absolute
-              security.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              6. Third-Party Links
-            </h3>
-            <p className="text-muted-foreground">
-              Our website may contain links to third-party websites. We are not
-              responsible for the privacy practices of those websites and
-              encourage you to review their privacy policies.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              7. Data Retention
-            </h3>
-            <p className="text-muted-foreground">
-              We retain personal data only for as long as necessary to fulfill
-              the purposes outlined in this policy or as required by law.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              8. Your Rights
-            </h3>
-            <p className="text-muted-foreground">
-              You have the right to access, correct, or request deletion of your
-              personal data. To exercise these rights, please contact us.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              9. Contact Information
-            </h3>
-            <p className="text-muted-foreground">
-              For any privacy-related questions or requests, please contact us
-              at:
-            </p>
-            <div className="mt-2 space-y-1 text-muted-foreground">
-              <p>
-                Email:{" "}
-                <a
-                  href="mailto:srivasundharasolutions@gmail.com"
-                  className="text-brand-teal hover:underline"
-                >
-                  srivasundharasolutions@gmail.com
-                </a>
-              </p>
-              <p>
-                Phone:{" "}
-                <a
-                  href="tel:+919398241974"
-                  className="text-brand-teal hover:underline"
-                >
-                  +91 9398241974
-                </a>
-              </p>
-              <p>KPHB Colony, Hyderabad, Telangana – 500072</p>
-            </div>
-          </section>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-// ─── Terms & Conditions Dialog ────────────────────────────────
-function TermsDialog({ trigger }: { trigger: React.ReactNode }) {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent
-        data-ocid="terms.dialog"
-        className="max-w-2xl max-h-[80vh] overflow-y-auto"
-      >
-        <DialogHeader>
-          <DialogTitle className="font-display text-xl font-bold text-foreground">
-            Terms & Conditions — Sri Vasundhara Solutions
-          </DialogTitle>
-          <DialogDescription className="text-sm text-muted-foreground">
-            Last updated: January 2026
-          </DialogDescription>
-        </DialogHeader>
-        <div className="space-y-5 text-sm text-foreground leading-relaxed mt-2">
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              1. Acceptance of Terms
-            </h3>
-            <p className="text-muted-foreground">
-              By engaging Sri Vasundhara Solutions for digital marketing
-              services or using our website, you agree to be bound by these
-              Terms and Conditions. If you do not agree with any part of these
-              terms, please do not use our services.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              2. Services Description
-            </h3>
-            <p className="text-muted-foreground">
-              Sri Vasundhara Solutions provides digital marketing services
-              including SEO, social media marketing, Google Ads management,
-              website design, lead generation, WhatsApp marketing, email
-              marketing, influencer marketing, and Google Business Profile
-              optimization. Specific deliverables and timelines will be defined
-              in individual service agreements.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              3. Payment Terms
-            </h3>
-            <ul className="list-disc list-inside text-muted-foreground space-y-1 pl-2">
-              <li>
-                Project-based work requires a 50% upfront payment before
-                commencement, with the remaining 50% due upon project
-                completion.
-              </li>
-              <li>
-                Monthly retainer services are billed at the beginning of each
-                month.
-              </li>
-              <li>
-                Payments are due within 7 days of invoice date unless otherwise
-                agreed.
-              </li>
-              <li>
-                Late payments may attract a penalty of 2% per month on the
-                outstanding amount.
-              </li>
-            </ul>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              4. Intellectual Property
-            </h3>
-            <p className="text-muted-foreground">
-              Upon full payment, the client owns all final deliverables
-              including website designs, content, and creative assets. Sri
-              Vasundhara Solutions retains the right to showcase completed work
-              in our portfolio for promotional purposes unless the client
-              requests confidentiality in writing.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              5. Confidentiality
-            </h3>
-            <p className="text-muted-foreground">
-              Both parties agree to keep confidential all proprietary
-              information shared during the engagement. This includes business
-              strategies, financial data, and trade secrets. This obligation
-              survives the termination of the service agreement.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              6. Limitation of Liability
-            </h3>
-            <p className="text-muted-foreground">
-              Sri Vasundhara Solutions provides services on a best-effort basis.
-              We do not guarantee specific rankings, traffic levels, or revenue
-              results, as these depend on factors outside our control including
-              search engine algorithm changes. Our total liability is limited to
-              the amount paid for the specific service in question.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              7. Termination
-            </h3>
-            <p className="text-muted-foreground">
-              Either party may terminate ongoing services with 30 days' written
-              notice. Upon termination, all outstanding fees for work completed
-              become immediately due. Sri Vasundhara Solutions will deliver all
-              work completed up to the termination date.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              8. Governing Law
-            </h3>
-            <p className="text-muted-foreground">
-              These Terms and Conditions are governed by the laws of Telangana,
-              India. Any disputes arising from these terms shall be subject to
-              the exclusive jurisdiction of the courts in Hyderabad, Telangana.
-            </p>
-          </section>
-          <section>
-            <h3 className="font-display font-bold text-base mb-2">
-              9. Contact Information
-            </h3>
-            <p className="text-muted-foreground">
-              For any questions regarding these terms, please contact us at:
-            </p>
-            <div className="mt-2 space-y-1 text-muted-foreground">
-              <p>
-                Email:{" "}
-                <a
-                  href="mailto:srivasundharasolutions@gmail.com"
-                  className="text-brand-teal hover:underline"
-                >
-                  srivasundharasolutions@gmail.com
-                </a>
-              </p>
-              <p>
-                Phone:{" "}
-                <a
-                  href="tel:+919398241974"
-                  className="text-brand-teal hover:underline"
-                >
-                  +91 9398241974
-                </a>
-              </p>
-              <p>KPHB Colony, Hyderabad, Telangana – 500072</p>
-            </div>
-          </section>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-// ─── Main App ─────────────────────────────────────────────────
-export default function App() {
-  const [lang, setLang] = useState<Lang>("en");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const t = translations[lang];
-
-  // Contact form state
-  const [formData, setFormData] = useState({
+// ─── Contact Form ─────────────────────────────────────────────────────────────
+function ContactForm() {
+  const [form, setForm] = useState({
     name: "",
-    email: "",
     phone: "",
+    email: "",
+    businessType: "",
     service: "",
     message: "",
   });
-  const [formStatus, setFormStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const { actor, isFetching } = useActor();
-
-  // Scroll handler for sticky header
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Portfolio query
-  const { data: portfolioData, isLoading: portfolioLoading } = useQuery<
-    PortfolioItem[]
-  >({
-    queryKey: ["portfolioItems"],
-    queryFn: async () => {
-      if (!actor) return FALLBACK_PORTFOLIO;
-      const items = await actor.getPortfolioItems();
-      return items.length > 0 ? items : FALLBACK_PORTFOLIO;
-    },
-    enabled: !!actor && !isFetching,
-    initialData: FALLBACK_PORTFOLIO,
-  });
-
-  // Blog query
-  const { data: blogData, isLoading: blogLoading } = useQuery<BlogPost[]>({
-    queryKey: ["blogPosts"],
-    queryFn: async () => {
-      if (!actor) return FALLBACK_BLOG;
-      const posts = await actor.getBlogPosts();
-      return posts.length > 0 ? posts : FALLBACK_BLOG;
-    },
-    enabled: !!actor && !isFetching,
-    initialData: FALLBACK_BLOG,
-  });
-
-  // Contact mutation
-  const contactMutation = useMutation({
-    mutationFn: async () => {
-      if (!actor) throw new Error("No connection");
-      await actor.submitContactForm(
-        formData.name,
-        formData.email,
-        formData.phone,
-        formData.service,
-        formData.message,
-      );
-    },
-    onMutate: () => setFormStatus("loading"),
-    onSuccess: () => {
-      setFormStatus("success");
-      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
-      toast.success(t.contact.successMsg);
-    },
-    onError: () => {
-      setFormStatus("error");
-      toast.error(t.contact.errorMsg);
-    },
-  });
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.name.trim()) e.name = "Name is required";
+    if (!form.phone.trim()) e.phone = "Phone is required";
+    if (!form.email.trim()) e.email = "Email is required";
+    else if (!/^[^@]+@[^@]+\.[^@]+$/.test(form.email))
+      e.email = "Enter a valid email";
+    if (!form.businessType) e.businessType = "Please select business type";
+    if (!form.service) e.service = "Please select a service";
+    return e;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    contactMutation.mutate();
+    const errs = validate();
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
+    setSubmitted(true);
   };
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMobileMenuOpen(false);
-  };
-
-  const portfolioItems = portfolioData ?? FALLBACK_PORTFOLIO;
-  const blogPosts = blogData ?? FALLBACK_BLOG;
+  if (submitted) {
+    return (
+      <div
+        className="bg-green-50 border border-green-200 rounded-xl p-8 text-center"
+        data-ocid="contact.success_state"
+      >
+        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+        <h3 className="text-xl font-bold text-green-800 mb-2">Thank You! 🎉</h3>
+        <p className="text-green-700">
+          We'll contact you within 24 hours. Meanwhile, you can WhatsApp us for
+          immediate assistance.
+        </p>
+        <a
+          href="https://wa.me/919398241974?text=Hi%20Sri%20Vasundhara%20Solutions%2C%20I%20just%20submitted%20the%20contact%20form"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+          data-ocid="contact.whatsapp_button"
+        >
+          <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
+        </a>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen font-body bg-background text-foreground">
-      <Toaster />
-
-      {/* ─── Sticky Header ─────────────────────────────────── */}
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-border"
-            : "bg-white/80 backdrop-blur-sm"
-        }`}
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className="space-y-4"
+      data-ocid="contact.form"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <Label htmlFor="cf-name">Full Name *</Label>
+          <Input
+            id="cf-name"
+            placeholder="Your Full Name"
+            value={form.name}
+            onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+            className="mt-1"
+            data-ocid="contact.name_input"
+          />
+          {errors.name && (
+            <p
+              className="text-destructive text-xs mt-1"
+              data-ocid="contact.name_error"
+            >
+              {errors.name}
+            </p>
+          )}
+        </div>
+        <div>
+          <Label htmlFor="cf-phone">Phone Number *</Label>
+          <Input
+            id="cf-phone"
+            placeholder="+91 XXXXXXXXXX"
+            value={form.phone}
+            onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
+            className="mt-1"
+            data-ocid="contact.phone_input"
+          />
+          {errors.phone && (
+            <p
+              className="text-destructive text-xs mt-1"
+              data-ocid="contact.phone_error"
+            >
+              {errors.phone}
+            </p>
+          )}
+        </div>
+      </div>
+      <div>
+        <Label htmlFor="cf-email">Email Address *</Label>
+        <Input
+          id="cf-email"
+          type="email"
+          placeholder="your@email.com"
+          value={form.email}
+          onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
+          className="mt-1"
+          data-ocid="contact.email_input"
+        />
+        {errors.email && (
+          <p
+            className="text-destructive text-xs mt-1"
+            data-ocid="contact.email_error"
+          >
+            {errors.email}
+          </p>
+        )}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <Label>Business Type *</Label>
+          <Select
+            onValueChange={(v) => setForm((p) => ({ ...p, businessType: v }))}
+          >
+            <SelectTrigger
+              className="mt-1"
+              data-ocid="contact.business_type_select"
+            >
+              <SelectValue placeholder="Select Business Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="restaurant">Restaurant</SelectItem>
+              <SelectItem value="clinic">Clinic / Hospital</SelectItem>
+              <SelectItem value="retail">Retail Shop</SelectItem>
+              <SelectItem value="realestate">Real Estate</SelectItem>
+              <SelectItem value="startup">Startup</SelectItem>
+              <SelectItem value="ecommerce">E-Commerce</SelectItem>
+              <SelectItem value="other">Other</SelectItem>
+            </SelectContent>
+          </Select>
+          {errors.businessType && (
+            <p
+              className="text-destructive text-xs mt-1"
+              data-ocid="contact.business_type_error"
+            >
+              {errors.businessType}
+            </p>
+          )}
+        </div>
+        <div>
+          <Label>Service Interested In *</Label>
+          <Select onValueChange={(v) => setForm((p) => ({ ...p, service: v }))}>
+            <SelectTrigger className="mt-1" data-ocid="contact.service_select">
+              <SelectValue placeholder="Select Service" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="seo">SEO Services</SelectItem>
+              <SelectItem value="google-ads">Google Ads / PPC</SelectItem>
+              <SelectItem value="social-media">
+                Social Media Marketing
+              </SelectItem>
+              <SelectItem value="website-design">Website Design</SelectItem>
+              <SelectItem value="local-seo">Local SEO</SelectItem>
+              <SelectItem value="lead-generation">Lead Generation</SelectItem>
+              <SelectItem value="full-package">Full Package</SelectItem>
+            </SelectContent>
+          </Select>
+          {errors.service && (
+            <p
+              className="text-destructive text-xs mt-1"
+              data-ocid="contact.service_error"
+            >
+              {errors.service}
+            </p>
+          )}
+        </div>
+      </div>
+      <div>
+        <Label htmlFor="cf-message">Message (Optional)</Label>
+        <Textarea
+          id="cf-message"
+          placeholder="Tell us about your business and goals..."
+          rows={4}
+          value={form.message}
+          onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
+          className="mt-1"
+          data-ocid="contact.message_textarea"
+        />
+      </div>
+      <Button
+        type="submit"
+        className="w-full btn-orange text-base py-4"
+        data-ocid="contact.submit_button"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-18">
+        Get Free Audit Now 🚀
+      </Button>
+    </form>
+  );
+}
+
+// ─── Privacy Policy Content ────────────────────────────────────────────────
+function PrivacyPolicyContent() {
+  return (
+    <div className="prose prose-sm max-w-none space-y-4 text-sm text-muted-foreground">
+      <p className="font-semibold text-foreground">Last Updated: March 2026</p>
+      <p>
+        Sri Vasundhara Solutions ("we," "us," or "our") operates the website
+        https://sri-vasundhara-solutions-382.caffeine.xyz ("Site"). This Privacy
+        Policy explains how we collect, use, disclose, and safeguard your
+        information when you visit our Site.
+      </p>
+      <h3 className="font-bold text-foreground">1. Information We Collect</h3>
+      <p>
+        We may collect information you provide directly: name, email address,
+        phone number, business type, and service inquiries submitted through
+        contact forms. We also automatically collect: IP address, browser type,
+        pages visited, and time spent on pages via Google Analytics (GA4).
+      </p>
+      <h3 className="font-bold text-foreground">
+        2. How We Use Your Information
+      </h3>
+      <p>
+        We use collected information to: respond to inquiries and provide
+        services, send marketing communications (with consent), analyze website
+        usage to improve our services, comply with legal obligations.
+      </p>
+      <h3 className="font-bold text-foreground">3. Cookies & Tracking</h3>
+      <p>
+        Our website uses cookies including Google Analytics cookies
+        (G-7QR6GE2QS4) to understand user behavior. You can opt out via your
+        browser settings or Google's opt-out tools.
+      </p>
+      <h3 className="font-bold text-foreground">4. Data Sharing</h3>
+      <p>
+        We do not sell your personal data. We may share data with trusted
+        service providers (Google Analytics, email services) under strict
+        confidentiality agreements.
+      </p>
+      <h3 className="font-bold text-foreground">5. Data Security</h3>
+      <p>
+        We implement appropriate technical and organizational measures to
+        protect your personal information from unauthorized access, use, or
+        disclosure.
+      </p>
+      <h3 className="font-bold text-foreground">6. Your Rights</h3>
+      <p>
+        You have the right to access, correct, or delete your personal data.
+        Contact us at srivasundharasolutions@gmail.com to exercise these rights.
+      </p>
+      <h3 className="font-bold text-foreground">7. Contact Us</h3>
+      <p>
+        Sri Vasundhara Solutions | KPHB Colony, Hyderabad – 500072 | Phone: +91
+        9398241974 | Email: srivasundharasolutions@gmail.com
+      </p>
+    </div>
+  );
+}
+
+// ─── Terms Content ────────────────────────────────────────────────────────────
+function TermsContent() {
+  return (
+    <div className="prose prose-sm max-w-none space-y-4 text-sm text-muted-foreground">
+      <p className="font-semibold text-foreground">Last Updated: March 2026</p>
+      <p>
+        These Terms and Conditions govern your use of Sri Vasundhara Solutions
+        services. By engaging our services, you agree to these terms.
+      </p>
+      <h3 className="font-bold text-foreground">1. Services</h3>
+      <p>
+        Sri Vasundhara Solutions provides digital marketing services including
+        SEO, Google Ads management, social media marketing, website design, and
+        lead generation. Service scope and deliverables are defined in
+        individual service agreements.
+      </p>
+      <h3 className="font-bold text-foreground">2. Payment Terms</h3>
+      <p>
+        Payments are due as per the agreed schedule. Monthly retainer services
+        require advance payment. Ad spend budgets (Google Ads) are separate from
+        management fees and billed directly by the platform.
+      </p>
+      <h3 className="font-bold text-foreground">3. Intellectual Property</h3>
+      <p>
+        Upon full payment, clients own the deliverables (website code, content,
+        designs). We retain rights to our proprietary processes, tools, and
+        methodologies.
+      </p>
+      <h3 className="font-bold text-foreground">4. Results Disclaimer</h3>
+      <p>
+        Digital marketing results depend on multiple factors including market
+        conditions, competition, and budget. We cannot guarantee specific
+        rankings, traffic, or lead volumes, but we commit to best-practice
+        execution.
+      </p>
+      <h3 className="font-bold text-foreground">5. Confidentiality</h3>
+      <p>
+        Both parties agree to maintain confidentiality of proprietary business
+        information shared during the engagement.
+      </p>
+      <h3 className="font-bold text-foreground">6. Termination</h3>
+      <p>
+        Either party may terminate with 30 days written notice. Client is liable
+        for services rendered up to termination date.
+      </p>
+      <h3 className="font-bold text-foreground">7. Governing Law</h3>
+      <p>
+        These terms are governed by the laws of Telangana, India. Disputes shall
+        be subject to exclusive jurisdiction of courts in Hyderabad.
+      </p>
+      <h3 className="font-bold text-foreground">8. Contact</h3>
+      <p>
+        Sri Vasundhara Solutions | srivasundharasolutions@gmail.com | +91
+        9398241974
+      </p>
+    </div>
+  );
+}
+
+// ─── Main App ──────────────────────────────────────────────────────────────────
+export default function App() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    setMobileMenuOpen(false);
+    setServicesDropdownOpen(false);
+  };
+
+  const serviceLinks = [
+    { label: "SEO Services", id: "seo-services-hyderabad" },
+    { label: "Google Ads", id: "google-ads-ppc-management" },
+    { label: "Social Media Marketing", id: "social-media-marketing-services" },
+    { label: "Website Design", id: "website-design-development" },
+    { label: "Local SEO", id: "local-seo-services" },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background font-body">
+      {/* ── STICKY HEADER ───────────────────────────────────────────────── */}
+      <header
+        className="sticky top-0 z-50 bg-white border-b border-border shadow-sm"
+        data-ocid="header.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <button
               type="button"
-              onClick={() => scrollTo("home")}
-              className="flex items-center gap-2 group"
-              aria-label="Sri Vasundhara Solutions - Go to top"
+              onClick={() => scrollTo("hero")}
+              className="flex items-center"
+              data-ocid="header.home_link"
             >
               <img
                 src="/assets/uploads/Sri_Vasundhara_Solutions_Logo--1.png"
-                alt="Sri Vasundhara Solutions Logo"
-                className="h-10 w-auto object-contain"
+                alt="Sri Vasundhara Solutions - Digital Marketing Agency"
+                className="h-10 w-auto"
+                loading="lazy"
               />
             </button>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {(
-                [
-                  "home",
-                  "services",
-                  "pricing",
-                  "about",
-                  "portfolio",
-                  "blog",
-                  "contact",
-                ] as const
-              ).map((key) => (
+            <nav
+              className="hidden lg:flex items-center gap-6"
+              aria-label="Main navigation"
+            >
+              <button
+                type="button"
+                onClick={() => scrollTo("hero")}
+                className="text-sm font-medium hover:text-primary transition-colors"
+                data-ocid="nav.home_link"
+              >
+                Home
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTo("about-digital-marketing-agency")}
+                className="text-sm font-medium hover:text-primary transition-colors"
+                data-ocid="nav.about_link"
+              >
+                About
+              </button>
+
+              {/* Services Dropdown */}
+              <div className="relative">
                 <button
                   type="button"
-                  key={key}
-                  data-ocid={`nav.${key}_link`}
-                  onClick={() => scrollTo(key)}
-                  className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-brand-teal transition-colors rounded-md hover:bg-brand-teal/5"
+                  onClick={() => setServicesDropdownOpen((v) => !v)}
+                  className="flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors"
+                  data-ocid="nav.services_dropdown"
                 >
-                  {t.nav[key]}
+                  Services <ChevronDown className="h-3 w-3" />
                 </button>
-              ))}
+                {servicesDropdownOpen && (
+                  <div
+                    className="absolute top-full left-0 mt-2 w-52 bg-white border border-border rounded-xl shadow-lg py-2 z-50"
+                    data-ocid="nav.services_menu"
+                  >
+                    {serviceLinks.map((s) => (
+                      <button
+                        type="button"
+                        key={s.id}
+                        onClick={() => scrollTo(s.id)}
+                        className="block w-full text-left px-4 py-2 text-sm hover:bg-secondary hover:text-primary transition-colors"
+                        data-ocid={`nav.${s.id}_link`}
+                      >
+                        {s.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => scrollTo("digital-marketing-blog")}
+                className="text-sm font-medium hover:text-primary transition-colors"
+                data-ocid="nav.blog_link"
+              >
+                Blog
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTo("contact-digital-marketing-consultant")}
+                className="text-sm font-medium hover:text-primary transition-colors"
+                data-ocid="nav.contact_link"
+              >
+                Contact
+              </button>
             </nav>
 
-            {/* Right controls */}
-            <div className="flex items-center gap-2">
-              {/* Language toggle */}
-              <button
-                type="button"
-                data-ocid="nav.language_toggle"
-                onClick={() => setLang(lang === "en" ? "te" : "en")}
-                className="hidden sm:flex items-center gap-1 px-3 py-1.5 text-xs font-semibold border border-border rounded-full hover:border-brand-teal hover:text-brand-teal transition-all"
+            {/* Desktop Right */}
+            <div className="hidden lg:flex items-center gap-3">
+              <a
+                href="tel:+919398241974"
+                className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                data-ocid="header.phone_link"
               >
-                <Globe className="h-3 w-3" />
-                {lang === "en" ? "EN | TE" : "TE | EN"}
-              </button>
-
-              {/* CTA */}
+                <Phone className="h-4 w-4" /> +91 9398241974
+              </a>
               <Button
-                data-ocid="nav.cta_button"
-                onClick={() => scrollTo("contact")}
-                size="sm"
-                className="hidden sm:flex bg-brand-teal hover:bg-brand-teal-dark text-white font-semibold px-4 shadow-teal hover:shadow-teal-lg transition-all"
+                onClick={() => scrollTo("contact-digital-marketing-consultant")}
+                className="bg-accent hover:bg-accent/90 text-white font-semibold text-sm px-4 py-2"
+                data-ocid="header.get_audit_button"
               >
-                {t.consultation}
+                Get Free Audit
               </Button>
-
-              {/* Mobile hamburger */}
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-md text-foreground hover:bg-muted transition-colors"
-                aria-label="Toggle menu"
-              >
-                {mobileMenuOpen ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
-                )}
-              </button>
             </div>
+
+            {/* Mobile Hamburger */}
+            <button
+              type="button"
+              className="lg:hidden p-2 rounded-lg hover:bg-secondary transition-colors"
+              onClick={() => setMobileMenuOpen((v) => !v)}
+              aria-label="Toggle menu"
+              data-ocid="header.mobile_menu_button"
+            >
+              {mobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-border">
-            <div className="container mx-auto px-4 py-4 space-y-1">
-              {(
-                [
-                  "home",
-                  "services",
-                  "pricing",
-                  "about",
-                  "portfolio",
-                  "blog",
-                  "contact",
-                ] as const
-              ).map((key) => (
-                <button
-                  type="button"
-                  key={key}
-                  data-ocid={`nav.${key}_link`}
-                  onClick={() => scrollTo(key)}
-                  className="w-full text-left px-4 py-3 text-sm font-medium text-foreground hover:text-brand-teal hover:bg-brand-teal/5 rounded-lg transition-colors"
-                >
-                  {t.nav[key]}
-                </button>
-              ))}
-              <div className="pt-3 border-t border-border flex items-center gap-3">
-                <button
-                  type="button"
-                  data-ocid="nav.language_toggle"
-                  onClick={() => setLang(lang === "en" ? "te" : "en")}
-                  className="flex items-center gap-1 px-3 py-2 text-xs font-semibold border border-border rounded-full hover:border-brand-teal hover:text-brand-teal transition-all"
-                >
-                  <Globe className="h-3 w-3" />
-                  {lang === "en" ? "EN | TE" : "TE | EN"}
-                </button>
-                <Button
-                  data-ocid="nav.cta_button"
-                  onClick={() => {
-                    scrollTo("contact");
-                    setMobileMenuOpen(false);
-                  }}
-                  size="sm"
-                  className="bg-brand-teal hover:bg-brand-teal-dark text-white font-semibold flex-1"
-                >
-                  {t.consultation}
-                </Button>
-              </div>
+          <div
+            className="lg:hidden bg-white border-t border-border px-4 py-4 space-y-2"
+            data-ocid="header.mobile_menu"
+          >
+            <button
+              type="button"
+              onClick={() => scrollTo("hero")}
+              className="block w-full text-left py-2 text-sm font-medium hover:text-primary"
+              data-ocid="nav.mobile_home_link"
+            >
+              Home
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo("about-digital-marketing-agency")}
+              className="block w-full text-left py-2 text-sm font-medium hover:text-primary"
+              data-ocid="nav.mobile_about_link"
+            >
+              About
+            </button>
+            <p className="py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Services
+            </p>
+            {serviceLinks.map((s) => (
+              <button
+                type="button"
+                key={s.id}
+                onClick={() => scrollTo(s.id)}
+                className="block w-full text-left py-2 pl-4 text-sm font-medium hover:text-primary"
+                data-ocid={`nav.mobile_${s.id}_link`}
+              >
+                {s.label}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={() => scrollTo("digital-marketing-blog")}
+              className="block w-full text-left py-2 text-sm font-medium hover:text-primary"
+              data-ocid="nav.mobile_blog_link"
+            >
+              Blog
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo("contact-digital-marketing-consultant")}
+              className="block w-full text-left py-2 text-sm font-medium hover:text-primary"
+              data-ocid="nav.mobile_contact_link"
+            >
+              Contact
+            </button>
+            <div className="pt-2 flex flex-col gap-2">
+              <a
+                href="tel:+919398241974"
+                className="btn-blue-outline text-center justify-center"
+                data-ocid="nav.mobile_call_button"
+              >
+                <Phone className="h-4 w-4" /> +91 9398241974
+              </a>
+              <Button
+                onClick={() => scrollTo("contact-digital-marketing-consultant")}
+                className="bg-accent hover:bg-accent/90 text-white w-full"
+                data-ocid="nav.mobile_audit_button"
+              >
+                Get Free Audit
+              </Button>
             </div>
           </div>
         )}
       </header>
 
-      {/* ─── Hero Section ──────────────────────────────────── */}
+      {/* ── HERO ────────────────────────────────────────────────────────────── */}
       <section
-        id="home"
-        className="hero-gradient pt-16 min-h-screen flex items-center"
+        id="hero"
+        className="relative bg-gradient-to-br from-primary/5 via-white to-accent/5 py-20 md:py-28"
+        data-ocid="hero.section"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Text */}
-            <div className="space-y-6 fade-in-up">
-              <Badge className="bg-brand-teal/15 text-brand-teal-dark border-brand-teal/30 font-semibold px-4 py-1.5">
-                🚀 Digital Marketing Agency — Hyderabad & Guntur
-              </Badge>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] text-foreground">
-                {t.hero.headline.split("Helping Businesses Grow Online")[0]}
-                <span className="text-brand-teal">
-                  Helping Businesses Grow Online
-                </span>
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-                {t.hero.subheadline}
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button
-                  data-ocid="hero.primary_button"
-                  onClick={() => scrollTo("contact")}
-                  size="lg"
-                  className="bg-brand-teal hover:bg-brand-teal-dark text-white font-bold px-8 py-6 text-base shadow-teal hover:shadow-teal-lg transition-all hover:-translate-y-0.5"
-                >
-                  {t.hero.cta1}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button
-                  data-ocid="hero.secondary_button"
-                  onClick={() => scrollTo("services")}
-                  variant="outline"
-                  size="lg"
-                  className="border-2 border-brand-teal text-brand-teal-dark hover:bg-brand-teal hover:text-white font-bold px-8 py-6 text-base transition-all"
-                >
-                  {t.hero.cta2}
-                </Button>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-4xl mx-auto">
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 hover:bg-primary/10 font-medium">
+              🏆 Trusted Digital Marketing Agency in Guntur &amp; Hyderabad
+            </Badge>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+              Best Digital Marketing Agency in{" "}
+              <span className="text-primary">Guntur</span> &amp;{" "}
+              <span className="text-accent">Hyderabad</span>
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
+              We help businesses in Guntur &amp; Hyderabad increase traffic,
+              leads, and sales through SEO, Google Ads, and social media
+              marketing. As a trusted{" "}
+              <strong>digital marketing agency in Guntur</strong> and{" "}
+              <strong>digital marketing agency in Hyderabad</strong>, we deliver
+              measurable results for small businesses and startups across India.
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Button
+                onClick={() => scrollTo("contact-digital-marketing-consultant")}
+                className="bg-accent hover:bg-accent/90 text-white font-bold text-base px-8 py-4 rounded-xl shadow-orange"
+                data-ocid="hero.get_audit_button"
+              >
+                Get Free Audit
+              </Button>
+              <a
+                href="tel:+919398241974"
+                className="btn-blue-outline text-base px-8 py-4 rounded-xl"
+                data-ocid="hero.call_button"
+              >
+                <Phone className="h-4 w-4" /> Call Now
+              </a>
+              <a
+                href="https://wa.me/919398241974?text=Hi%20Sri%20Vasundhara%20Solutions%2C%20I%20need%20digital%20marketing%20services"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold text-base px-8 py-4 rounded-xl transition-colors"
+                data-ocid="hero.whatsapp_button"
+              >
+                <MessageCircle className="h-4 w-4" /> WhatsApp Us
+              </a>
+            </div>
+          </div>
+
+          {/* Stats Bar */}
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+            {[
+              { value: "50+", label: "Projects Completed", icon: Award },
+              { value: "20+", label: "Happy Clients", icon: Users },
+              { value: "1+", label: "Year Experience", icon: Clock },
+              {
+                value: "100%",
+                label: "Transparent Reporting",
+                icon: BarChart2,
+              },
+            ].map(({ value, label, icon: Icon }, i) => (
+              <div
+                key={i}
+                className="text-center bg-white rounded-2xl p-5 shadow-card border border-border"
+                data-ocid={`hero.stat.${i + 1}`}
+              >
+                <Icon className="h-6 w-6 text-primary mx-auto mb-2" />
+                <div className="text-2xl font-bold text-primary font-display">
+                  {value}
+                </div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  {label}
+                </div>
               </div>
-              {/* Trust bar */}
-              <div className="flex flex-wrap gap-6 pt-2">
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVICES OVERVIEW ───────────────────────────────────────────────── */}
+      <section
+        id="digital-marketing-services"
+        className="py-20 bg-secondary/30"
+        data-ocid="services.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="section-heading">
+              Our Digital Marketing Services in Guntur &amp; Hyderabad
+            </h2>
+            <p className="section-subheading mx-auto mt-4">
+              Comprehensive digital marketing solutions tailored for small
+              businesses and startups in Andhra Pradesh and Telangana.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: "🔍",
+                title: "SEO Services",
+                desc: "Rank #1 on Google with proven SEO strategies for Guntur & Hyderabad businesses. Drive organic traffic that converts.",
+                id: "seo-services-hyderabad",
+              },
+              {
+                icon: "📢",
+                title: "Google Ads (PPC)",
+                desc: "High ROI Google Ads campaigns for lead generation in Hyderabad & Guntur. Pay only for results.",
+                id: "google-ads-ppc-management",
+              },
+              {
+                icon: "📱",
+                title: "Social Media Marketing",
+                desc: "Grow engagement with social media marketing for local businesses in Hyderabad. Facebook, Instagram & more.",
+                id: "social-media-marketing-services",
+              },
+              {
+                icon: "💻",
+                title: "Website Design",
+                desc: "Affordable, fast & SEO-friendly website design company in Guntur. Mobile-first websites that convert.",
+                id: "website-design-development",
+              },
+              {
+                icon: "📍",
+                title: "Local SEO",
+                desc: "Dominate local search with Local SEO services for small businesses in Andhra Pradesh. Rank on Google Maps.",
+                id: "local-seo-services",
+              },
+              {
+                icon: "📧",
+                title: "Lead Generation",
+                desc: "Generate quality leads for your business across India with targeted campaigns and conversion-optimized funnels.",
+                id: "contact-digital-marketing-consultant",
+              },
+            ].map((service, i) => (
+              <div
+                key={i}
+                className="service-card cursor-pointer"
+                onClick={() => scrollTo(service.id)}
+                data-ocid={`services.item.${i + 1}`}
+              >
+                <div className="text-4xl mb-4">{service.icon}</div>
+                <h3 className="text-lg font-bold text-foreground mb-2 font-display">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {service.desc}
+                </p>
+                <button
+                  type="button"
+                  className="mt-4 text-primary font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    scrollTo(service.id);
+                  }}
+                  data-ocid={`services.learn_more.${i + 1}`}
+                >
+                  Learn More <ArrowRight className="h-3 w-3" />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SEO SERVICES DETAIL ─────────────────────────────────────────────── */}
+      <section
+        id="seo-services-hyderabad"
+        className="py-20 bg-white"
+        data-ocid="seo.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <Badge className="mb-4 bg-blue-50 text-primary border-primary/20">
+                SEO Services
+              </Badge>
+              <h2 className="section-heading mb-4">
+                SEO Services in Guntur &amp; Hyderabad
+              </h2>
+              <h3 className="text-xl font-semibold text-foreground mb-4">
+                Rank Your Business #1 on Google
+              </h3>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Looking for the{" "}
+                <strong>best SEO company in Guntur for small business</strong>?
+                Sri Vasundhara Solutions offers affordable{" "}
+                <strong>SEO services in Guntur</strong> and Hyderabad that
+                deliver real results. Our SEO experts help businesses rank
+                higher on Google, drive organic traffic, and generate consistent
+                leads. Whether you're a startup or an established business, our{" "}
+                <strong>
+                  SEO services for small business in Andhra Pradesh
+                </strong>{" "}
+                are designed to deliver long-term, sustainable growth.
+              </p>
+
+              <div className="space-y-5">
                 {[
-                  "5+ Projects Completed",
-                  "100% Client Satisfaction",
-                  "Hyderabad & Guntur",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-2 text-sm text-muted-foreground"
-                  >
-                    <CheckCircle className="h-4 w-4 text-brand-green flex-shrink-0" />
-                    <span>{item}</span>
+                  {
+                    title: "On-Page SEO Optimization",
+                    desc: "We optimize title tags, meta descriptions, keyword placement, content structure, and internal linking to maximize your relevance for target keywords in Guntur and Hyderabad.",
+                  },
+                  {
+                    title: "Off-Page SEO & Link Building",
+                    desc: "Build domain authority with high-quality backlinks from relevant, authoritative websites. Our link-building strategies improve your site's credibility and Google rankings.",
+                  },
+                  {
+                    title: "Technical SEO",
+                    desc: "We audit and fix technical issues: site speed, mobile optimization, crawlability, Core Web Vitals, structured data, and XML sitemap to ensure Google can effectively index your site.",
+                  },
+                  {
+                    title: "Local SEO Integration",
+                    desc: "Optimize your Google Business Profile, build local citations, and maintain NAP consistency to rank in 'near me' searches in Guntur, Hyderabad, and Andhra Pradesh.",
+                  },
+                ].map(({ title, desc }, i) => (
+                  <div key={i} className="flex gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-1 shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">{title}</h4>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {desc}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
+
+              <div className="mt-8 grid grid-cols-2 gap-3">
+                {[
+                  "Increased organic traffic",
+                  "Higher Google rankings",
+                  "More qualified leads",
+                  "Brand credibility",
+                  "Long-term results",
+                  "Monthly reporting",
+                ].map((b, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm">
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    <span className="text-muted-foreground">{b}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Button
+                onClick={() => scrollTo("contact-digital-marketing-consultant")}
+                className="mt-8 bg-accent hover:bg-accent/90 text-white font-bold"
+                data-ocid="seo.cta_button"
+              >
+                Get Free SEO Audit
+              </Button>
             </div>
 
-            {/* Image */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="float-animation w-full max-w-md lg:max-w-lg">
-                <img
-                  src="/assets/generated/hero-illustration.dim_800x600.png"
-                  alt="Digital Marketing Illustration"
-                  className="w-full h-auto object-contain drop-shadow-2xl"
-                />
+            <div>
+              {/* Process */}
+              <div className="bg-secondary/50 rounded-2xl p-6 mb-6">
+                <h3 className="font-bold text-foreground mb-4 font-display">
+                  Our SEO Process
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    "Website Audit",
+                    "Keyword Research",
+                    "On-Page Optimization",
+                    "Link Building",
+                    "Monthly Reporting",
+                  ].map((step, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="h-7 w-7 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center shrink-0">
+                        {i + 1}
+                      </div>
+                      <span className="text-sm font-medium text-foreground">
+                        {step}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* FAQ */}
+              <h3 className="font-bold text-foreground mb-4 font-display">
+                Frequently Asked Questions
+              </h3>
+              <FAQItem
+                q="How long does SEO take to show results?"
+                a="SEO typically takes 3–6 months to show significant results. However, you may see initial improvements in rankings and traffic within 4–8 weeks for less competitive keywords. Local SEO for Guntur businesses often shows faster results."
+              />
+              <FAQItem
+                q="How much do SEO services cost in Guntur?"
+                a="Our affordable SEO packages start from ₹5,000/month for basic local SEO. Full SEO packages including on-page, off-page, and technical SEO start from ₹8,999/month. We offer customized pricing based on your business needs."
+              />
+              <FAQItem
+                q="Do you provide local SEO for Guntur businesses?"
+                a="Yes! We specialize in local SEO services for businesses in Guntur, Hyderabad, and across Andhra Pradesh and Telangana. We optimize your Google Business Profile, build local citations, and target location-specific keywords."
+              />
+              <FAQItem
+                q="What is included in your SEO package?"
+                a="Our SEO packages include complete on-page optimization, off-page link building, technical SEO audit and fixes, local SEO optimization, Google Business Profile management, keyword tracking, and detailed monthly reports."
+              />
+
+              <div className="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-xl">
+                <p className="text-sm font-medium text-primary">
+                  🔗 Also explore:{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("local-seo-services")}
+                    className="underline"
+                  >
+                    Local SEO Services
+                  </button>{" "}
+                  |{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("google-ads-ppc-management")}
+                    className="underline"
+                  >
+                    Google Ads
+                  </button>{" "}
+                  |{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("website-design-development")}
+                    className="underline"
+                  >
+                    Website Design
+                  </button>
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── About Section ─────────────────────────────────── */}
-      <section id="about" className="py-20 lg:py-28 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Stats */}
-            <div className="space-y-10">
-              <div className="grid grid-cols-3 gap-6">
-                <AnimatedStat value="1+" label={t.about.stats.years} />
-                <AnimatedStat value="5+" label={t.about.stats.projects} />
-                <AnimatedStat value="100%" label={t.about.stats.satisfaction} />
-              </div>
-              {/* Decorative element */}
-              <div className="relative rounded-2xl overflow-hidden">
-                <div className="bg-gradient-to-br from-brand-teal/10 to-brand-green/10 p-8 rounded-2xl border border-brand-teal/20">
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      {
-                        icon: TrendingUp,
-                        label: "Revenue Growth",
-                        val: "↑ 2.4x",
-                      },
-                      { icon: Users, label: "Happy Clients", val: "5+" },
-                      { icon: Globe, label: "Services", val: "10+" },
-                      { icon: BarChart2, label: "Avg. ROI", val: "300%" },
-                    ].map(({ icon: Icon, label, val }) => (
-                      <div
-                        key={label}
-                        className="flex items-center gap-3 p-3 bg-white rounded-xl border border-border shadow-xs"
-                      >
-                        <div className="p-2 bg-brand-teal/10 rounded-lg">
-                          <Icon className="h-4 w-4 text-brand-teal" />
-                        </div>
-                        <div>
-                          <div className="font-display font-bold text-lg text-foreground">
-                            {val}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            {label}
-                          </div>
-                        </div>
+      {/* ── GOOGLE ADS DETAIL ───────────────────────────────────────────────── */}
+      <section
+        id="google-ads-ppc-management"
+        className="py-20 bg-secondary/30"
+        data-ocid="google_ads.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div className="order-2 lg:order-1">
+              <div className="bg-white rounded-2xl p-6 mb-6">
+                <h3 className="font-bold text-foreground mb-4 font-display">
+                  Google Ads Campaign Process
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    "Campaign Setup",
+                    "Keyword Research",
+                    "Ad Copywriting",
+                    "Bid Management",
+                    "Optimization",
+                    "Reporting",
+                  ].map((step, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="h-7 w-7 rounded-full bg-accent text-white text-xs font-bold flex items-center justify-center shrink-0">
+                        {i + 1}
                       </div>
-                    ))}
-                  </div>
+                      <span className="text-sm font-medium text-foreground">
+                        {step}
+                      </span>
+                    </div>
+                  ))}
                 </div>
+              </div>
+
+              <h3 className="font-bold text-foreground mb-4 font-display">
+                FAQ – Google Ads
+              </h3>
+              <FAQItem
+                q="How much budget do I need for Google Ads?"
+                a="For small businesses in Guntur and Hyderabad, we recommend starting with ₹5,000–₹10,000/month. Most businesses see good results with ₹15,000–₹50,000/month depending on industry and competition. The more competitive your market, the higher the budget needed."
+              />
+              <FAQItem
+                q="How soon will I see results with Google Ads?"
+                a="Google Ads shows results within 24–48 hours of campaign launch. You'll start seeing clicks and leads immediately, unlike SEO which takes months. This makes Google Ads ideal for businesses needing quick lead generation."
+              />
+              <FAQItem
+                q="Do you manage Google Ads for small businesses in Hyderabad?"
+                a="Yes! We specialize in Google Ads management for small and medium businesses in Hyderabad, Guntur, and across India. Our low cost Google Ads services Hyderabad are designed to maximize ROI for businesses with limited budgets."
+              />
+              <FAQItem
+                q="What is your Google Ads management fee?"
+                a="Our Google Ads management fee starts from ₹4,999/month. The management fee is separate from the ad spend budget. We offer transparent pricing with no hidden charges and detailed monthly reporting."
+              />
+
+              <div className="mt-4 p-4 bg-accent/5 border border-accent/20 rounded-xl">
+                <p className="text-sm font-medium text-accent">
+                  🔗 Also explore:{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("seo-services-hyderabad")}
+                    className="underline"
+                  >
+                    SEO Services
+                  </button>{" "}
+                  |{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("social-media-marketing-services")}
+                    className="underline"
+                  >
+                    Social Media
+                  </button>{" "}
+                  |{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("online-lead-generation-services")}
+                    className="underline"
+                  >
+                    Lead Generation
+                  </button>
+                </p>
               </div>
             </div>
 
-            {/* Text */}
-            <div className="space-y-6">
-              <div>
-                <Badge className="bg-brand-teal/15 text-brand-teal-dark border-brand-teal/30 mb-4">
-                  Est. 2025 · Hyderabad & Guntur
-                </Badge>
-                <h2 className="section-heading text-3xl sm:text-4xl text-foreground mb-4">
-                  {t.about.heading}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed text-lg">
-                  {t.about.story}
-                </p>
-              </div>
-              <p className="text-muted-foreground leading-relaxed">
-                {t.about.trust}
+            <div className="order-1 lg:order-2">
+              <Badge className="mb-4 bg-orange-50 text-accent border-accent/20">
+                Google Ads / PPC
+              </Badge>
+              <h2 className="section-heading mb-4">
+                Google Ads &amp; PPC Management Services in Hyderabad &amp;
+                Guntur
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Need a{" "}
+                <strong>
+                  Google Ads expert in Hyderabad for lead generation
+                </strong>
+                ? We manage high-ROI Google Ads campaigns for businesses in
+                Guntur and Hyderabad. Our{" "}
+                <strong>low cost Google Ads services Hyderabad</strong> are
+                designed to maximize your advertising budget and deliver
+                qualified leads. Whether you need Search Ads, Display Ads, or
+                Shopping campaigns, we create data-driven strategies that
+                generate real business results.
               </p>
-              <div className="space-y-3">
+              <div className="space-y-5">
                 {[
-                  "Serving clients online across Hyderabad & Guntur",
-                  "Transparent strategies, measurable results",
-                  "Affordable packages for startups and SMBs",
-                  "Dedicated support in English and Telugu",
-                ].map((point) => (
-                  <div key={point} className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-brand-green mt-0.5 flex-shrink-0" />
-                    <span className="text-foreground">{point}</span>
+                  {
+                    title: "Search Ads Campaigns",
+                    desc: "Appear at the top of Google search results when potential customers in Guntur and Hyderabad search for your services. Highly targeted, intent-driven traffic.",
+                  },
+                  {
+                    title: "Display & Remarketing Ads",
+                    desc: "Re-engage website visitors with targeted display ads across Google's network. Keep your brand top-of-mind and bring back potential customers.",
+                  },
+                  {
+                    title: "Shopping Campaigns",
+                    desc: "For e-commerce businesses, Google Shopping campaigns showcase your products directly in search results with images and prices.",
+                  },
+                  {
+                    title: "YouTube Ads",
+                    desc: "Reach your audience with video advertising on YouTube, the world's second-largest search engine. Cost-effective brand awareness for Hyderabad businesses.",
+                  },
+                ].map(({ title, desc }, i) => (
+                  <div key={i} className="flex gap-3">
+                    <CheckCircle className="h-5 w-5 text-accent mt-1 shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">{title}</h4>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 grid grid-cols-2 gap-3">
+                {[
+                  "Immediate visibility",
+                  "Pay only for clicks",
+                  "Measurable ROI",
+                  "Budget control",
+                  "Geographic targeting",
+                  "How to generate leads using Google Ads in India",
+                ].map((b, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm">
+                    <div className="h-1.5 w-1.5 rounded-full bg-accent" />
+                    <span className="text-muted-foreground">{b}</span>
                   </div>
                 ))}
               </div>
               <Button
-                onClick={() => scrollTo("contact")}
-                className="bg-brand-teal hover:bg-brand-teal-dark text-white font-semibold shadow-teal hover:shadow-teal-lg transition-all hover:-translate-y-0.5"
+                onClick={() => scrollTo("contact-digital-marketing-consultant")}
+                className="mt-8 bg-accent hover:bg-accent/90 text-white font-bold"
+                data-ocid="google_ads.cta_button"
               >
-                {t.consultation} <ArrowRight className="ml-2 h-4 w-4" />
+                Start Google Ads Campaign
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Services Section ───────────────────────────────── */}
+      {/* ── SOCIAL MEDIA MARKETING ──────────────────────────────────────────── */}
       <section
-        id="services"
-        className="py-20 lg:py-28 bg-gradient-to-b from-slate-50 to-white"
+        id="social-media-marketing-services"
+        className="py-20 bg-white"
+        data-ocid="social_media.section"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <Badge className="bg-brand-teal/15 text-brand-teal-dark border-brand-teal/30 mb-4">
-              What We Offer
-            </Badge>
-            <h2 className="section-heading text-3xl sm:text-4xl text-foreground mb-4">
-              {t.services.heading}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <Badge className="mb-4 bg-pink-50 text-pink-600 border-pink-200">
+                Social Media Marketing
+              </Badge>
+              <h2 className="section-heading mb-4">
+                Social Media Marketing Services for Businesses in Hyderabad
+                &amp; Guntur
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Grow your brand with{" "}
+                <strong>
+                  social media marketing for local businesses in Hyderabad
+                </strong>
+                . Our team creates engaging content, manages your social
+                profiles, and runs targeted ad campaigns on Facebook, Instagram,
+                LinkedIn, and YouTube. As a leading{" "}
+                <strong>social media marketing agency Hyderabad</strong>, we
+                help businesses build a strong online presence and connect with
+                their local audience.
+              </p>
+              <div className="space-y-5">
+                {[
+                  {
+                    title: "Facebook & Instagram Marketing",
+                    desc: "Create scroll-stopping content and run targeted ad campaigns to reach your ideal customers in Guntur, Hyderabad, and across India.",
+                  },
+                  {
+                    title: "LinkedIn Marketing for B2B",
+                    desc: "Build professional credibility and generate B2B leads with LinkedIn content marketing and sponsored campaigns.",
+                  },
+                  {
+                    title: "YouTube Marketing",
+                    desc: "Create engaging video content and run YouTube ads to build brand awareness and drive traffic to your website.",
+                  },
+                  {
+                    title: "Content Creation & Scheduling",
+                    desc: "We create, schedule, and publish SEO-friendly content in both English and Telugu, tailored for your local audience.",
+                  },
+                ].map(({ title, desc }, i) => (
+                  <div key={i} className="flex gap-3">
+                    <CheckCircle className="h-5 w-5 text-pink-500 mt-1 shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">{title}</h4>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Button
+                onClick={() => scrollTo("contact-digital-marketing-consultant")}
+                className="mt-8 bg-primary hover:bg-primary/90 text-white font-bold"
+                data-ocid="social_media.cta_button"
+              >
+                Grow My Social Media
+              </Button>
+            </div>
+            <div>
+              <div className="bg-secondary/50 rounded-2xl p-6 mb-6">
+                <h3 className="font-bold text-foreground mb-3 font-display">
+                  Benefits
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    "Brand awareness",
+                    "Customer engagement",
+                    "Lead generation",
+                    "Cost-effective reach",
+                    "Analytics & insights",
+                    "Telugu & English content",
+                  ].map((b, i) => (
+                    <div key={i} className="flex items-center gap-2 text-sm">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      <span className="text-muted-foreground">{b}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <h3 className="font-bold text-foreground mb-4 font-display">
+                FAQ – Social Media Marketing
+              </h3>
+              <FAQItem
+                q="Which social media platforms do you manage?"
+                a="We manage Facebook, Instagram, LinkedIn, YouTube, and Twitter/X. We recommend the best platforms based on your business type and target audience in Guntur and Hyderabad."
+              />
+              <FAQItem
+                q="How do you measure social media ROI?"
+                a="We track key metrics including reach, engagement rate, follower growth, website traffic from social, lead form submissions, and conversion rates. Monthly reports clearly show the ROI of your social media investment."
+              />
+              <FAQItem
+                q="Do you create content in Telugu and English?"
+                a="Yes! We create engaging content in both Telugu and English to connect with local audiences in Guntur, Hyderabad, and Andhra Pradesh. Bilingual content significantly improves engagement for local businesses."
+              />
+              <div className="mt-4 p-4 bg-pink-50 border border-pink-200 rounded-xl">
+                <p className="text-sm font-medium text-pink-600">
+                  🔗 Also explore:{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("seo-services-hyderabad")}
+                    className="underline"
+                  >
+                    SEO Services
+                  </button>{" "}
+                  |{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("google-ads-ppc-management")}
+                    className="underline"
+                  >
+                    Google Ads
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── WEBSITE DESIGN ──────────────────────────────────────────────────── */}
+      <section
+        id="website-design-development"
+        className="py-20 bg-secondary/30"
+        data-ocid="web_design.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div className="order-2 lg:order-1">
+              <div className="bg-white rounded-2xl p-6 mb-6">
+                <h3 className="font-bold text-foreground mb-3 font-display">
+                  What We Build
+                </h3>
+                <div className="space-y-2">
+                  {[
+                    {
+                      title: "Business Websites",
+                      desc: "Professional, fast-loading websites that showcase your business and convert visitors to customers.",
+                    },
+                    {
+                      title: "E-Commerce Development",
+                      desc: "Full-featured online stores with product management, payment gateway integration, and SEO optimization.",
+                    },
+                    {
+                      title: "Landing Pages",
+                      desc: "High-converting landing pages designed specifically for Google Ads and lead generation campaigns.",
+                    },
+                    {
+                      title: "SEO-Optimized Design",
+                      desc: "Every website we build is SEO-ready from day one — fast load times, proper schema markup, and mobile-first design.",
+                    },
+                  ].map(({ title, desc }, i) => (
+                    <div
+                      key={i}
+                      className="p-3 rounded-lg border border-border"
+                    >
+                      <p className="font-semibold text-sm text-foreground">
+                        {title}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <h3 className="font-bold text-foreground mb-4 font-display">
+                FAQ – Website Design
+              </h3>
+              <FAQItem
+                q="How much does a website cost in Guntur?"
+                a="A basic business website starts from ₹8,999. E-commerce websites start from ₹19,999. All websites include mobile-responsive design, basic SEO setup, and 3 months of free support. We offer the most affordable website design with SEO in Guntur."
+              />
+              <FAQItem
+                q="How long does it take to build a website?"
+                a="A standard business website takes 7–14 days. E-commerce websites take 15–30 days. Landing pages can be delivered within 3–5 days. Timeline depends on content readiness and revision cycles."
+              />
+              <FAQItem
+                q="Do you provide website maintenance?"
+                a="Yes, we offer monthly website maintenance packages starting from ₹1,999/month including security updates, performance optimization, content updates, and technical support."
+              />
+            </div>
+            <div className="order-1 lg:order-2">
+              <Badge className="mb-4 bg-purple-50 text-purple-600 border-purple-200">
+                Website Design
+              </Badge>
+              <h2 className="section-heading mb-4">
+                Affordable Website Design Company in Guntur &amp; Hyderabad
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Looking for a{" "}
+                <strong>website design company in Guntur affordable</strong>? We
+                build fast, mobile-first, SEO-friendly websites that convert
+                visitors into customers. Our{" "}
+                <strong>affordable website design with SEO in Guntur</strong> is
+                perfect for startups, small businesses, clinics, restaurants,
+                and retail stores. Every website we deliver is optimized for
+                speed, search engines, and lead generation.
+              </p>
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                {[
+                  "Mobile-first design",
+                  "Fast loading (<3s)",
+                  "SEO-ready structure",
+                  "Lead capture forms",
+                  "Affordable pricing",
+                  "3 months support",
+                ].map((f, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm">
+                    <CheckCircle className="h-4 w-4 text-purple-500 shrink-0" />
+                    <span className="text-muted-foreground">{f}</span>
+                  </div>
+                ))}
+              </div>
+              <Button
+                onClick={() => scrollTo("contact-digital-marketing-consultant")}
+                className="bg-primary hover:bg-primary/90 text-white font-bold"
+                data-ocid="web_design.cta_button"
+              >
+                Get Website Quote
+              </Button>
+              <div className="mt-4 p-4 bg-purple-50 border border-purple-200 rounded-xl">
+                <p className="text-sm font-medium text-purple-600">
+                  🔗 Also explore:{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("seo-services-hyderabad")}
+                    className="underline"
+                  >
+                    SEO Services
+                  </button>{" "}
+                  |{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("local-seo-services")}
+                    className="underline"
+                  >
+                    Local SEO
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── LOCAL SEO ───────────────────────────────────────────────────────── */}
+      <section
+        id="local-seo-services"
+        className="py-20 bg-white"
+        data-ocid="local_seo.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <Badge className="mb-4 bg-green-50 text-green-600 border-green-200">
+                Local SEO
+              </Badge>
+              <h2 className="section-heading mb-4">
+                Local SEO Services for Small Businesses in Andhra Pradesh &amp;
+                Telangana
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Dominate local search results with our{" "}
+                <strong>
+                  local SEO services for small businesses in Andhra Pradesh
+                </strong>
+                . We optimize your Google Business Profile, build local
+                citations, and help your business appear in the 'near me'
+                searches in Guntur, Hyderabad, and across India. As a leading{" "}
+                <strong>digital marketing agency in KPHB Hyderabad</strong>, we
+                understand the local market and help businesses stand out from
+                competitors.
+              </p>
+              <div className="space-y-5">
+                {[
+                  {
+                    title: "Google Business Profile Optimization",
+                    desc: "Complete optimization of your GBP listing including photos, posts, Q&A, categories, and attributes to rank in the Google Maps 3-pack.",
+                  },
+                  {
+                    title: "Local Citation Building",
+                    desc: "Build consistent NAP (Name, Address, Phone) citations across major directories like Justdial, Sulekha, IndiaMART, and 50+ local directories.",
+                  },
+                  {
+                    title: "'Near Me' SEO",
+                    desc: "Optimize your website and content for location-based 'near me' searches in Guntur, Hyderabad, KPHB, and surrounding areas.",
+                  },
+                  {
+                    title: "Review Management",
+                    desc: "Develop a systematic approach to generating and responding to Google reviews to build trust and improve local ranking signals.",
+                  },
+                ].map(({ title, desc }, i) => (
+                  <div key={i} className="flex gap-3">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-1 shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-foreground">{title}</h4>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Button
+                onClick={() => scrollTo("contact-digital-marketing-consultant")}
+                className="mt-8 bg-green-600 hover:bg-green-700 text-white font-bold"
+                data-ocid="local_seo.cta_button"
+              >
+                Get Local SEO Quote
+              </Button>
+            </div>
+            <div>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                {[
+                  {
+                    icon: MapPin,
+                    label: "Top 3 Google Maps pack",
+                    color: "text-green-600",
+                  },
+                  {
+                    icon: Phone,
+                    label: "More local phone calls",
+                    color: "text-primary",
+                  },
+                  {
+                    icon: TrendingUp,
+                    label: "Drive foot traffic",
+                    color: "text-accent",
+                  },
+                  {
+                    icon: Star,
+                    label: "Build local trust",
+                    color: "text-yellow-500",
+                  },
+                ].map(({ icon: Icon, label, color }, i) => (
+                  <div
+                    key={i}
+                    className="bg-secondary/50 rounded-xl p-4 text-center"
+                  >
+                    <Icon className={`h-6 w-6 ${color} mx-auto mb-2`} />
+                    <p className="text-xs font-medium text-foreground">
+                      {label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <h3 className="font-bold text-foreground mb-4 font-display">
+                FAQ – Local SEO
+              </h3>
+              <FAQItem
+                q="What is Local SEO?"
+                a="Local SEO is the process of optimizing your online presence to attract more business from local searches. It includes Google Business Profile optimization, local citation building, and creating location-specific content to rank in searches like 'digital marketing agency near me'."
+              />
+              <FAQItem
+                q="How do I rank on Google Maps in Guntur?"
+                a="To rank on Google Maps in Guntur, you need an optimized Google Business Profile, consistent NAP citations across directories, positive customer reviews, location-specific content on your website, and regular posts on your GBP listing."
+              />
+              <FAQItem
+                q="How long does Local SEO take?"
+                a="Local SEO shows faster results than organic SEO. Most businesses see improvements in Google Maps rankings within 4–8 weeks. Full results with significant ranking improvements typically take 3–4 months of consistent optimization."
+              />
+              <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl">
+                <p className="text-sm font-medium text-green-600">
+                  🔗 Also explore:{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("seo-services-hyderabad")}
+                    className="underline"
+                  >
+                    Full SEO Services
+                  </button>{" "}
+                  |{" "}
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("website-design-development")}
+                    className="underline"
+                  >
+                    Website Design
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY CHOOSE US ────────────────────────────────────────────────────── */}
+      <section
+        id="about-digital-marketing-agency"
+        className="py-20 bg-primary text-white"
+        data-ocid="about.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display">
+              Why Choose Sri Vasundhara Solutions as Your Digital Marketing
+              Partner
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Complete digital marketing solutions to help your business
-              dominate online and outgrow the competition across Hyderabad &
-              Guntur.
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+              Sri Vasundhara Solutions is a digital marketing freelancing agency
+              founded in 2025, serving businesses in Guntur, Hyderabad, and
+              across India.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {SERVICES.map(({ icon: Icon, title, description }) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {[
+              {
+                icon: "💡",
+                title: "ROI-Focused Strategies",
+                desc: "Every campaign is designed to maximize your return on investment with data-driven decisions.",
+              },
+              {
+                icon: "📊",
+                title: "Transparent Reporting",
+                desc: "Monthly detailed reports so you always know what's happening with your campaigns.",
+              },
+              {
+                icon: "🎯",
+                title: "Customized Campaigns",
+                desc: "No cookie-cutter solutions. Tailored strategies for your specific business goals and budget.",
+              },
+              {
+                icon: "💰",
+                title: "Affordable Pricing",
+                desc: "Best digital marketing services for startups in Hyderabad at competitive, transparent rates.",
+              },
+            ].map(({ icon, title, desc }, i) => (
               <div
-                key={title}
-                className="service-card card-teal-top group bg-white rounded-xl border border-border p-5 shadow-xs cursor-pointer"
+                key={i}
+                className="bg-white/10 backdrop-blur rounded-xl p-6 text-center hover:bg-white/20 transition-colors"
+                data-ocid={`about.feature.${i + 1}`}
               >
-                <div className="mb-4 p-3 bg-brand-teal/10 rounded-xl w-fit group-hover:bg-brand-teal group-hover:text-white transition-colors">
-                  <Icon className="h-5 w-5 text-brand-teal group-hover:text-white transition-colors" />
+                <div className="text-4xl mb-4">{icon}</div>
+                <h3 className="font-bold text-white mb-2 font-display">
+                  {title}
+                </h3>
+                <p className="text-white/70 text-sm">{desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-white/20 pt-10">
+            {[
+              { value: "50+", label: "Projects Completed" },
+              { value: "20+", label: "Happy Clients" },
+              { value: "1+", label: "Year Experience" },
+              { value: "100%", label: "Client Satisfaction" },
+            ].map(({ value, label }, i) => (
+              <div
+                key={i}
+                className="text-center"
+                data-ocid={`about.stat.${i + 1}`}
+              >
+                <div className="text-3xl font-bold text-accent font-display">
+                  {value}
                 </div>
-                <h3 className="font-display font-bold text-sm text-foreground mb-2">
+                <div className="text-white/70 text-sm mt-1">{label}</div>
+              </div>
+            ))}
+          </div>
+          <p className="text-center mt-8 text-white/70 text-sm max-w-3xl mx-auto">
+            We specialize in{" "}
+            <strong className="text-white">
+              affordable digital marketing services in Guntur
+            </strong>{" "}
+            and{" "}
+            <strong className="text-white">
+              digital marketing services in Hyderabad
+            </strong>
+            , helping small businesses and startups grow online.
+          </p>
+        </div>
+      </section>
+
+      {/* ── PROCESS ─────────────────────────────────────────────────────────── */}
+      <section
+        id="our-process"
+        className="py-20 bg-white"
+        data-ocid="process.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="section-heading">
+              Our Proven Digital Marketing Growth Process
+            </h2>
+            <p className="section-subheading mx-auto mt-4">
+              A systematic, data-driven approach that delivers consistent
+              results for businesses in Guntur, Hyderabad, and across India.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {[
+              {
+                step: 1,
+                icon: "🔍",
+                title: "Business Analysis",
+                desc: "We analyze your business, competitors, target audience, and market opportunities in Guntur & Hyderabad.",
+              },
+              {
+                step: 2,
+                icon: "📋",
+                title: "Strategy Planning",
+                desc: "Custom digital marketing strategy based on your goals, budget, and target market.",
+              },
+              {
+                step: 3,
+                icon: "🚀",
+                title: "Campaign Execution",
+                desc: "We execute SEO, Google Ads, and social media campaigns with precision and expertise.",
+              },
+              {
+                step: 4,
+                icon: "📈",
+                title: "Performance Optimization",
+                desc: "Continuous monitoring and optimization for better results and higher ROI.",
+              },
+              {
+                step: 5,
+                icon: "📊",
+                title: "Growth Scaling",
+                desc: "Scale winning strategies to grow your business revenue and market share.",
+              },
+            ].map(({ step, icon, title, desc }) => (
+              <div
+                key={step}
+                className="text-center relative"
+                data-ocid={`process.item.${step}`}
+              >
+                <div className="h-16 w-16 rounded-full bg-primary/10 border-2 border-primary text-2xl flex items-center justify-center mx-auto mb-4 relative z-10">
+                  {icon}
+                </div>
+                <div className="h-6 w-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto -mt-3 mb-3 relative z-20">
+                  {step}
+                </div>
+                <h3 className="font-bold text-foreground mb-2 font-display text-base">
                   {title}
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  {description}
+                  {desc}
                 </p>
               </div>
             ))}
@@ -1310,263 +1673,62 @@ export default function App() {
         </div>
       </section>
 
-      {/* ─── Why Choose Us ──────────────────────────────────── */}
-      <section id="why-us" className="py-20 lg:py-28 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <Badge className="bg-brand-teal/15 text-brand-teal-dark border-brand-teal/30 mb-4">
-              Our Edge
-            </Badge>
-            <h2 className="section-heading text-3xl sm:text-4xl text-foreground mb-4">
-              {t.whyUs.heading}
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              We combine local market knowledge of Hyderabad and Guntur with
-              proven digital strategies.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {WHY_US.map(({ icon: Icon, title, description }) => (
-              <div
-                key={title}
-                className="group text-center p-8 rounded-2xl border border-border hover:border-brand-teal/40 hover:shadow-teal transition-all duration-300 cursor-pointer"
-              >
-                <div className="mx-auto mb-5 w-14 h-14 bg-gradient-to-br from-brand-teal/15 to-brand-green/15 rounded-2xl flex items-center justify-center group-hover:from-brand-teal group-hover:to-brand-green transition-all duration-300">
-                  <Icon className="h-6 w-6 text-brand-teal group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="font-display font-bold text-lg text-foreground mb-3">
-                  {title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Process Section ────────────────────────────────── */}
-      <section
-        id="process"
-        className="py-20 lg:py-28 bg-gradient-to-b from-slate-50 to-white"
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <Badge className="bg-brand-teal/15 text-brand-teal-dark border-brand-teal/30 mb-4">
-              How We Work
-            </Badge>
-            <h2 className="section-heading text-3xl sm:text-4xl text-foreground mb-4">
-              {t.process.heading}
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              A structured, transparent approach that delivers consistent
-              results for every client.
-            </p>
-          </div>
-
-          {/* Desktop: horizontal steps */}
-          <div className="hidden lg:flex items-start gap-0 max-w-6xl mx-auto">
-            {PROCESS_STEPS.map((step, index) => (
-              <div key={step.number} className="flex items-start flex-1">
-                <div className="flex flex-col items-center flex-1">
-                  <div className="relative mb-5">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-teal to-brand-green flex items-center justify-center shadow-teal">
-                      <span className="font-display font-black text-white text-xl">
-                        {step.number}
-                      </span>
-                    </div>
-                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-brand-teal/20 rounded-full" />
-                  </div>
-                  <div className="text-center px-3">
-                    <h3 className="font-display font-bold text-base text-foreground mb-2 leading-tight">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-                {index < PROCESS_STEPS.length - 1 && (
-                  <div className="flex-shrink-0 mt-7 text-brand-teal/40">
-                    <ArrowRight className="h-6 w-6" />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile: vertical steps */}
-          <div className="lg:hidden space-y-4 max-w-lg mx-auto">
-            {PROCESS_STEPS.map((step, index) => (
-              <div key={step.number} className="flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-teal to-brand-green flex items-center justify-center shadow-teal flex-shrink-0">
-                    <span className="font-display font-black text-white text-sm">
-                      {step.number}
-                    </span>
-                  </div>
-                  {index < PROCESS_STEPS.length - 1 && (
-                    <div className="w-0.5 flex-1 bg-brand-teal/20 my-2 min-h-[2rem]" />
-                  )}
-                </div>
-                <div className="pb-4">
-                  <h3 className="font-display font-bold text-base text-foreground mb-1">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Pricing Section ────────────────────────────────── */}
-      <section id="pricing" className="py-20 lg:py-28 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <Badge className="bg-brand-teal/15 text-brand-teal-dark border-brand-teal/30 mb-4">
-              Pricing
-            </Badge>
-            <h2 className="section-heading text-3xl sm:text-4xl text-foreground mb-4">
-              {t.pricing.heading}
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              No hidden fees. No lock-in contracts. Pick the plan that fits your
-              growth stage.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {PRICING_PLANS.map((plan) => (
-              <div
-                key={plan.name}
-                className={`relative rounded-2xl border-2 p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 ${
-                  plan.popular
-                    ? "border-brand-teal shadow-teal-lg bg-white"
-                    : "border-border bg-white hover:border-brand-teal/40 hover:shadow-teal"
-                }`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <Badge className="bg-brand-teal text-white border-0 px-4 py-1 font-semibold shadow-teal">
-                      ⭐ Most Popular
-                    </Badge>
-                  </div>
-                )}
-                <div className="mb-6">
-                  <h3 className="font-display font-bold text-xl text-foreground mb-1">
-                    {plan.name}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    {plan.description}
-                  </p>
-                  <div className="flex items-baseline gap-1">
-                    <span className="font-display font-black text-4xl text-brand-teal">
-                      {plan.price}
-                    </span>
-                    <span className="text-muted-foreground text-sm">
-                      {plan.period}
-                    </span>
-                  </div>
-                </div>
-
-                <ul className="space-y-3 mb-8 flex-1">
-                  {plan.features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-start gap-2.5 text-sm text-foreground"
-                    >
-                      <CheckCircle className="h-4 w-4 text-brand-green mt-0.5 flex-shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                <Button
-                  data-ocid={plan.ocid}
-                  onClick={() => scrollTo("contact")}
-                  className={`w-full font-bold py-5 transition-all ${
-                    plan.popular
-                      ? "bg-brand-teal hover:bg-brand-teal-dark text-white shadow-teal hover:shadow-teal-lg hover:-translate-y-0.5"
-                      : "bg-white border-2 border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-white"
-                  }`}
-                  variant={plan.popular ? "default" : "outline"}
-                >
-                  {plan.cta} <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            ))}
-          </div>
-
-          {/* Custom quote */}
-          <div className="text-center mt-10">
-            <p className="text-muted-foreground mb-3">
-              Need something custom for your business?
-            </p>
-            <Button
-              data-ocid="pricing.custom_quote_button"
-              variant="outline"
-              onClick={() => scrollTo("contact")}
-              className="border-2 border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-white font-semibold transition-all"
-            >
-              Request Custom Quote <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Testimonials ───────────────────────────────────── */}
+      {/* ── TESTIMONIALS ────────────────────────────────────────────────────── */}
       <section
         id="testimonials"
-        className="py-20 lg:py-28 bg-gradient-to-b from-slate-50 to-white"
+        className="py-20 bg-secondary/30"
+        data-ocid="testimonials.section"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <Badge className="bg-brand-teal/15 text-brand-teal-dark border-brand-teal/30 mb-4">
-              Client Stories
-            </Badge>
-            <h2 className="section-heading text-3xl sm:text-4xl text-foreground mb-4">
-              {t.testimonials.heading}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="section-heading">
+              What Our Clients Say About Sri Vasundhara Solutions
             </h2>
+            <p className="section-subheading mx-auto mt-4">
+              Real results. Real businesses. Real growth across Guntur,
+              Hyderabad, and India.
+            </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {TESTIMONIALS.map((testimonial) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                stars: 5,
+                text: "Sri Vasundhara Solutions transformed our online presence. Our website traffic increased by 300% in just 4 months through their SEO services in Guntur. Highly recommended for any local business!",
+                name: "Rajesh K.",
+                role: "Restaurant Owner, Guntur",
+              },
+              {
+                stars: 5,
+                text: "The Google Ads campaigns they ran for us in Hyderabad generated 5x more leads than we expected. Excellent ROI and transparent reporting every month. Best digital marketing agency in Hyderabad!",
+                name: "Priya S.",
+                role: "Clinic Owner, Hyderabad",
+              },
+              {
+                stars: 5,
+                text: "Best affordable digital marketing agency for small businesses. They designed our website and set up local SEO that brought us more customers from KPHB area. Truly professional team!",
+                name: "Suresh M.",
+                role: "Retail Business, KPHB Hyderabad",
+              },
+            ].map(({ stars, text, name, role }, i) => (
               <div
-                key={testimonial.name}
-                className="testimonial-card card-teal-top bg-white rounded-xl border border-border p-6 shadow-xs transition-all duration-300 hover:shadow-card-hover"
+                key={i}
+                className="bg-white rounded-2xl p-6 shadow-card border border-border"
+                data-ocid={`testimonials.item.${i + 1}`}
               >
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-4">
-                  {[1, 2, 3, 4, 5].map((s) => (
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: stars }).map((_, j) => (
                     <Star
-                      key={s}
+                      key={j}
                       className="h-4 w-4 text-yellow-400 fill-yellow-400"
                     />
                   ))}
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6 italic">
-                  "{testimonial.quote}"
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4 italic">
+                  "{text}"
                 </p>
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`w-10 h-10 rounded-full ${testimonial.color} flex items-center justify-center text-white font-display font-bold text-sm`}
-                  >
-                    {testimonial.initials}
-                  </div>
-                  <div>
-                    <div className="font-display font-bold text-sm text-foreground">
-                      {testimonial.name}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {testimonial.role}
-                    </div>
-                  </div>
+                <div>
+                  <p className="font-bold text-foreground text-sm">{name}</p>
+                  <p className="text-xs text-muted-foreground">{role}</p>
                 </div>
               </div>
             ))}
@@ -1574,659 +1736,659 @@ export default function App() {
         </div>
       </section>
 
-      {/* ─── Portfolio Section ──────────────────────────────── */}
-      <section id="portfolio" className="py-20 lg:py-28 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <Badge className="bg-brand-teal/15 text-brand-teal-dark border-brand-teal/30 mb-4">
-              Case Studies
-            </Badge>
-            <h2 className="section-heading text-3xl sm:text-4xl text-foreground mb-4">
-              {t.portfolio.heading}
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Real results for real businesses across Hyderabad, Guntur, and
-              beyond.
-            </p>
-          </div>
-
-          {portfolioLoading ? (
-            <PortfolioSkeleton />
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {portfolioItems.slice(0, 5).map((item, i) => (
-                <div
-                  key={item.title}
-                  data-ocid={`portfolio.item.${i + 1}`}
-                  className="portfolio-card card-teal-top bg-white rounded-xl border border-border p-6 shadow-xs transition-all duration-300 cursor-pointer group"
-                >
-                  <div
-                    className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border mb-4 ${getCategoryColor(item.category)}`}
-                  >
-                    {item.category}
-                  </div>
-                  <h3 className="font-display font-bold text-base text-foreground mb-2 group-hover:text-brand-teal transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                    {item.description}
-                  </p>
-                  <div className="flex items-center justify-between pt-3 border-t border-border">
-                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                      <Building2 className="h-3.5 w-3.5" />
-                      {item.clientType}
-                    </div>
-                    <div className="font-display font-black text-brand-teal text-lg">
-                      {item.metric}
-                    </div>
-                  </div>
-                  <div className="mt-2 text-xs text-brand-green font-semibold flex items-center gap-1">
-                    <TrendingUp className="h-3.5 w-3.5" />
-                    {item.result}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ─── Blog Section ───────────────────────────────────── */}
+      {/* ── BLOG ────────────────────────────────────────────────────────────── */}
       <section
-        id="blog"
-        className="py-20 lg:py-28 bg-gradient-to-b from-slate-50 to-white"
+        id="digital-marketing-blog"
+        className="py-20 bg-white"
+        data-ocid="blog.section"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <Badge className="bg-brand-teal/15 text-brand-teal-dark border-brand-teal/30 mb-4">
-              Knowledge Hub
-            </Badge>
-            <h2 className="section-heading text-3xl sm:text-4xl text-foreground mb-4">
-              {t.blog.heading}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="section-heading">
+              Digital Marketing Blog – Tips, Strategies &amp; Insights
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Actionable tips and strategies to grow your business online.
+            <p className="section-subheading mx-auto mt-4">
+              Stay updated with the latest digital marketing trends, SEO
+              strategies, and business growth tips for Guntur and Hyderabad
+              businesses.
             </p>
           </div>
-
-          {blogLoading ? (
-            <BlogSkeleton />
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {blogPosts.slice(0, 3).map((post, i) => (
-                <article
-                  key={post.slug}
-                  data-ocid={`blog.item.${i + 1}`}
-                  className="group bg-white rounded-xl border border-border p-6 shadow-xs hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-                >
-                  <div
-                    className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border mb-4 ${getCategoryColor(post.category)}`}
-                  >
-                    {post.category}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                cat: "SEO",
+                catColor: "bg-blue-100 text-primary",
+                title: "What is SEO and How Does It Work in 2026?",
+                excerpt:
+                  "Learn everything about Search Engine Optimization and how to rank your business on Google. Essential guide for businesses in Guntur and Hyderabad.",
+                date: "Mar 2026",
+              },
+              {
+                cat: "Google Ads",
+                catColor: "bg-orange-100 text-accent",
+                title: "Google Ads vs SEO – Which is Better for Your Business?",
+                excerpt:
+                  "Compare paid vs organic marketing strategies to decide which works best for your business goals and budget in Hyderabad.",
+                date: "Mar 2026",
+              },
+              {
+                cat: "Social Media",
+                catColor: "bg-pink-100 text-pink-600",
+                title:
+                  "Social Media Marketing Tips for Small Businesses in Hyderabad",
+                excerpt:
+                  "Practical social media strategies to grow your local business, increase engagement, and generate leads in Hyderabad & Guntur.",
+                date: "Feb 2026",
+              },
+              {
+                cat: "Local SEO",
+                catColor: "bg-green-100 text-green-600",
+                title:
+                  "Local SEO Guide for Guntur Businesses – Rank on Google Maps",
+                excerpt:
+                  "Step-by-step guide to optimizing your Google Business Profile and ranking in local searches in Guntur and Andhra Pradesh.",
+                date: "Feb 2026",
+              },
+              {
+                cat: "Digital Marketing",
+                catColor: "bg-purple-100 text-purple-600",
+                title: "Best Digital Marketing Strategies for Startups in 2026",
+                excerpt:
+                  "Data-driven digital marketing strategies that startups in Hyderabad and Guntur can implement on a limited budget.",
+                date: "Jan 2026",
+              },
+              {
+                cat: "Google Ads",
+                catColor: "bg-orange-100 text-accent",
+                title: "How to Generate Leads Using Google Ads in India",
+                excerpt:
+                  "Complete beginner's guide to setting up Google Ads campaigns that generate quality leads for your business across India.",
+                date: "Jan 2026",
+              },
+              {
+                cat: "SEO",
+                catColor: "bg-blue-100 text-primary",
+                title:
+                  "Benefits of Digital Marketing for Small Business in Andhra Pradesh",
+                excerpt:
+                  "Why every small business in Andhra Pradesh needs digital marketing to survive and grow in the competitive online landscape of 2026.",
+                date: "Dec 2025",
+              },
+            ].map((post, i) => (
+              <div
+                key={i}
+                className="border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer"
+                data-ocid={`blog.item.${i + 1}`}
+              >
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <span
+                      className={`text-xs font-semibold px-3 py-1 rounded-full ${post.catColor}`}
+                    >
+                      {post.cat}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {post.date}
+                    </span>
                   </div>
-                  <h3 className="font-display font-bold text-base text-foreground mb-3 leading-tight group-hover:text-brand-teal transition-colors line-clamp-2">
+                  <h3 className="font-bold text-foreground mb-2 font-display text-base group-hover:text-primary transition-colors">
                     {post.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-5 leading-relaxed line-clamp-3">
+                  <p className="text-sm text-muted-foreground line-clamp-2">
                     {post.excerpt}
                   </p>
-                  <div className="flex items-center justify-between pt-4 border-t border-border">
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                      <span>{post.date}</span>
-                      <span>·</span>
-                      <span>{String(post.readTime)} min read</span>
-                    </div>
-                    <button
-                      type="button"
-                      className="text-xs font-semibold text-brand-teal hover:text-brand-teal-dark flex items-center gap-1 transition-colors group-hover:gap-2"
-                    >
-                      Read More <ExternalLink className="h-3 w-3" />
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
+                  <button
+                    type="button"
+                    className="mt-4 text-primary font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all"
+                    onClick={() =>
+                      scrollTo("contact-digital-marketing-consultant")
+                    }
+                    data-ocid={`blog.read_more.${i + 1}`}
+                  >
+                    Read More <ArrowRight className="h-3 w-3" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ─── CTA Banner ─────────────────────────────────────── */}
-      <section className="py-20 bg-gradient-to-r from-brand-teal to-brand-green relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full -translate-y-1/2 blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-white rounded-full translate-y-1/2 blur-3xl" />
-        </div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
-            {t.cta.headline}
-          </h2>
-          <p className="text-white/85 text-lg mb-8 max-w-xl mx-auto">
-            {t.cta.sub}
-          </p>
-          <Button
-            data-ocid="cta.primary_button"
-            onClick={() => scrollTo("contact")}
-            size="lg"
-            className="bg-white text-brand-teal-dark hover:bg-white/90 font-bold px-10 py-6 text-base shadow-xl hover:-translate-y-0.5 transition-all"
-          >
-            {t.cta.button} <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </div>
-      </section>
-
-      {/* ─── Contact Section ────────────────────────────────── */}
-      <section id="contact" className="py-20 lg:py-28 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <Badge className="bg-brand-teal/15 text-brand-teal-dark border-brand-teal/30 mb-4">
-              Contact Us
-            </Badge>
-            <h2 className="section-heading text-3xl sm:text-4xl text-foreground mb-4">
-              {t.contact.heading}
+      {/* ── PRICING ─────────────────────────────────────────────────────────── */}
+      <section
+        id="digital-marketing-pricing-plans"
+        className="py-20 bg-secondary/30"
+        data-ocid="pricing.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="section-heading">
+              Affordable Digital Marketing Pricing Plans
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-              Ready to take your business to the next level? Let's talk!
+            <p className="section-subheading mx-auto mt-4">
+              Transparent pricing with no hidden charges. Choose the plan that
+              fits your business goals and budget.
             </p>
           </div>
-
-          <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {/* Form */}
-            <div className="bg-white rounded-2xl border border-border p-8 shadow-card">
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label
-                    htmlFor="contact-name"
-                    className="block text-sm font-semibold text-foreground mb-1.5"
-                  >
-                    {t.contact.name} *
-                  </label>
-                  <Input
-                    id="contact-name"
-                    data-ocid="contact.name_input"
-                    placeholder="Rajesh Kumar"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData((p) => ({ ...p, name: e.target.value }))
-                    }
-                    required
-                    className="border-border focus-visible:ring-brand-teal"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label
-                      htmlFor="contact-email"
-                      className="block text-sm font-semibold text-foreground mb-1.5"
-                    >
-                      {t.contact.email} *
-                    </label>
-                    <Input
-                      id="contact-email"
-                      data-ocid="contact.email_input"
-                      type="email"
-                      placeholder="hello@business.com"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData((p) => ({ ...p, email: e.target.value }))
-                      }
-                      required
-                      className="border-border focus-visible:ring-brand-teal"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="contact-phone"
-                      className="block text-sm font-semibold text-foreground mb-1.5"
-                    >
-                      {t.contact.phone}
-                    </label>
-                    <Input
-                      id="contact-phone"
-                      data-ocid="contact.phone_input"
-                      type="tel"
-                      placeholder="+91 93982 41974"
-                      value={formData.phone}
-                      onChange={(e) =>
-                        setFormData((p) => ({ ...p, phone: e.target.value }))
-                      }
-                      className="border-border focus-visible:ring-brand-teal"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="contact-service"
-                    className="block text-sm font-semibold text-foreground mb-1.5"
-                  >
-                    {t.contact.service} *
-                  </label>
-                  <Select
-                    value={formData.service}
-                    onValueChange={(v) =>
-                      setFormData((p) => ({ ...p, service: v }))
-                    }
-                  >
-                    <SelectTrigger
-                      id="contact-service"
-                      data-ocid="contact.service_select"
-                      className="border-border focus:ring-brand-teal"
-                    >
-                      <SelectValue placeholder="Select a service..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {SERVICES.map((s) => (
-                        <SelectItem key={s.title} value={s.title}>
-                          {s.title}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <label
-                    htmlFor="contact-message"
-                    className="block text-sm font-semibold text-foreground mb-1.5"
-                  >
-                    {t.contact.message} *
-                  </label>
-                  <Textarea
-                    id="contact-message"
-                    data-ocid="contact.message_textarea"
-                    placeholder="Tell us about your business and goals..."
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData((p) => ({ ...p, message: e.target.value }))
-                    }
-                    required
-                    className="border-border focus-visible:ring-brand-teal resize-none"
-                  />
-                </div>
-
-                {/* Status states */}
-                {formStatus === "success" && (
-                  <div
-                    data-ocid="contact.success_state"
-                    className="flex items-center gap-2 p-4 bg-brand-green/10 text-green-700 rounded-lg border border-brand-green/20"
-                  >
-                    <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                    <span className="text-sm font-medium">
-                      {translations[lang].contact.successMsg}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              {
+                name: "Starter Plan",
+                price: "₹8,999",
+                period: "/month",
+                popular: false,
+                features: [
+                  "Local SEO Setup",
+                  "Google Business Profile Optimization",
+                  "Social Media Management (2 platforms)",
+                  "5 Blog Posts/Month",
+                  "Monthly Report",
+                  "WhatsApp Support",
+                ],
+              },
+              {
+                name: "Growth Plan",
+                price: "₹17,999",
+                period: "/month",
+                popular: true,
+                features: [
+                  "Everything in Starter +",
+                  "SEO Services (On-page + Off-page)",
+                  "Google Ads Management (up to ₹20,000 ad spend)",
+                  "Social Media Marketing (3 platforms)",
+                  "10 Blog Posts/Month",
+                  "Weekly Reports",
+                  "Priority Email Support",
+                ],
+              },
+              {
+                name: "Pro Plan",
+                price: "₹29,999",
+                period: "/month",
+                popular: false,
+                features: [
+                  "Everything in Growth +",
+                  "Full Technical SEO",
+                  "Advanced Google Ads (up to ₹50,000 ad spend)",
+                  "All Social Platforms",
+                  "Website Design/Redesign",
+                  "Lead Generation Campaigns",
+                  "Priority Phone Support",
+                ],
+              },
+            ].map(({ name, price, period, popular, features }, i) => (
+              <div
+                key={i}
+                className={`rounded-2xl border p-7 relative flex flex-col ${
+                  popular
+                    ? "border-primary shadow-blue bg-primary text-white"
+                    : "border-border bg-white shadow-card"
+                }`}
+                data-ocid={`pricing.item.${i + 1}`}
+              >
+                {popular && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                    <span className="bg-accent text-white text-xs font-bold px-4 py-1.5 rounded-full">
+                      ⭐ Most Popular
                     </span>
                   </div>
                 )}
-                {formStatus === "error" && (
-                  <div
-                    data-ocid="contact.error_state"
-                    className="flex items-center gap-2 p-4 bg-brand-red/10 text-red-700 rounded-lg border border-brand-red/20"
-                  >
-                    <X className="h-5 w-5 flex-shrink-0" />
-                    <span className="text-sm font-medium">
-                      {translations[lang].contact.errorMsg}
-                    </span>
-                  </div>
-                )}
-
-                <Button
-                  data-ocid="contact.submit_button"
-                  type="submit"
-                  disabled={
-                    formStatus === "loading" ||
-                    !formData.name ||
-                    !formData.email ||
-                    !formData.service ||
-                    !formData.message
-                  }
-                  className="w-full bg-brand-teal hover:bg-brand-teal-dark text-white font-bold py-5 shadow-teal hover:shadow-teal-lg transition-all disabled:opacity-60"
+                <h3
+                  className={`font-bold text-xl mb-1 font-display ${popular ? "text-white" : "text-foreground"}`}
                 >
-                  {formStatus === "loading" ? (
-                    <>
-                      <Loader2
-                        data-ocid="contact.loading_state"
-                        className="mr-2 h-4 w-4 animate-spin"
+                  {name}
+                </h3>
+                <div className="flex items-end gap-1 mb-5">
+                  <span
+                    className={`text-3xl font-bold font-display ${popular ? "text-accent" : "text-primary"}`}
+                  >
+                    {price}
+                  </span>
+                  <span
+                    className={`text-sm mb-1 ${popular ? "text-white/70" : "text-muted-foreground"}`}
+                  >
+                    {period}
+                  </span>
+                </div>
+                <ul className="space-y-2.5 mb-7 flex-1">
+                  {features.map((f, j) => (
+                    <li
+                      key={j}
+                      className={`flex items-start gap-2 text-sm ${popular ? "text-white/90" : "text-muted-foreground"}`}
+                    >
+                      <CheckCircle
+                        className={`h-4 w-4 shrink-0 mt-0.5 ${popular ? "text-accent" : "text-primary"}`}
                       />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="mr-2 h-4 w-4" />
-                      {t.contact.submit}
-                    </>
-                  )}
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  onClick={() =>
+                    scrollTo("contact-digital-marketing-consultant")
+                  }
+                  className={`w-full font-bold ${
+                    popular
+                      ? "bg-accent hover:bg-accent/90 text-white"
+                      : "bg-primary hover:bg-primary/90 text-white"
+                  }`}
+                  data-ocid={`pricing.get_started.${i + 1}`}
+                >
+                  Get Started
                 </Button>
-              </form>
-            </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Contact info */}
-            <div className="space-y-6">
-              {/* Info cards */}
-              <div className="space-y-4">
+      {/* ── CONTACT ─────────────────────────────────────────────────────────── */}
+      <section
+        id="contact-digital-marketing-consultant"
+        className="py-20 bg-white"
+        data-ocid="contact.section"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+              🔥 Limited Free Audit Offer
+            </Badge>
+            <h2 className="section-heading">
+              Get Your Free Digital Marketing Audit Today
+            </h2>
+            <p className="section-subheading mx-auto mt-4">
+              Limited Offer – Book Your Free Consultation Today. Available for
+              businesses in Guntur, Hyderabad, and across India.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left: Contact Info */}
+            <div>
+              <div className="space-y-4 mb-8">
                 {[
                   {
                     icon: Phone,
                     label: "Phone",
                     value: "+91 9398241974",
                     href: "tel:+919398241974",
+                    color: "text-primary",
                   },
                   {
                     icon: Mail,
                     label: "Email",
                     value: "srivasundharasolutions@gmail.com",
                     href: "mailto:srivasundharasolutions@gmail.com",
+                    color: "text-primary",
                   },
-                  {
-                    icon: MapPin,
-                    label: "Hyderabad Office",
-                    value: "KPHB Colony, Hyderabad, Telangana – 500072",
-                    href: null,
-                  },
-                  {
-                    icon: MapPin,
-                    label: "Guntur Office",
-                    value: "Amaravati Road, Guntur, Andhra Pradesh – 522034",
-                    href: null,
-                  },
-                ].map(({ icon: Icon, label, value, href }) => (
-                  <div
-                    key={label}
-                    className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-border hover:border-brand-teal/30 transition-colors"
+                ].map(({ icon: Icon, label, value, href, color }, i) => (
+                  <a
+                    key={i}
+                    href={href}
+                    className="flex items-center gap-4 p-4 border border-border rounded-xl hover:bg-secondary/50 transition-colors group"
+                    data-ocid={`contact.info.${i + 1}`}
                   >
-                    <div className="p-2.5 bg-brand-teal/10 rounded-xl flex-shrink-0">
-                      <Icon className="h-5 w-5 text-brand-teal" />
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <Icon className={`h-5 w-5 ${color}`} />
                     </div>
                     <div>
-                      <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-0.5">
-                        {label}
-                      </div>
-                      {href ? (
-                        <a
-                          href={href}
-                          className="text-foreground font-medium hover:text-brand-teal transition-colors break-all"
-                        >
-                          {value}
-                        </a>
-                      ) : (
-                        <span className="text-foreground font-medium">
-                          {value}
-                        </span>
-                      )}
+                      <p className="text-xs text-muted-foreground">{label}</p>
+                      <p className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors">
+                        {value}
+                      </p>
                     </div>
-                  </div>
+                  </a>
                 ))}
+                <div className="flex items-start gap-4 p-4 border border-border rounded-xl">
+                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <MapPin className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground mb-1">
+                      Office Locations
+                    </p>
+                    <p className="font-semibold text-foreground text-sm">
+                      📍 KPHB Colony, Hyderabad, Telangana – 500072
+                    </p>
+                    <p className="font-semibold text-foreground text-sm mt-1">
+                      📍 Amaravati Road, Guntur, Andhra Pradesh – 522034
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Mon–Sat: 9AM–6PM IST
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              {/* Map placeholder */}
-              <div className="rounded-xl border-2 border-brand-teal/20 overflow-hidden bg-gradient-to-br from-brand-teal/5 to-brand-green/5 h-auto min-h-[10rem] flex flex-col items-center justify-center gap-3 py-6 px-4">
-                <div className="p-4 bg-brand-teal/15 rounded-full">
-                  <MapPin className="h-8 w-8 text-brand-teal" />
-                </div>
-                <div className="text-center space-y-1">
-                  <div className="font-display font-bold text-foreground text-sm">
-                    KPHB Colony, Hyderabad – 500072
-                  </div>
-                  <div className="font-display font-semibold text-muted-foreground text-sm">
-                    Amaravati Road, Guntur – 522034
-                  </div>
-                </div>
-                <Badge className="bg-brand-teal/10 text-brand-teal-dark border-brand-teal/30 text-xs">
-                  📍 Online Consultant — Serving Nationwide
-                </Badge>
-              </div>
-
-              {/* WhatsApp card */}
               <a
-                href="https://wa.me/919398241974"
+                href="https://wa.me/919398241974?text=Hi%20Sri%20Vasundhara%20Solutions%2C%20I%20need%20digital%20marketing%20services"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-5 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200 hover:shadow-green transition-all duration-300 hover:-translate-y-0.5 group"
+                className="flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-xl transition-colors mb-6 w-full"
+                data-ocid="contact.whatsapp_link"
               >
-                <div className="p-3 bg-brand-green rounded-xl shadow-green flex-shrink-0">
-                  <MessageCircle className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <div className="font-display font-bold text-foreground group-hover:text-green-700 transition-colors">
-                    Chat on WhatsApp
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Get instant replies to your queries
-                  </div>
-                </div>
-                <ArrowRight className="ml-auto h-5 w-5 text-green-600 group-hover:translate-x-1 transition-transform" />
+                <MessageCircle className="h-5 w-5" /> Chat on WhatsApp – Quick
+                Response!
               </a>
+
+              {/* Google Maps Embed */}
+              <div className="rounded-xl overflow-hidden border border-border">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4!2d78.3915!3d17.4905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91e9!2sKPHB+Colony%2C+Hyderabad!5e0!3m2!1sen!2sin!4v1234567890"
+                  width="100%"
+                  height="220"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Sri Vasundhara Solutions – KPHB Colony, Hyderabad"
+                />
+              </div>
+            </div>
+
+            {/* Right: Form */}
+            <div className="bg-secondary/30 rounded-2xl p-6 border border-border">
+              <h3 className="text-xl font-bold text-foreground mb-6 font-display">
+                Book Your Free Consultation
+              </h3>
+              <ContactForm />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Footer ─────────────────────────────────────────── */}
-      <footer className="bg-slate-900 text-slate-300">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {/* Brand */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <img
-                  src="/assets/uploads/Sri_Vasundhara_Solutions_Logo--1.png"
-                  alt="Sri Vasundhara Solutions Logo"
-                  className="h-10 w-auto object-contain opacity-90 brightness-0 invert"
-                />
-              </div>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                {t.footer.tagline}
+      {/* ── FINAL CTA ───────────────────────────────────────────────────────── */}
+      <section
+        className="py-16 bg-gradient-to-r from-primary to-primary/80"
+        data-ocid="cta.section"
+      >
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display">
+            Ready to Grow Your Business Online?
+          </h2>
+          <p className="text-white/80 text-lg mb-8">
+            Join 20+ happy clients across Guntur, Hyderabad, and India. Get your
+            free digital marketing audit today!
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button
+              onClick={() => scrollTo("contact-digital-marketing-consultant")}
+              className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4 text-lg rounded-xl"
+              data-ocid="cta.primary_button"
+            >
+              Get Free Audit Now 🚀
+            </Button>
+            <a
+              href="https://wa.me/919398241974?text=Hi%20Sri%20Vasundhara%20Solutions%2C%20I%20need%20digital%20marketing%20services"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-4 text-lg rounded-xl transition-colors"
+              data-ocid="cta.whatsapp_button"
+            >
+              <MessageCircle className="h-5 w-5" /> WhatsApp Us
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ──────────────────────────────────────────────────────────── */}
+      <footer className="bg-gray-900 text-white" data-ocid="footer.section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+            {/* Col 1: Brand */}
+            <div>
+              <img
+                src="/assets/uploads/Sri_Vasundhara_Solutions_Logo--1.png"
+                alt="Sri Vasundhara Solutions"
+                className="h-12 w-auto mb-4 brightness-0 invert"
+                loading="lazy"
+              />
+              <p className="text-gray-400 text-sm leading-relaxed mb-5">
+                Digital Marketing Agency in Guntur &amp; Hyderabad. Helping
+                businesses grow online with SEO, Google Ads, and Social Media
+                Marketing.
               </p>
-              {/* Social icons */}
               <div className="flex gap-3">
                 {[
                   {
-                    icon: Facebook,
+                    icon: SiFacebook,
                     href: "https://www.facebook.com/Srivasundharasolutions",
-                    ocid: "footer.facebook_link",
                     label: "Facebook",
                   },
                   {
-                    icon: Instagram,
+                    icon: SiInstagram,
                     href: "https://www.instagram.com/srivasundharasolutions/",
-                    ocid: "footer.instagram_link",
                     label: "Instagram",
                   },
                   {
-                    icon: Linkedin,
+                    icon: SiLinkedin,
                     href: "https://www.linkedin.com/company/110518953/",
-                    ocid: "footer.linkedin_link",
                     label: "LinkedIn",
                   },
                   {
-                    icon: Youtube,
+                    icon: SiYoutube,
                     href: "https://www.youtube.com/@SriVasundharaSolutions",
-                    ocid: "footer.youtube_link",
                     label: "YouTube",
                   },
                   {
-                    icon: Twitter,
+                    icon: SiX,
                     href: "https://x.com/SrivasundharaS",
-                    ocid: "footer.twitter_link",
-                    label: "Twitter",
+                    label: "Twitter/X",
                   },
-                ].map(({ icon: Icon, href, ocid, label }) => (
+                ].map(({ icon: Icon, href, label }, i) => (
                   <a
-                    key={ocid}
+                    key={i}
                     href={href}
-                    data-ocid={ocid}
-                    aria-label={label}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 bg-slate-800 hover:bg-brand-teal rounded-lg flex items-center justify-center transition-colors group"
+                    aria-label={label}
+                    className="h-9 w-9 rounded-lg bg-white/10 hover:bg-primary flex items-center justify-center transition-colors"
+                    data-ocid={`footer.social.${i + 1}`}
                   >
-                    <Icon className="h-4 w-4 text-slate-400 group-hover:text-white transition-colors" />
+                    <Icon className="h-4 w-4" />
                   </a>
                 ))}
               </div>
             </div>
 
-            {/* Quick Links */}
+            {/* Col 2: Quick Links */}
             <div>
-              <h4 className="font-display font-bold text-white mb-4">
-                {t.footer.quickLinks}
+              <h4 className="font-bold text-white mb-4 font-display">
+                Quick Links
               </h4>
               <ul className="space-y-2">
-                {(
-                  [
-                    "home",
-                    "services",
-                    "pricing",
-                    "about",
-                    "portfolio",
-                    "blog",
-                    "contact",
-                  ] as const
-                ).map((key) => (
-                  <li key={key}>
+                {[
+                  { label: "Home", id: "hero" },
+                  {
+                    label: "About Our Agency",
+                    id: "about-digital-marketing-agency",
+                  },
+                  {
+                    label: "Digital Marketing Services",
+                    id: "digital-marketing-services",
+                  },
+                  {
+                    label: "Pricing Plans",
+                    id: "digital-marketing-pricing-plans",
+                  },
+                  { label: "Blog", id: "digital-marketing-blog" },
+                  {
+                    label: "Contact",
+                    id: "contact-digital-marketing-consultant",
+                  },
+                ].map(({ label, id }, i) => (
+                  <li key={i}>
                     <button
                       type="button"
-                      onClick={() => scrollTo(key)}
-                      className="text-slate-400 hover:text-brand-teal transition-colors text-sm"
+                      onClick={() => scrollTo(id)}
+                      className="text-gray-400 hover:text-white text-sm transition-colors"
+                      data-ocid={`footer.nav.${i + 1}`}
                     >
-                      {t.nav[key]}
+                      {label}
                     </button>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Services */}
+            {/* Col 3: Services */}
             <div>
-              <h4 className="font-display font-bold text-white mb-4">
-                {t.footer.services}
+              <h4 className="font-bold text-white mb-4 font-display">
+                Our Services
               </h4>
               <ul className="space-y-2">
-                {SERVICES.map((s) => (
-                  <li key={s.title}>
+                {[
+                  { label: "SEO Services", id: "seo-services-hyderabad" },
+                  {
+                    label: "Google Ads / PPC",
+                    id: "google-ads-ppc-management",
+                  },
+                  {
+                    label: "Social Media Marketing",
+                    id: "social-media-marketing-services",
+                  },
+                  { label: "Website Design", id: "website-design-development" },
+                  { label: "Local SEO", id: "local-seo-services" },
+                  {
+                    label: "Lead Generation",
+                    id: "contact-digital-marketing-consultant",
+                  },
+                ].map(({ label, id }, i) => (
+                  <li key={i}>
                     <button
                       type="button"
-                      onClick={() => scrollTo("services")}
-                      className="text-slate-400 hover:text-brand-teal transition-colors text-sm text-left"
+                      onClick={() => scrollTo(id)}
+                      className="text-gray-400 hover:text-white text-sm transition-colors"
+                      data-ocid={`footer.service.${i + 1}`}
                     >
-                      {s.title}
+                      {label}
                     </button>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Contact */}
+            {/* Col 4: Contact / NAP */}
             <div>
-              <h4 className="font-display font-bold text-white mb-4">
-                {t.footer.contactInfo}
+              <h4 className="font-bold text-white mb-4 font-display">
+                Contact Us
               </h4>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-2.5 text-sm">
-                  <Phone className="h-4 w-4 text-brand-teal mt-0.5 flex-shrink-0" />
-                  <a
-                    href="tel:+919398241974"
-                    className="text-slate-400 hover:text-brand-teal transition-colors"
-                  >
-                    +91 9398241974
-                  </a>
-                </li>
-                <li className="flex items-start gap-2.5 text-sm">
-                  <Mail className="h-4 w-4 text-brand-teal mt-0.5 flex-shrink-0" />
-                  <a
-                    href="mailto:srivasundharasolutions@gmail.com"
-                    className="text-slate-400 hover:text-brand-teal transition-colors break-all"
-                  >
-                    srivasundharasolutions@gmail.com
-                  </a>
-                </li>
-                <li className="flex items-start gap-2.5 text-sm">
-                  <MapPin className="h-4 w-4 text-brand-teal mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-400">
-                    KPHB Colony, Hyderabad – 500072
-                  </span>
-                </li>
-                <li className="flex items-start gap-2.5 text-sm">
-                  <MapPin className="h-4 w-4 text-brand-teal mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-400">
-                    Amaravati Road, Guntur – 522034
-                  </span>
-                </li>
-                <li className="pt-2">
-                  <a
-                    href="https://wa.me/919398241974"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm bg-brand-green/20 text-green-400 hover:bg-brand-green hover:text-white px-4 py-2 rounded-lg transition-all font-semibold"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    WhatsApp Us
-                  </a>
-                </li>
-              </ul>
+              <address className="not-italic space-y-3">
+                <a
+                  href="tel:+919398241974"
+                  className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors"
+                  data-ocid="footer.phone_link"
+                >
+                  <Phone className="h-4 w-4 text-primary shrink-0" /> +91
+                  9398241974
+                </a>
+                <a
+                  href="mailto:srivasundharasolutions@gmail.com"
+                  className="flex items-start gap-2 text-gray-400 hover:text-white text-sm transition-colors"
+                  data-ocid="footer.email_link"
+                >
+                  <Mail className="h-4 w-4 text-primary shrink-0 mt-0.5" />{" "}
+                  srivasundharasolutions@gmail.com
+                </a>
+                <div className="flex items-start gap-2 text-gray-400 text-sm">
+                  <MapPin className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <p>KPHB Colony, Hyderabad – 500072</p>
+                    <p className="mt-1">Amaravati Road, Guntur – 522034</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-gray-400 text-sm">
+                  <Clock className="h-4 w-4 text-primary shrink-0" /> Mon–Sat:
+                  9AM–6PM
+                </div>
+              </address>
+              <a
+                href="https://wa.me/919398241974?text=Hi%20Sri%20Vasundhara%20Solutions%2C%20I%20need%20digital%20marketing%20services"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
+                data-ocid="footer.whatsapp_button"
+              >
+                <MessageCircle className="h-4 w-4" /> WhatsApp Us
+              </a>
             </div>
           </div>
 
-          {/* Bottom bar */}
-          <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-slate-500 text-sm">{t.footer.copyright}</p>
-            <div className="flex items-center gap-4 text-sm">
-              <PrivacyPolicyDialog
-                trigger={
+          {/* Bottom Bar */}
+          <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-gray-500 text-sm">
+              © {new Date().getFullYear()} Sri Vasundhara Solutions. All Rights
+              Reserved.
+            </p>
+            <div className="flex gap-4">
+              <Dialog>
+                <DialogTrigger asChild>
                   <button
                     type="button"
-                    data-ocid="footer.privacy_button"
-                    className="text-slate-500 hover:text-brand-teal transition-colors"
+                    className="text-gray-500 hover:text-white text-sm transition-colors"
+                    data-ocid="footer.privacy_policy_link"
                   >
-                    {t.footer.privacy}
+                    Privacy Policy
                   </button>
-                }
-              />
-              <span className="text-slate-700">·</span>
-              <TermsDialog
-                trigger={
+                </DialogTrigger>
+                <DialogContent
+                  className="max-w-2xl max-h-[80vh] overflow-y-auto"
+                  data-ocid="privacy_policy.dialog"
+                >
+                  <DialogHeader>
+                    <DialogTitle className="font-display">
+                      Privacy Policy – Sri Vasundhara Solutions
+                    </DialogTitle>
+                  </DialogHeader>
+                  <PrivacyPolicyContent />
+                </DialogContent>
+              </Dialog>
+              <Dialog>
+                <DialogTrigger asChild>
                   <button
                     type="button"
-                    data-ocid="footer.terms_button"
-                    className="text-slate-500 hover:text-brand-teal transition-colors"
+                    className="text-gray-500 hover:text-white text-sm transition-colors"
+                    data-ocid="footer.terms_link"
                   >
-                    {t.footer.terms}
+                    Terms &amp; Conditions
                   </button>
-                }
-              />
-              <span className="text-slate-700">·</span>
-              <a
-                href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-500 hover:text-brand-teal transition-colors"
-              >
-                Built with ❤️ using caffeine.ai
-              </a>
+                </DialogTrigger>
+                <DialogContent
+                  className="max-w-2xl max-h-[80vh] overflow-y-auto"
+                  data-ocid="terms.dialog"
+                >
+                  <DialogHeader>
+                    <DialogTitle className="font-display">
+                      Terms &amp; Conditions – Sri Vasundhara Solutions
+                    </DialogTitle>
+                  </DialogHeader>
+                  <TermsContent />
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* ─── Floating WhatsApp Button ───────────────────────── */}
+      {/* ── FLOATING BUTTONS ────────────────────────────────────────────────── */}
+      {/* WhatsApp */}
       <a
-        href="https://wa.me/919398241974"
+        href="https://wa.me/919398241974?text=Hi%20Sri%20Vasundhara%20Solutions%2C%20I%20need%20digital%20marketing%20services"
         target="_blank"
         rel="noopener noreferrer"
-        data-ocid="whatsapp.button"
         aria-label="Chat on WhatsApp"
-        className="whatsapp-pulse fixed bottom-6 right-6 z-50 w-14 h-14 bg-brand-green rounded-full flex items-center justify-center shadow-green hover:shadow-lg hover:scale-110 transition-transform"
+        className="fixed bottom-6 right-6 z-50 h-14 w-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
+        data-ocid="floating.whatsapp_button"
       >
-        <span className="sr-only">Chat on WhatsApp</span>
-        <svg
-          viewBox="0 0 24 24"
-          fill="white"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-7 w-7"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <title>WhatsApp</title>
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
+        <MessageCircle className="h-6 w-6" />
+      </a>
+      {/* Call */}
+      <a
+        href="tel:+919398241974"
+        aria-label="Call Sri Vasundhara Solutions"
+        className="fixed bottom-24 right-6 z-50 h-14 w-14 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
+        data-ocid="floating.call_button"
+      >
+        <Phone className="h-6 w-6" />
       </a>
     </div>
   );

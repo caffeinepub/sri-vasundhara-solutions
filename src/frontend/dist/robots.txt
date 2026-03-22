@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sri-vasundhara-solutions-382.caffeine.xyz/sitemap.xml
