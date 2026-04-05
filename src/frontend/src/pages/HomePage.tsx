@@ -55,52 +55,48 @@ export default function HomePage() {
     if (meta)
       meta.setAttribute(
         "content",
-        "Best digital marketing agency in Guntur & Hyderabad. Get SEO, Google Ads, and website design services to grow your business. Free consultation today",
+        "Best digital marketing agency in Guntur & Hyderabad. Get SEO, Google Ads, and website design services. Call +91 9398241974",
       );
   }, []);
 
   const services = [
     {
-      icon: "🔍",
-      title: "SEO Services",
-      desc: "Our SEO services in Guntur and Hyderabad are designed to rank your business on Google. We focus on keyword research, on-page optimization, and high-quality backlinks to drive organic traffic.",
+      icon: "\uD83D\uDD0D",
+      title: "SEO Services in Guntur & Hyderabad",
+      desc: "Our SEO services are designed to rank your business on Google. We focus on keyword research, on-page optimization, and high-quality backlinks to drive organic traffic for businesses across Guntur and Hyderabad.",
       to: "/seo-services",
       alt: "SEO services in Hyderabad",
-      h2: "SEO Services in Guntur & Hyderabad",
     },
     {
-      icon: "📢",
-      title: "Google Ads / PPC",
-      desc: "We provide low-cost Google Ads services in Hyderabad and Guntur to generate high-quality leads. Our PPC experts create targeted campaigns that maximize ROI.",
+      icon: "\uD83D\uDCE2",
+      title: "Google Ads & PPC Services Hyderabad",
+      desc: "Cost-effective Google Ads management for Hyderabad and Guntur businesses. Our PPC experts create targeted campaigns that maximize ROI and generate high-quality leads.",
       to: "/google-ads-services",
       alt: "Google Ads services Hyderabad",
-      h2: "Google Ads & PPC Services Hyderabad",
     },
     {
-      icon: "💻",
-      title: "Website Design",
-      desc: "We are a leading website design company in Guntur offering SEO-friendly and mobile-responsive websites that convert visitors into customers.",
+      icon: "\uD83D\uDCBB",
+      title: "Website Design Company in Guntur",
+      desc: "We build SEO-friendly and mobile-responsive websites that convert visitors into customers. Professional website design tailored for businesses in Guntur and Hyderabad.",
       to: "/website-design",
       alt: "website design company in Guntur",
-      h2: "Website Design Company in Guntur",
     },
     {
-      icon: "📱",
-      title: "Social Media Marketing",
-      desc: "Grow your brand with social media marketing across Facebook, Instagram, LinkedIn, and YouTube. Build a loyal audience for your Hyderabad or Guntur business.",
+      icon: "\uD83D\uDCF1",
+      title: "Social Media Marketing Agency Hyderabad",
+      desc: "Grow your brand across Facebook, Instagram, LinkedIn, and YouTube. We build loyal audiences for businesses in Hyderabad and Guntur with strategic social media campaigns.",
       to: "/social-media-marketing",
       alt: "social media marketing agency Hyderabad",
-      h2: "Social Media Marketing Agency Hyderabad",
     },
     {
-      icon: "📍",
+      icon: "\uD83D\uDCCD",
       title: "Local SEO Services",
-      desc: "Dominate Google Maps and local search results for your area. We specialize in local SEO for businesses in Guntur, KPHB Hyderabad, and across Andhra Pradesh.",
+      desc: "Dominate Google Maps and local search results. We specialize in local SEO for businesses in Guntur, KPHB Hyderabad, and across Andhra Pradesh.",
       to: "/local-seo-services",
       alt: "local SEO services Guntur Hyderabad",
     },
     {
-      icon: "📊",
+      icon: "\uD83D\uDCCA",
       title: "Lead Generation",
       desc: "Data-driven lead generation strategies that fill your sales pipeline with qualified prospects from Guntur, Hyderabad, and across India.",
       to: "/contact-us",
@@ -111,7 +107,7 @@ export default function HomePage() {
   const pricingPlans = [
     {
       name: "Starter Plan",
-      price: "₹8,999",
+      price: "\u20b98,999",
       period: "/month",
       popular: false,
       features: [
@@ -125,13 +121,13 @@ export default function HomePage() {
     },
     {
       name: "Growth Plan",
-      price: "₹17,999",
+      price: "\u20b917,999",
       period: "/month",
       popular: true,
       features: [
         "Everything in Starter +",
         "SEO Services (On-page + Off-page)",
-        "Google Ads Management (up to ₹20,000 ad spend)",
+        "Google Ads Management (up to \u20b920,000 ad spend)",
         "Social Media Marketing (3 platforms)",
         "10 Blog Posts/Month",
         "Weekly Reports",
@@ -140,13 +136,13 @@ export default function HomePage() {
     },
     {
       name: "Pro Plan",
-      price: "₹29,999",
+      price: "\u20b929,999",
       period: "/month",
       popular: false,
       features: [
         "Everything in Growth +",
         "Full Technical SEO",
-        "Advanced Google Ads (up to ₹50,000 ad spend)",
+        "Advanced Google Ads (up to \u20b950,000 ad spend)",
         "All Social Platforms",
         "Website Design/Redesign",
         "Lead Generation Campaigns",
@@ -241,22 +237,22 @@ export default function HomePage() {
   const benefits = [
     {
       icon: TrendingUp,
-      text: "Increase website traffic",
+      text: "Increase Website Traffic",
       desc: "Drive more organic visitors to your website with proven SEO and content strategies.",
     },
     {
       icon: Users,
-      text: "Generate quality leads",
+      text: "Generate Quality Leads",
       desc: "Attract and convert high-intent prospects into paying customers consistently.",
     },
     {
       icon: Award,
-      text: "Improve brand visibility",
+      text: "Improve Brand Visibility",
       desc: "Build a recognizable online presence across Google, social media, and local directories.",
     },
     {
       icon: BarChart2,
-      text: "Higher ROI",
+      text: "Higher ROI Campaigns",
       desc: "Maximize returns on your marketing budget with data-driven campaigns that deliver results.",
     },
   ];
@@ -265,12 +261,12 @@ export default function HomePage() {
     {
       question: "How to rank business on Google in Guntur?",
       answer:
-        "By using local SEO, optimizing your Google Business Profile, and building high-quality backlinks from local and niche websites. Sri Vasundhara Solutions specializes in local SEO for Guntur businesses and helps you appear in Google Maps and local search results within 60–90 days.",
+        "By using local SEO, optimizing your Google Business Profile, and building high-quality backlinks from local and niche websites. Sri Vasundhara Solutions specializes in local SEO for Guntur businesses and helps you appear in Google Maps and local search results within 60\u201390 days.",
     },
     {
       question: "Which is the best digital marketing agency in Hyderabad?",
       answer:
-        "Choose an agency with proven results, a strong portfolio, and affordable pricing. Sri Vasundhara Solutions is a trusted digital marketing agency in KPHB Hyderabad with a track record of delivering measurable results for local businesses — from clinics and restaurants to real estate and e-commerce.",
+        "Choose an agency with proven results, a strong portfolio, and affordable pricing. Sri Vasundhara Solutions is a trusted digital marketing agency in KPHB Hyderabad with a track record of delivering measurable results for local businesses \u2014 from clinics and restaurants to real estate and e-commerce.",
     },
     {
       question: "What digital marketing services do you offer in Guntur?",
@@ -280,7 +276,7 @@ export default function HomePage() {
     {
       question: "How much does digital marketing cost for small businesses?",
       answer:
-        "Our affordable digital marketing plans start from ₹8,999/month for small businesses in Guntur and Hyderabad. We offer transparent pricing with no hidden charges. Contact us for a free consultation and customized quote.",
+        "Our affordable digital marketing plans start from \u20b98,999/month for small businesses in Guntur and Hyderabad. We offer transparent pricing with no hidden charges. Contact us for a free consultation and customized quote.",
     },
     {
       question: "Can you help my business rank in KPHB Hyderabad?",
@@ -291,9 +287,9 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ── TOP ANNOUNCEMENT BANNER ─── */}
+      {/* \u2500\u2500 TOP ANNOUNCEMENT BANNER \u2500\u2500\u2500 */}
       <div className="bg-accent text-white text-center py-2.5 px-4 text-sm font-semibold">
-        🚀 Limited Offer:{" "}
+        \uD83D\uDE80 Limited Offer:{" "}
         <span className="font-bold">Free Digital Marketing Consultation</span>{" "}
         for Guntur &amp; Hyderabad Businesses!{" "}
         <a
@@ -304,7 +300,7 @@ export default function HomePage() {
         </a>
       </div>
 
-      {/* ── HERO ─── */}
+      {/* \u2500\u2500 HERO \u2500\u2500\u2500 */}
       <section
         id="hero"
         className="relative bg-gradient-to-br from-primary/5 via-white to-accent/5 py-20 md:py-28"
@@ -313,29 +309,43 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 hover:bg-primary/10 font-medium">
-              🏆 #1 Digital Marketing Agency in Guntur &amp; Hyderabad
+              \uD83C\uDFC6 Trusted Digital Marketing Agency in Guntur &amp;
+              Hyderabad
             </Badge>
-            {/* H1 - Exact as specified */}
+            {/* H1 */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
               Best Digital Marketing Agency in{" "}
               <span className="text-primary">Guntur</span> &amp;{" "}
               <span className="text-accent">Hyderabad</span>
             </h1>
-            {/* Keywords in first 100 words */}
+            {/* Keywords in first 100 words — natural density */}
             <p className="text-lg md:text-xl text-muted-foreground mb-4 leading-relaxed">
-              Looking for the best{" "}
-              <strong>digital marketing agency in Guntur</strong> or{" "}
-              <strong>Hyderabad</strong>? We help businesses grow with
-              result-driven <strong>SEO services</strong>, Google Ads campaigns,
-              and high-converting website design.
+              Looking for reliable{" "}
+              <strong>digital marketing services in Guntur</strong> or{" "}
+              <strong>Hyderabad</strong>? Sri Vasundhara Solutions helps
+              businesses grow with result-driven{" "}
+              <Link
+                to="/seo-services"
+                className="text-primary font-semibold hover:underline"
+              >
+                SEO services in Guntur
+              </Link>
+              , targeted{" "}
+              <Link
+                to="/google-ads-services"
+                className="text-primary font-semibold hover:underline"
+              >
+                Google Ads services in Hyderabad
+              </Link>
+              , and high-converting website design.
             </p>
             <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed">
               Our expert team specializes in <strong>lead generation</strong>,
               local SEO, and performance marketing to boost your online
-              visibility and sales. As a trusted{" "}
-              <strong>digital marketing agency in KPHB Hyderabad</strong> and
-              across Andhra Pradesh, we deliver measurable results that grow
-              your business within 60–90 days.
+              visibility and sales. Headquartered in{" "}
+              <strong>Gorantla, Guntur</strong> with a presence in{" "}
+              <strong>KPHB Colony, Hyderabad</strong>, we deliver measurable
+              results within 60\u201390 days.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link to="/contact-us">
@@ -395,11 +405,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── SERVICES SECTION ─── */}
+      {/* \u2500\u2500 SERVICES SECTION \u2500\u2500\u2500 */}
       <section className="py-20 bg-white" data-ocid="services.section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            {/* H2 - Exact as specified */}
+            {/* H2 */}
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-display">
               Our Digital Marketing Services
             </h2>
@@ -424,20 +434,15 @@ export default function HomePage() {
                 >
                   {service.icon}
                 </div>
-                {service.h2 ? (
-                  <h2 className="text-lg font-bold text-foreground mb-2 font-display group-hover:text-primary transition-colors">
-                    {service.h2}
-                  </h2>
-                ) : (
-                  <h3 className="text-lg font-bold text-foreground mb-2 font-display group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-                )}
+                {/* H3 for service card titles — children of H2 section */}
+                <h3 className="text-lg font-bold text-foreground mb-2 font-display group-hover:text-primary transition-colors">
+                  {service.title}
+                </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {service.desc}
                 </p>
                 <span className="mt-4 text-primary font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
-                  Learn More <ArrowRight className="h-3 w-3" />
+                  View Service Details <ArrowRight className="h-3 w-3" />
                 </span>
               </Link>
             ))}
@@ -445,13 +450,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── BENEFITS SECTION ─── */}
+      {/* \u2500\u2500 BENEFITS SECTION \u2500\u2500\u2500 */}
       <section className="py-20 bg-secondary/30" data-ocid="benefits.section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 font-display">
-              Lead Generation Strategy – Why Digital Marketing Works
-            </h3>
+            {/* H2 for benefits — no longer skipping from h2 services */}
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 font-display">
+              Lead Generation Strategy \u2013 Why Digital Marketing Works
+            </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               A proven digital marketing strategy that drives consistent leads
               and revenue growth for businesses in Guntur and Hyderabad.
@@ -467,9 +473,10 @@ export default function HomePage() {
                 <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Icon className="h-7 w-7 text-primary" />
                 </div>
-                <h4 className="font-bold text-foreground mb-2 font-display">
+                {/* H3 for benefit card titles — children of H2 section */}
+                <h3 className="font-bold text-foreground mb-2 font-display">
                   {text}
-                </h4>
+                </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {desc}
                 </p>
@@ -490,19 +497,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── WHY CHOOSE US ─── */}
+      {/* \u2500\u2500 WHY CHOOSE US \u2500\u2500\u2500 */}
       <section
         className="py-20 bg-primary text-white"
         data-ocid="about.section"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            {/* H3 - Why Choose Us */}
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display">
+            {/* H2 for section */}
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display">
               Why Choose Us as Your Digital Marketing Partner
-            </h3>
+            </h2>
             <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Sri Vasundhara Solutions is the leading{" "}
+              Sri Vasundhara Solutions is a leading{" "}
               <strong className="text-white">
                 SEO company in Andhra Pradesh
               </strong>{" "}
@@ -517,24 +524,24 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
               {
-                icon: "💡",
+                icon: "\uD83D\uDCA1",
                 title: "ROI-Focused Strategies",
                 desc: "Every campaign is designed to maximize your return on investment with data-driven decisions.",
               },
               {
-                icon: "📊",
+                icon: "\uD83D\uDCCA",
                 title: "Transparent Reporting",
                 desc: "Monthly detailed reports so you always know what's happening with your campaigns.",
               },
               {
-                icon: "🎯",
+                icon: "\uD83C\uDFAF",
                 title: "Customized Campaigns",
                 desc: "No cookie-cutter solutions. Tailored strategies for your specific business goals and budget.",
               },
               {
-                icon: "💰",
+                icon: "\uD83D\uDCB0",
                 title: "Affordable Pricing",
-                desc: "Best digital marketing services for startups in Hyderabad at competitive, transparent rates.",
+                desc: "Professional digital marketing services for startups and SMEs at competitive, transparent rates.",
               },
             ].map(({ icon, title, desc }, i) => (
               <div
@@ -543,9 +550,10 @@ export default function HomePage() {
                 data-ocid={`about.feature.${i + 1}`}
               >
                 <div className="text-4xl mb-4">{icon}</div>
-                <h4 className="font-bold text-white mb-2 font-display">
+                {/* H3 for feature card titles — children of H2 section */}
+                <h3 className="font-bold text-white mb-2 font-display">
                   {title}
-                </h4>
+                </h3>
                 <p className="text-white/70 text-sm">{desc}</p>
               </div>
             ))}
@@ -572,7 +580,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── PROCESS ─── */}
+      {/* \u2500\u2500 PROCESS \u2500\u2500\u2500 */}
       <section className="py-20 bg-white" data-ocid="process.section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -588,31 +596,31 @@ export default function HomePage() {
             {[
               {
                 step: 1,
-                icon: "🔍",
+                icon: "\uD83D\uDD0D",
                 title: "Business Analysis",
                 desc: "We analyze your business, competitors, target audience, and market opportunities in Guntur & Hyderabad.",
               },
               {
                 step: 2,
-                icon: "📋",
+                icon: "\uD83D\uDCCB",
                 title: "Strategy Planning",
                 desc: "Custom digital marketing strategy based on your goals, budget, and target market.",
               },
               {
                 step: 3,
-                icon: "🚀",
+                icon: "\uD83D\uDE80",
                 title: "Campaign Execution",
                 desc: "We execute SEO, Google Ads, and social media campaigns with precision and expertise.",
               },
               {
                 step: 4,
-                icon: "📈",
+                icon: "\uD83D\uDCC8",
                 title: "Performance Optimization",
                 desc: "Continuous monitoring and optimization for better results and higher ROI.",
               },
               {
                 step: 5,
-                icon: "📊",
+                icon: "\uD83D\uDCCA",
                 title: "Growth Scaling",
                 desc: "Scale winning strategies to grow your business revenue and market share.",
               },
@@ -640,7 +648,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ─── */}
+      {/* \u2500\u2500 TESTIMONIALS \u2500\u2500\u2500 */}
       <section
         className="py-20 bg-secondary/30"
         data-ocid="testimonials.section"
@@ -696,12 +704,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── BLOG PREVIEW ─── */}
+      {/* \u2500\u2500 BLOG PREVIEW \u2500\u2500\u2500 */}
       <section className="py-20 bg-white" data-ocid="blog.section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-display">
-              Digital Marketing Blog – Tips, Strategies &amp; Insights
+              Digital Marketing Blog \u2013 Tips, Strategies &amp; Insights
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Stay updated with the latest digital marketing trends, SEO
@@ -723,7 +731,8 @@ export default function HomePage() {
               {
                 cat: "Google Ads",
                 catColor: "bg-orange-100 text-accent",
-                title: "Google Ads vs SEO – Which is Better for Your Business?",
+                title:
+                  "Google Ads vs SEO \u2013 Which is Better for Your Business?",
                 excerpt:
                   "Compare paid vs organic marketing strategies to decide which works best for your business in Hyderabad.",
                 date: "Apr 2026",
@@ -763,7 +772,7 @@ export default function HomePage() {
                     {excerpt}
                   </p>
                   <span className="mt-4 text-primary font-semibold text-sm flex items-center gap-1">
-                    Read More <ArrowRight className="h-3 w-3" />
+                    Read Full Article <ArrowRight className="h-3 w-3" />
                   </span>
                 </div>
               </Link>
@@ -783,14 +792,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── PRICING ─── */}
+      {/* \u2500\u2500 PRICING \u2500\u2500\u2500 */}
       <section className="py-20 bg-secondary/30" data-ocid="pricing.section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            {/* H3 - Affordable Plans */}
-            <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-display">
+            {/* H2 for Affordable Plans — continuing H1>H2>H3 hierarchy */}
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-display">
               Affordable Plans
-            </h3>
+            </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Transparent pricing with no hidden charges. Choose the plan that
               fits your business goals and budget in Guntur or Hyderabad.
@@ -811,23 +820,30 @@ export default function HomePage() {
                   {popular && (
                     <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
                       <span className="bg-accent text-white text-xs font-bold px-4 py-1.5 rounded-full">
-                        ⭐ Most Popular
+                        \u2B50 Most Popular
                       </span>
                     </div>
                   )}
-                  <h4
-                    className={`font-bold text-xl mb-1 font-display ${popular ? "text-white" : "text-foreground"}`}
+                  {/* H3 for plan name — children of H2 Affordable Plans */}
+                  <h3
+                    className={`font-bold text-xl mb-1 font-display ${
+                      popular ? "text-white" : "text-foreground"
+                    }`}
                   >
                     {name}
-                  </h4>
+                  </h3>
                   <div className="flex items-end gap-1 mb-5">
                     <span
-                      className={`text-3xl font-bold font-display ${popular ? "text-accent" : "text-primary"}`}
+                      className={`text-3xl font-bold font-display ${
+                        popular ? "text-accent" : "text-primary"
+                      }`}
                     >
                       {price}
                     </span>
                     <span
-                      className={`text-sm mb-1 ${popular ? "text-white/70" : "text-muted-foreground"}`}
+                      className={`text-sm mb-1 ${
+                        popular ? "text-white/70" : "text-muted-foreground"
+                      }`}
                     >
                       {period}
                     </span>
@@ -836,10 +852,14 @@ export default function HomePage() {
                     {features.map((f) => (
                       <li
                         key={f}
-                        className={`flex items-start gap-2 text-sm ${popular ? "text-white/90" : "text-muted-foreground"}`}
+                        className={`flex items-start gap-2 text-sm ${
+                          popular ? "text-white/90" : "text-muted-foreground"
+                        }`}
                       >
                         <CheckCircle
-                          className={`h-4 w-4 shrink-0 mt-0.5 ${popular ? "text-accent" : "text-primary"}`}
+                          className={`h-4 w-4 shrink-0 mt-0.5 ${
+                            popular ? "text-accent" : "text-primary"
+                          }`}
                         />
                         {f}
                       </li>
@@ -864,7 +884,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── FAQ SECTION ─── */}
+      {/* \u2500\u2500 FAQ SECTION \u2500\u2500\u2500 */}
       <section className="py-20 bg-white" data-ocid="faq.section">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -888,12 +908,115 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CONTACT CTA ─── */}
+      {/* \u2500\u2500 LOCAL CONTENT SECTION \u2500\u2500\u2500 */}
+      <section className="py-16 bg-white" data-ocid="local.section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-foreground mb-6 font-display">
+            Serving Businesses in Gorantla, Guntur &amp; Hyderabad
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                Sri Vasundhara Solutions is headquartered in{" "}
+                <strong className="text-foreground">
+                  Gorantla, Guntur, Andhra Pradesh
+                </strong>
+                , with a presence in KPHB Colony, Hyderabad. We understand the
+                local business landscape \u2014 from agricultural traders and
+                retail shops in Guntur district to tech startups and healthcare
+                providers in Hyderabad \u2014 and we design digital marketing
+                strategies that work for your specific market.
+              </p>
+              <p>
+                As a{" "}
+                <strong className="text-foreground">
+                  digital marketing agency in Gorantla Guntur
+                </strong>
+                , we work closely with local business owners to build their
+                online presence from the ground up. Whether you need to rank
+                your clinic, restaurant, or retail business on Google Maps, or
+                launch targeted{" "}
+                <Link
+                  to="/google-ads-services"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Google Ads services in Hyderabad
+                </Link>{" "}
+                to reach customers in Andhra Pradesh and Telangana, our team has
+                the expertise to deliver measurable results.
+              </p>
+              <p>
+                Our{" "}
+                <Link
+                  to="/seo-services"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  SEO services in Guntur
+                </Link>{" "}
+                are built around local search intent. We research the exact
+                keywords your potential customers in Guntur, Vijayawada, Tenali,
+                and Narasaraopet are typing into Google \u2014 and we optimize
+                your website and Google Business Profile to appear at the top of
+                those results.
+              </p>
+              <p>
+                For businesses in Hyderabad, our Google Ads campaigns target
+                high-intent customers in KPHB, Kukatpally, Ameerpet, Banjara
+                Hills, and across the greater Hyderabad metropolitan area. Every
+                rupee of your ad budget is tracked, optimized, and reported
+                transparently every month.
+              </p>
+            </div>
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                We believe every small business deserves access to professional
+                digital marketing. That's why we offer{" "}
+                <strong className="text-foreground">
+                  affordable digital marketing packages starting at
+                  \u20b98,999/month
+                </strong>{" "}
+                \u2014 giving small businesses in Guntur and Hyderabad access to
+                the same quality of service that large corporations pay lakhs
+                for.
+              </p>
+              <p>
+                Our process is straightforward: we start with a free audit of
+                your current online presence, identify the biggest opportunities
+                for growth, and present a clear strategy with realistic
+                timelines. No jargon, no hidden fees \u2014 just transparent,
+                accountable digital marketing that generates real leads for your
+                business.
+              </p>
+              <p>
+                Ready to grow your business online? Contact our team at{" "}
+                <a
+                  href="tel:+919398241974"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  +91 9398241974
+                </a>{" "}
+                for a free consultation. We serve clients across Gorantla,
+                Guntur district, and Hyderabad \u2014 and across India for
+                digital services.
+              </p>
+              <p>
+                Sri Vasundhara Solutions \u2014 your trusted{" "}
+                <strong className="text-foreground">
+                  SEO company in Andhra Pradesh
+                </strong>
+                , committed to results you can measure.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* \u2500\u2500 CONTACT CTA \u2500\u2500\u2500 */}
       <section className="py-20 bg-secondary/30" data-ocid="contact.section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
-              🔥 Limited Free Audit Offer
+              \uD83D\uDD25 Limited Free Audit Offer
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-display">
               Get Your Free Digital Marketing Consultation Today
@@ -909,7 +1032,7 @@ export default function HomePage() {
               {/* Local SEO keywords in contact section */}
               <div className="bg-white rounded-2xl p-6 border border-border mb-6">
                 <h3 className="font-bold text-foreground mb-4 font-display text-lg">
-                  📍 Our Locations
+                  \uD83D\uDCCD Our Locations
                 </h3>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3 text-sm">
@@ -919,8 +1042,8 @@ export default function HomePage() {
                         Hyderabad Office
                       </p>
                       <p className="text-muted-foreground">
-                        Digital marketing agency in KPHB Hyderabad — KPHB
-                        Colony, Kukatpally, Hyderabad – 500072
+                        Digital marketing agency in KPHB Hyderabad \u2014 KPHB
+                        Colony, Kukatpally, Hyderabad \u2013 500072
                       </p>
                     </div>
                   </div>
@@ -931,8 +1054,9 @@ export default function HomePage() {
                         Guntur Office
                       </p>
                       <p className="text-muted-foreground">
-                        SEO company in Andhra Pradesh — Amaravati Road, Guntur –
-                        522034
+                        Digital marketing agency in Gorantla Guntur \u2014 Sri
+                        Vasundhara Solutions, Gorantla, Guntur, Andhra Pradesh
+                        \u2013 522034
                       </p>
                     </div>
                   </div>
@@ -964,8 +1088,8 @@ export default function HomePage() {
                 className="flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-xl transition-colors mb-4 w-full"
                 data-ocid="contact.whatsapp_link"
               >
-                <MessageCircle className="h-5 w-5" /> Chat on WhatsApp – Quick
-                Response!
+                <MessageCircle className="h-5 w-5" /> Chat on WhatsApp \u2013
+                Quick Response!
               </a>
             </div>
             <div className="bg-white rounded-2xl p-6 border border-border">
@@ -978,7 +1102,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── FINAL CTA ─── */}
+      {/* \u2500\u2500 FINAL CTA \u2500\u2500\u2500 */}
       <section
         className="py-16 bg-gradient-to-r from-primary to-primary/80"
         data-ocid="cta.section"
@@ -990,7 +1114,7 @@ export default function HomePage() {
           <p className="text-white/80 text-lg mb-8">
             Join 20+ happy clients across Guntur, Hyderabad, and India. Get your
             free digital marketing consultation today and rank on Google within
-            60–90 days!
+            60\u201390 days!
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
@@ -998,7 +1122,7 @@ export default function HomePage() {
                 className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4 text-lg rounded-xl"
                 data-ocid="cta.primary_button"
               >
-                Contact Us Now 🚀
+                Contact Us Now \uD83D\uDE80
               </Button>
             </Link>
             <a

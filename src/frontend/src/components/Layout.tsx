@@ -504,7 +504,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <MapPin className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                   <div>
                     <p>KPHB Colony, Hyderabad – 500072</p>
-                    <p className="mt-1">Amaravati Road, Guntur – 522034</p>
+                    <p className="mt-1">
+                      Sri Vasundhara Solutions, Gorantla, Guntur, Andhra Pradesh
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-gray-400 text-sm">

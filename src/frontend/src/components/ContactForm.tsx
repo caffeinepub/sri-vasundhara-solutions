@@ -139,11 +139,12 @@ export default function ContactForm() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <Label>Business Type *</Label>
+          <Label htmlFor="cf-business-type">Business Type *</Label>
           <Select
             onValueChange={(v) => setForm((p) => ({ ...p, businessType: v }))}
           >
             <SelectTrigger
+              id="cf-business-type"
               className="mt-1"
               data-ocid="contact.business_type_select"
             >
@@ -169,9 +170,13 @@ export default function ContactForm() {
           )}
         </div>
         <div>
-          <Label>Service Interested In *</Label>
+          <Label htmlFor="cf-service">Service Interested In *</Label>
           <Select onValueChange={(v) => setForm((p) => ({ ...p, service: v }))}>
-            <SelectTrigger className="mt-1" data-ocid="contact.service_select">
+            <SelectTrigger
+              id="cf-service"
+              className="mt-1"
+              data-ocid="contact.service_select"
+            >
               <SelectValue placeholder="Select Service" />
             </SelectTrigger>
             <SelectContent>

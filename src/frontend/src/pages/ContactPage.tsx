@@ -89,7 +89,8 @@ export default function ContactPage() {
                       📍 KPHB Colony, Hyderabad, Telangana – 500072
                     </p>
                     <p className="font-semibold text-foreground text-sm mt-1">
-                      📍 Amaravati Road, Guntur, Andhra Pradesh – 522034
+                      📍 Sri Vasundhara Solutions, Gorantla, Guntur, Andhra
+                      Pradesh
                     </p>
                   </div>
                 </div>
@@ -140,18 +141,18 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-foreground mb-2">
-                    Amaravati Road, Guntur Office
+                    Gorantla, Guntur Office
                   </p>
                   <div className="rounded-xl overflow-hidden border border-border">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.8!2d80.4462!3d16.3067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4a75!2sAmaravati+Road%2C+Guntur!5e0!3m2!1sen!2sin!4v1234567891"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.0!2d80.3800!3d16.2800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4a75!2sGorantla%2C+Guntur%2C+Andhra+Pradesh!5e0!3m2!1sen!2sin!4v1234567892"
                       width="100%"
                       height="200"
                       style={{ border: 0 }}
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      title="Sri Vasundhara Solutions – Amaravati Road, Guntur"
+                      title="Sri Vasundhara Solutions – Gorantla, Guntur"
                     />
                   </div>
                 </div>
