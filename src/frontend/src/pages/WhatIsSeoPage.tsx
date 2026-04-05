@@ -78,8 +78,8 @@ export default function WhatIsSeoPage() {
                   title: "3. Technical SEO",
                   desc: "Ensuring your website is technically sound: fast loading speed, mobile-friendly design, proper URL structure, XML sitemaps, robots.txt, Core Web Vitals, and structured data markup. Technical SEO is the foundation that allows Google to crawl and index your site effectively.",
                 },
-              ].map(({ title, desc }, i) => (
-                <div key={i} className="bg-secondary/30 rounded-xl p-5">
+              ].map(({ title, desc }, _i) => (
+                <div key={title} className="bg-secondary/30 rounded-xl p-5">
                   <h3 className="font-bold text-foreground mb-2">{title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {desc}
@@ -103,9 +103,9 @@ export default function WhatIsSeoPage() {
                 "📍 SEO leads have a 14.6% close rate vs. 1.7% for outbound leads",
                 "📍 Local searches result in a purchase 28% of the time",
                 "📍 46% of all Google searches have local intent",
-              ].map((fact, i) => (
+              ].map((fact, _i) => (
                 <li
-                  key={i}
+                  key={fact}
                   className="flex items-start gap-2 text-muted-foreground"
                 >
                   <span>{fact}</span>
@@ -143,8 +143,8 @@ export default function WhatIsSeoPage() {
                   title: "Mobile-First Indexing",
                   desc: "Google primarily uses the mobile version of your website for indexing and ranking. Ensure your website is fully responsive and mobile-optimized.",
                 },
-              ].map(({ title, desc }, i) => (
-                <div key={i} className="border-l-4 border-primary pl-4">
+              ].map(({ title, desc }, _i) => (
+                <div key={title} className="border-l-4 border-primary pl-4">
                   <h3 className="font-bold text-foreground text-sm">{title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">{desc}</p>
                 </div>
@@ -170,7 +170,7 @@ export default function WhatIsSeoPage() {
                   "Monitor rankings and traffic using Google Search Console and Analytics",
                 ].map((step, i) => (
                   <li
-                    key={i}
+                    key={step}
                     className="flex items-start gap-3 text-sm text-foreground"
                   >
                     <span className="h-6 w-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">

@@ -79,9 +79,9 @@ export default function SocialMediaTipsPage() {
                 desc: "Users research brands on Instagram before buying",
               },
               { stat: "4x", desc: "Higher engagement with bilingual content" },
-            ].map(({ stat, desc }, i) => (
+            ].map(({ stat, desc }, _i) => (
               <div
-                key={i}
+                key={stat}
                 className="bg-secondary/50 rounded-xl p-4 text-center"
               >
                 <div className="text-2xl font-bold text-primary font-display">
@@ -137,8 +137,8 @@ export default function SocialMediaTipsPage() {
                 tip: "10. Collaborate With Local Influencers",
                 desc: "Partner with micro-influencers (1,000-50,000 followers) in Hyderabad and Guntur for authentic product promotions. Local influencers often have highly engaged regional audiences.",
               },
-            ].map(({ tip, desc }, i) => (
-              <div key={i} className="border-l-4 border-pink-400 pl-4">
+            ].map(({ tip, desc }, _i) => (
+              <div key={tip} className="border-l-4 border-pink-400 pl-4">
                 <h3 className="font-bold text-foreground">{tip}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{desc}</p>
               </div>
@@ -178,8 +178,8 @@ export default function SocialMediaTipsPage() {
                 reach: "467M+ India users",
                 tip: "Telugu-language YouTube content gets massive organic reach in Andhra Pradesh and Telangana.",
               },
-            ].map(({ platform, icon, best, reach, tip }, i) => (
-              <div key={i} className="bg-secondary/30 rounded-xl p-5">
+            ].map(({ platform, icon, best, reach, tip }, _i) => (
+              <div key={platform} className="bg-secondary/30 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">{icon}</span>
                   <h3 className="font-bold text-foreground">{platform}</h3>

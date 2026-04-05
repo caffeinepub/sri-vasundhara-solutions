@@ -122,8 +122,8 @@ export default function DigitalMarketingStrategiesPage() {
                 action:
                   "Action: Create 2 YouTube videos per month, optimize titles and descriptions for SEO, and repurpose as Instagram Reels.",
               },
-            ].map(({ num, title, desc, action }, i) => (
-              <div key={i} className="border border-border rounded-xl p-6">
+            ].map(({ num, title, desc, action }, _i) => (
+              <div key={title} className="border border-border rounded-xl p-6">
                 <div className="flex items-start gap-4">
                   <div className="text-4xl font-bold text-primary/20 font-display shrink-0">
                     {num}
@@ -184,12 +184,12 @@ export default function DigitalMarketingStrategiesPage() {
                   ],
                 ].map((row, i) => (
                   <tr
-                    key={i}
+                    key={row[0]}
                     className={i % 2 === 0 ? "bg-secondary/30" : "bg-white"}
                   >
-                    {row.map((cell, j) => (
+                    {row.map((cell) => (
                       <td
-                        key={j}
+                        key={cell}
                         className="p-3 text-sm text-muted-foreground border-b border-border"
                       >
                         {cell}

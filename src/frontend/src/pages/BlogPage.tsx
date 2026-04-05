@@ -93,7 +93,7 @@ export default function BlogPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post, i) => (
               <Link
-                key={i}
+                key={post.slug}
                 to={post.slug}
                 className="bg-white rounded-2xl border border-border overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block"
                 data-ocid={`blog.item.${i + 1}`}
@@ -147,7 +147,7 @@ export default function BlogPage() {
                 { label: "Contact Us", to: "/contact-us" },
               ].map(({ label, to }, i) => (
                 <Link
-                  key={i}
+                  key={to}
                   to={to}
                   className="bg-white border border-border rounded-lg px-4 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-white transition-colors"
                   data-ocid={`blog.service_link.${i + 1}`}

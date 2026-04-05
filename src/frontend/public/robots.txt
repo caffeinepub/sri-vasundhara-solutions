@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /src/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 Sitemap: https://sri-vasundhara-solutions-382.caffeine.xyz/sitemap.xml

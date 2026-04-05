@@ -87,9 +87,9 @@ export default function LocalSeoGuidePage() {
                 icon: "⭐",
                 desc: "How well-known your business is online. Reviews, citations, backlinks, and mentions all contribute to prominence.",
               },
-            ].map(({ title, icon, desc }, i) => (
+            ].map(({ title, icon, desc }, _i) => (
               <div
-                key={i}
+                key={title}
                 className="bg-green-50 border border-green-200 rounded-xl p-5 text-center"
               >
                 <div className="text-3xl mb-2">{icon}</div>
@@ -146,13 +146,13 @@ export default function LocalSeoGuidePage() {
                   "Use structured data markup (LocalBusiness schema) on your website",
                 ],
               },
-            ].map(({ step, details }, i) => (
-              <div key={i} className="border border-border rounded-xl p-6">
+            ].map(({ step, details }, _i) => (
+              <div key={step} className="border border-border rounded-xl p-6">
                 <h3 className="font-bold text-foreground mb-3">{step}</h3>
                 <ul className="space-y-2">
-                  {details.map((detail, j) => (
+                  {details.map((detail) => (
                     <li
-                      key={j}
+                      key={detail}
                       className="flex items-start gap-2 text-sm text-muted-foreground"
                     >
                       <span className="text-green-500 font-bold mt-0.5">✓</span>

@@ -81,8 +81,8 @@ export default function SeoServicesPage() {
                     title: "Local SEO Integration",
                     desc: "Optimize your Google Business Profile, build local citations, and maintain NAP consistency to rank in 'near me' searches in Guntur, Hyderabad, and Andhra Pradesh.",
                   },
-                ].map(({ title, desc }, i) => (
-                  <div key={i} className="flex gap-3">
+                ].map(({ title, desc }, _i) => (
+                  <div key={title} className="flex gap-3">
                     <CheckCircle className="h-5 w-5 text-primary mt-1 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground">{title}</h3>
@@ -101,8 +101,8 @@ export default function SeoServicesPage() {
                   "Brand credibility",
                   "Long-term results",
                   "Monthly reporting",
-                ].map((b, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm">
+                ].map((b, _i) => (
+                  <div key={b} className="flex items-center gap-2 text-sm">
                     <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                     <span className="text-muted-foreground">{b}</span>
                   </div>
@@ -130,7 +130,7 @@ export default function SeoServicesPage() {
                     "Link Building",
                     "Monthly Reporting",
                   ].map((step, i) => (
-                    <div key={i} className="flex items-center gap-3">
+                    <div key={step} className="flex items-center gap-3">
                       <div className="h-7 w-7 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center shrink-0">
                         {i + 1}
                       </div>

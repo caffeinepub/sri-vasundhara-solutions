@@ -68,8 +68,8 @@ export default function WebsiteDesignPage() {
                   "Lead capture forms",
                   "Affordable pricing",
                   "3 months support",
-                ].map((f, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm">
+                ].map((f, _i) => (
+                  <div key={f} className="flex items-center gap-2 text-sm">
                     <CheckCircle className="h-4 w-4 text-purple-500 shrink-0" />
                     <span className="text-muted-foreground">{f}</span>
                   </div>
@@ -134,9 +134,9 @@ export default function WebsiteDesignPage() {
                       title: "SEO-Optimized Design",
                       desc: "Every website we build is SEO-ready from day one — fast load times, proper schema markup, and mobile-first design.",
                     },
-                  ].map(({ title, desc }, i) => (
+                  ].map(({ title, desc }, _i) => (
                     <div
-                      key={i}
+                      key={title}
                       className="p-3 rounded-lg border border-border"
                     >
                       <p className="font-semibold text-sm text-foreground">

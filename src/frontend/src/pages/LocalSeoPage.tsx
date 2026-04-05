@@ -89,8 +89,8 @@ export default function LocalSeoPage() {
                     title: "Review Management",
                     desc: "Develop a systematic approach to generating and responding to Google reviews to build trust and improve local ranking signals.",
                   },
-                ].map(({ title, desc }, i) => (
-                  <div key={i} className="flex gap-3">
+                ].map(({ title, desc }, _i) => (
+                  <div key={title} className="flex gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-1 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground">{title}</h3>
@@ -133,9 +133,9 @@ export default function LocalSeoPage() {
                     label: "Build local trust",
                     color: "text-yellow-500",
                   },
-                ].map(({ icon: Icon, label, color }, i) => (
+                ].map(({ icon: Icon, label, color }, _i) => (
                   <div
-                    key={i}
+                    key={label}
                     className="bg-secondary/50 rounded-xl p-4 text-center"
                   >
                     <Icon className={`h-6 w-6 ${color} mx-auto mb-2`} />

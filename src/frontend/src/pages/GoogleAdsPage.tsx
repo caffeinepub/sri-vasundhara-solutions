@@ -81,8 +81,8 @@ export default function GoogleAdsPage() {
                     title: "YouTube Ads",
                     desc: "Reach your audience with video advertising on YouTube, the world's second-largest search engine. Cost-effective brand awareness for Hyderabad businesses.",
                   },
-                ].map(({ title, desc }, i) => (
-                  <div key={i} className="flex gap-3">
+                ].map(({ title, desc }, _i) => (
+                  <div key={title} className="flex gap-3">
                     <CheckCircle className="h-5 w-5 text-accent mt-1 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground">{title}</h3>
@@ -101,8 +101,8 @@ export default function GoogleAdsPage() {
                   "Budget control",
                   "Geographic targeting",
                   "Detailed analytics",
-                ].map((b, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm">
+                ].map((b, _i) => (
+                  <div key={b} className="flex items-center gap-2 text-sm">
                     <div className="h-1.5 w-1.5 rounded-full bg-accent" />
                     <span className="text-muted-foreground">{b}</span>
                   </div>
@@ -131,7 +131,7 @@ export default function GoogleAdsPage() {
                     "Optimization",
                     "Reporting",
                   ].map((step, i) => (
-                    <div key={i} className="flex items-center gap-3">
+                    <div key={step} className="flex items-center gap-3">
                       <div className="h-7 w-7 rounded-full bg-accent text-white text-xs font-bold flex items-center justify-center shrink-0">
                         {i + 1}
                       </div>

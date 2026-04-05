@@ -99,12 +99,12 @@ export default function GoogleAdsGuidePage() {
                   ],
                 ].map((row, i) => (
                   <tr
-                    key={i}
+                    key={row[0]}
                     className={i % 2 === 0 ? "bg-secondary/30" : "bg-white"}
                   >
-                    {row.map((cell, j) => (
+                    {row.map((cell) => (
                       <td
-                        key={j}
+                        key={cell}
                         className="p-3 text-sm text-muted-foreground border-b border-border"
                       >
                         {cell}
@@ -133,9 +133,9 @@ export default function GoogleAdsGuidePage() {
                 title: "Highly competitive markets",
                 desc: "In competitive industries where SEO takes longer, Google Ads can capture valuable leads while your organic rankings build up.",
               },
-            ].map(({ title, desc }, i) => (
+            ].map(({ title, desc }, _i) => (
               <div
-                key={i}
+                key={title}
                 className="bg-orange-50 border border-orange-200 rounded-xl p-4"
               >
                 <h3 className="font-bold text-foreground text-sm mb-1">
@@ -163,9 +163,9 @@ export default function GoogleAdsGuidePage() {
                 title: "Content marketing and thought leadership",
                 desc: "For businesses that want to establish expertise in their industry, SEO-driven content marketing builds authority and attracts ideal customers.",
               },
-            ].map(({ title, desc }, i) => (
+            ].map(({ title, desc }, _i) => (
               <div
-                key={i}
+                key={title}
                 className="bg-blue-50 border border-blue-200 rounded-xl p-4"
               >
                 <h3 className="font-bold text-foreground text-sm mb-1">

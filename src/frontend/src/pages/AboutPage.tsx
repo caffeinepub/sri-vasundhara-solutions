@@ -78,8 +78,8 @@ export default function AboutPage() {
                   "Local expertise in Guntur and Hyderabad markets",
                   "Bilingual support in Telugu and English",
                   "Affordable pricing for small businesses and startups",
-                ].map((point, i) => (
-                  <div key={i} className="flex items-start gap-3">
+                ].map((point, _i) => (
+                  <div key={point} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
                     <span className="text-muted-foreground">{point}</span>
                   </div>
@@ -143,9 +143,9 @@ export default function AboutPage() {
                     label: "Satisfaction Rate",
                     color: "text-primary",
                   },
-                ].map(({ value, label, color }, i) => (
+                ].map(({ value, label, color }, _i) => (
                   <div
-                    key={i}
+                    key={label}
                     className="bg-secondary/50 rounded-xl p-5 text-center"
                   >
                     <div className={`text-3xl font-bold font-display ${color}`}>
@@ -202,7 +202,7 @@ export default function AboutPage() {
               },
             ].map(({ title, desc, to }, i) => (
               <Link
-                key={i}
+                key={title}
                 to={to}
                 className="bg-white rounded-xl p-5 border border-border hover:shadow-md hover:border-primary/30 transition-all"
                 data-ocid={`about.service.${i + 1}`}

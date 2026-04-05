@@ -82,8 +82,8 @@ export default function SocialMediaPage() {
                     title: "Content Creation & Scheduling",
                     desc: "We create, schedule, and publish SEO-friendly content in both English and Telugu, tailored for your local audience.",
                   },
-                ].map(({ title, desc }, i) => (
-                  <div key={i} className="flex gap-3">
+                ].map(({ title, desc }, _i) => (
+                  <div key={title} className="flex gap-3">
                     <CheckCircle className="h-5 w-5 text-pink-500 mt-1 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-foreground">{title}</h3>
@@ -116,8 +116,8 @@ export default function SocialMediaPage() {
                     "Cost-effective reach",
                     "Analytics & insights",
                     "Telugu & English content",
-                  ].map((b, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm">
+                  ].map((b, _i) => (
+                    <div key={b} className="flex items-center gap-2 text-sm">
                       <CheckCircle className="h-4 w-4 text-primary shrink-0" />
                       <span className="text-muted-foreground">{b}</span>
                     </div>

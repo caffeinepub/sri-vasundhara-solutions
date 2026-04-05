@@ -10,7 +10,10 @@ export default function BreadcrumbNav({ crumbs }: { crumbs: Crumb[] }) {
     <nav aria-label="breadcrumb" className="mb-6">
       <ol className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
         {crumbs.map((crumb, i) => (
-          <li key={i} className="flex items-center gap-1">
+          <li
+            key={crumb.label || crumb.href}
+            className="flex items-center gap-1"
+          >
             {i > 0 && <span className="text-muted-foreground/50">›</span>}
             {crumb.href ? (
               <Link

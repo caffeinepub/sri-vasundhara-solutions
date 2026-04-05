@@ -208,6 +208,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <div
                       className="fixed inset-0 z-40"
                       onClick={() => setServicesDropdownOpen(false)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === "Escape")
+                          setServicesDropdownOpen(false);
+                      }}
+                      role="button"
+                      tabIndex={0}
                     />
                     <div
                       className="absolute top-full left-0 mt-2 w-56 bg-white border border-border rounded-xl shadow-lg py-2 z-50"
@@ -404,7 +410,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   },
                 ].map(({ icon: Icon, href, label }, i) => (
                   <a
-                    key={i}
+                    key={href}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -430,7 +436,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   { label: "Blog", to: "/blog" },
                   { label: "Contact", to: "/contact-us" },
                 ].map(({ label, to }, i) => (
-                  <li key={i}>
+                  <li key={to}>
                     <Link
                       to={to}
                       className="text-gray-400 hover:text-white text-sm transition-colors"
@@ -459,7 +465,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   { label: "Website Design", to: "/website-design" },
                   { label: "Local SEO Services", to: "/local-seo-services" },
                 ].map(({ label, to }, i) => (
-                  <li key={i}>
+                  <li key={to + label}>
                     <Link
                       to={to}
                       className="text-gray-400 hover:text-white text-sm transition-colors"
