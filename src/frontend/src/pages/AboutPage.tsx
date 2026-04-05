@@ -20,12 +20,12 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Page Header */}
-      <section className="bg-gradient-to-br from-primary/5 via-white to-accent/5 py-16">
+      <section className="bg-[#E6F7F8] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BreadcrumbNav
             crumbs={[{ label: "Home", href: "/" }, { label: "About Us" }]}
           />
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+          <Badge className="mb-4 bg-green-100 text-primary border-primary/20">
             About Us
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-display">
@@ -77,14 +77,17 @@ export default function AboutPage() {
                   "Affordable pricing for small businesses and startups",
                 ].map((point) => (
                   <div key={point} className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                     <span className="text-muted-foreground">{point}</span>
                   </div>
                 ))}
               </div>
             </div>
             <div>
-              <div className="bg-primary text-white rounded-2xl p-8 mb-6">
+              <div
+                style={{ backgroundColor: "#4FC3C7" }}
+                className="text-white rounded-2xl p-8 mb-6"
+              >
                 <h3 className="text-2xl font-bold mb-6 font-display">
                   Our Mission &amp; Vision
                 </h3>
@@ -160,11 +163,11 @@ export default function AboutPage() {
       </section>
 
       {/* Author / E-E-A-T Section */}
-      <section className="py-16 bg-secondary/30">
+      <section className="py-16 bg-[#E6F7F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="section-heading text-center mb-10">Meet Our Expert</h2>
           <div className="max-w-2xl mx-auto bg-white rounded-2xl p-8 border border-border shadow-sm text-center">
-            <div className="h-20 w-20 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 font-display">
+            <div className="h-20 w-20 rounded-full bg-[#4FC3C7] text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 font-display">
               GS
             </div>
             <h3 className="text-xl font-bold text-foreground mb-1 font-display">
@@ -250,7 +253,8 @@ export default function AboutPage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
               <Button
-                className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4 text-base"
+                style={{ backgroundColor: "#DC2626" }}
+                className="text-white font-bold px-8 py-4 text-base hover:opacity-90"
                 data-ocid="about.cta_button"
               >
                 Get Free Audit

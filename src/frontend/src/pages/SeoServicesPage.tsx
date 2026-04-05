@@ -20,16 +20,16 @@ export default function SeoServicesPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-primary/5 via-white to-accent/5 py-16">
+      <section className="bg-[#E6F7F8] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BreadcrumbNav
             crumbs={[
               { label: "Home", href: "/" },
-              { label: "Services" },
+              { label: "Services", href: "/services" },
               { label: "SEO Services" },
             ]}
           />
-          <Badge className="mb-4 bg-blue-50 text-primary border-primary/20">
+          <Badge className="mb-4 bg-[#E6F7F8] text-[#4FC3C7] border-[#4FC3C7]/30">
             SEO Services
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-display">
@@ -63,24 +63,35 @@ export default function SeoServicesPage() {
                   {
                     title: "On-Page SEO Optimization",
                     desc: "We optimize title tags, meta descriptions, keyword placement, content structure, and internal linking to improve your relevance for target keywords in Guntur and Hyderabad.",
+                    to: "/on-page-seo",
                   },
                   {
                     title: "Off-Page SEO & Link Building",
                     desc: "Build domain authority with high-quality backlinks from relevant, authoritative websites. Our link-building strategies improve your site's credibility and search rankings.",
+                    to: "/off-page-seo",
                   },
                   {
                     title: "Technical SEO",
                     desc: "We audit and fix technical issues including site speed, mobile optimization, crawlability, Core Web Vitals, structured data, and XML sitemap to ensure search engines can effectively index your site.",
+                    to: "/technical-seo",
                   },
                   {
                     title: "Local SEO Integration",
                     desc: "Optimize your Google Business Profile, build local citations, and maintain NAP consistency to appear in local searches and Google Maps for Guntur and Hyderabad.",
+                    to: "/local-seo-services",
                   },
-                ].map(({ title, desc }) => (
+                ].map(({ title, desc, to }) => (
                   <div key={title} className="flex gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-1 shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-green-600 mt-1 shrink-0" />
                     <div>
-                      <h3 className="font-semibold text-foreground">{title}</h3>
+                      <h3 className="font-semibold text-foreground">
+                        <Link
+                          to={to}
+                          className="hover:text-primary transition-colors"
+                        >
+                          {title}
+                        </Link>
+                      </h3>
                       <p className="text-sm text-muted-foreground mt-1">
                         {desc}
                       </p>
@@ -98,14 +109,15 @@ export default function SeoServicesPage() {
                   "Monthly reporting",
                 ].map((b) => (
                   <div key={b} className="flex items-center gap-2 text-sm">
-                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-[#4FC3C7]" />
                     <span className="text-muted-foreground">{b}</span>
                   </div>
                 ))}
               </div>
               <Link to="/contact-us">
                 <Button
-                  className="bg-accent hover:bg-accent/90 text-white font-bold"
+                  style={{ backgroundColor: "#DC2626" }}
+                  className="text-white font-bold hover:opacity-90"
                   data-ocid="seo.cta_button"
                 >
                   Get Free SEO Audit
@@ -126,7 +138,7 @@ export default function SeoServicesPage() {
                     "Monthly Reporting",
                   ].map((step, i) => (
                     <div key={step} className="flex items-center gap-3">
-                      <div className="h-7 w-7 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center shrink-0">
+                      <div className="h-7 w-7 rounded-full bg-[#4FC3C7] text-white text-xs font-bold flex items-center justify-center shrink-0">
                         {i + 1}
                       </div>
                       <span className="text-sm font-medium text-foreground">
@@ -155,7 +167,7 @@ export default function SeoServicesPage() {
                 q="What is included in your SEO package?"
                 a="Our SEO packages include complete on-page optimization, off-page link building, technical SEO audit and fixes, local SEO optimization, Google Business Profile management, keyword tracking, and detailed monthly reports."
               />
-              <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-xl">
+              <div className="mt-6 p-4 bg-[#E6F7F8] border border-[#4FC3C7]/20 rounded-xl">
                 <p className="text-sm font-medium text-primary mb-2">
                   Also explore our services:
                 </p>
@@ -187,6 +199,55 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
+      {/* SEO Sub-Services Section */}
+      <section className="py-16 bg-[#E6F7F8]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="section-heading">Our SEO Sub-Services</h2>
+            <p className="section-subheading">
+              Explore the specific SEO disciplines we specialise in.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "On-Page SEO",
+                to: "/on-page-seo",
+                desc: "Optimize your web pages for target keywords with title tags, meta descriptions, heading structure, and quality content.",
+              },
+              {
+                title: "Off-Page SEO & Link Building",
+                to: "/off-page-seo",
+                desc: "Build domain authority through high-quality backlinks, brand mentions, and off-site credibility signals.",
+              },
+              {
+                title: "Technical SEO",
+                to: "/technical-seo",
+                desc: "Fix crawl errors, improve site speed, and optimize Core Web Vitals so Google can index your site without barriers.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-bold text-foreground mb-3 font-display">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  {item.desc}
+                </p>
+                <Link
+                  to={item.to}
+                  className="text-primary font-semibold text-sm hover:text-primary/80 transition-colors inline-flex items-center gap-1"
+                >
+                  Learn More &rarr;
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 bg-gradient-to-r from-primary to-primary/80">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4 font-display">
@@ -198,7 +259,10 @@ export default function SeoServicesPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
-              <Button className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4">
+              <Button
+                style={{ backgroundColor: "#DC2626" }}
+                className="text-white font-bold px-8 py-4 hover:opacity-90"
+              >
                 Get Free SEO Audit
               </Button>
             </Link>

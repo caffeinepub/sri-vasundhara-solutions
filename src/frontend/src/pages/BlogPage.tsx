@@ -18,7 +18,7 @@ const blogPosts = [
   {
     slug: "/google-ads-guide",
     cat: "Google Ads",
-    catColor: "bg-orange-100 text-accent",
+    catColor: "bg-[#E6F7F8] text-[#4FC3C7]",
     title: "Google Ads vs SEO – Which is Better for Your Business?",
     excerpt:
       "Compare paid vs organic marketing strategies to decide which works best for your business goals and budget in Hyderabad.",
@@ -70,12 +70,12 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-primary/5 via-white to-accent/5 py-16">
+      <section className="bg-[#E6F7F8] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BreadcrumbNav
             crumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
           />
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+          <Badge className="mb-4 bg-green-100 text-primary border-primary/20">
             Digital Marketing Blog
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-display">

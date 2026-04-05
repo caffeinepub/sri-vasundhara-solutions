@@ -180,7 +180,7 @@ export default function LocalSeoGuidePage() {
             a="Regular SEO targets national/global rankings for broad keywords. Local SEO targets geographic-specific rankings like 'near me' searches and Google Maps results. Local SEO uses Google Business Profile optimization, local citations, and location-specific content, which regular SEO doesn't focus on."
           />
 
-          <div className="mt-8 bg-secondary/30 rounded-2xl p-6">
+          <div className="mt-8 bg-[#E6F7F8] rounded-2xl p-6">
             <h3 className="font-bold text-foreground mb-3 font-display">
               Need Help with Local SEO?
             </h3>

@@ -179,7 +179,7 @@ export default function SocialMediaTipsPage() {
                 tip: "Telugu-language YouTube content gets massive organic reach in Andhra Pradesh and Telangana.",
               },
             ].map(({ platform, icon, best, reach, tip }, _i) => (
-              <div key={platform} className="bg-secondary/30 rounded-xl p-5">
+              <div key={platform} className="bg-[#E6F7F8] rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">{icon}</span>
                   <h3 className="font-bold text-foreground">{platform}</h3>
@@ -211,7 +211,7 @@ export default function SocialMediaTipsPage() {
             a="Professional social media management in Hyderabad starts from ₹3,000-₹8,000/month depending on the number of platforms, posts, and ad management. Our Growth Plan at ₹17,999/month includes complete social media management across 3 platforms."
           />
 
-          <div className="mt-8 bg-secondary/30 rounded-2xl p-6">
+          <div className="mt-8 bg-[#E6F7F8] rounded-2xl p-6">
             <h3 className="font-bold text-foreground mb-3 font-display">
               Explore Our Social Media Services
             </h3>
@@ -250,7 +250,10 @@ export default function SocialMediaTipsPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
-              <Button className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4">
+              <Button
+                style={{ backgroundColor: "#DC2626" }}
+                className="text-white font-bold px-8 py-4 hover:opacity-90"
+              >
                 Get Free Strategy Call 🚀
               </Button>
             </Link>

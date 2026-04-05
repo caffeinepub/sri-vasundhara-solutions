@@ -6,51 +6,54 @@
 
 @layer base {
   :root {
-    /* Blue primary (#1e40af -> OKLCH) */
-    --primary: 0.38 0.14 264;
+    /* Teal Blue #4FC3C7 → primary */
+    --primary: 0.73 0.1 198;
     --primary-foreground: 1 0 0;
 
-    /* Orange accent (#f97316 -> OKLCH) */
-    --accent: 0.72 0.19 50;
+    /* Green #16A34A → accent */
+    --accent: 0.55 0.18 142;
     --accent-foreground: 1 0 0;
 
-    --background: 1 0 0;
-    --foreground: 0.15 0.02 264;
+    /* Light Background #F5F5F5 */
+    --background: 0.97 0 0;
+    --foreground: 0.25 0.02 264;
 
+    /* White for cards */
     --card: 1 0 0;
-    --card-foreground: 0.15 0.02 264;
+    --card-foreground: 0.25 0.02 264;
 
     --popover: 1 0 0;
-    --popover-foreground: 0.15 0.02 264;
+    --popover-foreground: 0.25 0.02 264;
 
-    --secondary: 0.96 0.01 264;
-    --secondary-foreground: 0.15 0.02 264;
+    /* Light teal tint for secondary/muted */
+    --secondary: 0.96 0.03 198;
+    --secondary-foreground: 0.25 0.02 264;
 
-    --muted: 0.96 0.01 264;
+    --muted: 0.96 0.03 198;
     --muted-foreground: 0.52 0.03 264;
 
-    --destructive: 0.57 0.22 27;
+    --destructive: 0.53 0.22 27;
     --destructive-foreground: 1 0 0;
 
-    --border: 0.9 0.02 264;
-    --input: 0.9 0.02 264;
-    --ring: 0.38 0.14 264;
+    --border: 0.9 0.02 198;
+    --input: 0.9 0.02 198;
+    --ring: 0.73 0.1 198;
     --radius: 0.5rem;
 
-    --chart-1: 0.38 0.14 264;
-    --chart-2: 0.72 0.19 50;
-    --chart-3: 0.55 0.17 145;
-    --chart-4: 0.65 0.15 196;
-    --chart-5: 0.75 0.12 310;
+    --chart-1: 0.73 0.1 198;
+    --chart-2: 0.55 0.18 142;
+    --chart-3: 0.53 0.22 27;
+    --chart-4: 0.5 0.16 142;
+    --chart-5: 0.65 0.15 196;
 
     --sidebar: 0.97 0.01 264;
-    --sidebar-foreground: 0.15 0.02 264;
-    --sidebar-primary: 0.38 0.14 264;
+    --sidebar-foreground: 0.25 0.02 264;
+    --sidebar-primary: 0.73 0.1 198;
     --sidebar-primary-foreground: 1 0 0;
-    --sidebar-accent: 0.96 0.01 264;
-    --sidebar-accent-foreground: 0.15 0.02 264;
-    --sidebar-border: 0.9 0.02 264;
-    --sidebar-ring: 0.38 0.14 264;
+    --sidebar-accent: 0.96 0.03 198;
+    --sidebar-accent-foreground: 0.25 0.02 264;
+    --sidebar-border: 0.9 0.02 198;
+    --sidebar-ring: 0.73 0.1 198;
   }
 
   * {
@@ -81,16 +84,61 @@
 }
 
 @layer components {
-  .btn-orange {
-    @apply bg-accent text-white font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-all duration-200 inline-flex items-center gap-2;
+  /* RED CTA button — primary calls to action ONLY */
+  .btn-cta {
+    background-color: #dc2626;
+    @apply text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 inline-flex items-center gap-2;
+  }
+  .btn-cta:hover {
+    background-color: #15803d;
   }
 
+  /* Legacy alias so existing JSX works unchanged */
+  .btn-orange {
+    background-color: #dc2626;
+    @apply text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 inline-flex items-center gap-2;
+  }
+  .btn-orange:hover {
+    background-color: #15803d;
+  }
+
+  /* TEAL button for secondary actions */
+  .btn-teal {
+    background-color: #4fc3c7;
+    @apply text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 inline-flex items-center gap-2;
+  }
+  .btn-teal:hover {
+    opacity: 0.9;
+  }
+
+  /* Legacy alias */
   .btn-blue {
-    @apply bg-primary text-white font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-all duration-200 inline-flex items-center gap-2;
+    background-color: #4fc3c7;
+    @apply text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 inline-flex items-center gap-2;
+  }
+  .btn-blue:hover {
+    opacity: 0.9;
+  }
+
+  /* TEAL outline */
+  .btn-teal-outline {
+    border: 2px solid #4fc3c7;
+    color: #4fc3c7;
+    @apply font-semibold px-6 py-3 rounded-lg transition-all duration-200 inline-flex items-center gap-2;
+  }
+  .btn-teal-outline:hover {
+    background-color: #4fc3c7;
+    @apply text-white;
   }
 
   .btn-blue-outline {
-    @apply border-2 border-primary text-primary font-semibold px-6 py-3 rounded-lg hover:bg-primary hover:text-white transition-all duration-200 inline-flex items-center gap-2;
+    border: 2px solid #4fc3c7;
+    color: #4fc3c7;
+    @apply font-semibold px-6 py-3 rounded-lg transition-all duration-200 inline-flex items-center gap-2;
+  }
+  .btn-blue-outline:hover {
+    background-color: #4fc3c7;
+    @apply text-white;
   }
 
   .section-heading {

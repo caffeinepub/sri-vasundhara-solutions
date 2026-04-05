@@ -82,8 +82,8 @@ export default {
         xs: "0 1px 2px 0 rgba(0,0,0,0.05)",
         card: "0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
         "card-hover": "0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06)",
-        blue: "0 8px 32px -4px oklch(0.38 0.14 264 / 0.3)",
-        orange: "0 8px 32px -4px oklch(0.72 0.19 50 / 0.3)",
+        blue: "0 8px 32px -4px oklch(0.73 0.10 198 / 0.3)",
+        orange: "0 8px 32px -4px oklch(0.55 0.18 142 / 0.3)",
       },
       keyframes: {
         "accordion-down": {

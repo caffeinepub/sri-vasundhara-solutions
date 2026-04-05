@@ -19,16 +19,16 @@ export default function WebsiteDesignPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-purple-50 via-white to-purple-50/30 py-16">
+      <section className="bg-[#E6F7F8] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BreadcrumbNav
             crumbs={[
               { label: "Home", href: "/" },
-              { label: "Services" },
+              { label: "Services", href: "/services" },
               { label: "Website Design" },
             ]}
           />
-          <Badge className="mb-4 bg-purple-50 text-purple-600 border-purple-200">
+          <Badge className="mb-4 bg-[#E6F7F8] text-[#4FC3C7] border-[#4FC3C7]/30">
             Website Design
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-display">
@@ -68,41 +68,42 @@ export default function WebsiteDesignPage() {
                   "Post-launch support",
                 ].map((f) => (
                   <div key={f} className="flex items-center gap-2 text-sm">
-                    <CheckCircle className="h-4 w-4 text-purple-500 shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-[#16A34A] shrink-0" />
                     <span className="text-muted-foreground">{f}</span>
                   </div>
                 ))}
               </div>
               <Link to="/contact-us">
                 <Button
-                  className="bg-primary hover:bg-primary/90 text-white font-bold"
+                  style={{ backgroundColor: "#DC2626" }}
+                  className="text-white font-bold hover:opacity-90"
                   data-ocid="web_design.cta_button"
                 >
                   Get Website Quote
                 </Button>
               </Link>
-              <div className="mt-6 p-4 bg-purple-50 border border-purple-200 rounded-xl">
-                <p className="text-sm font-medium text-purple-600 mb-2">
+              <div className="mt-6 p-4 bg-[#E6F7F8] border border-[#4FC3C7]/20 rounded-xl">
+                <p className="text-sm font-medium text-primary mb-2">
                   Also explore our services:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Link
                     to="/seo-services"
-                    className="text-purple-600 text-sm underline hover:no-underline"
+                    className="text-primary text-sm underline hover:no-underline"
                   >
                     SEO Services in Guntur
                   </Link>
                   <span className="text-muted-foreground">|</span>
                   <Link
                     to="/local-seo-services"
-                    className="text-purple-600 text-sm underline hover:no-underline"
+                    className="text-primary text-sm underline hover:no-underline"
                   >
                     Local SEO Services
                   </Link>
                   <span className="text-muted-foreground">|</span>
                   <Link
                     to="/contact-us"
-                    className="text-purple-600 text-sm underline hover:no-underline"
+                    className="text-primary text-sm underline hover:no-underline"
                   >
                     Get Free Quote
                   </Link>
@@ -119,27 +120,34 @@ export default function WebsiteDesignPage() {
                     {
                       title: "Business Websites",
                       desc: "Professional, fast-loading websites that showcase your business and convert visitors into customers.",
+                      to: "/business-website-design",
                     },
                     {
-                      title: "E-Commerce Development",
+                      title: "E-Commerce Websites",
                       desc: "Full-featured online stores with product management, payment gateway integration, and SEO optimization.",
+                      to: "/ecommerce-website-design",
                     },
                     {
                       title: "Landing Pages",
                       desc: "High-converting landing pages designed for Google Ads and lead generation campaigns.",
+                      to: "/contact-us",
                     },
                     {
                       title: "SEO-Optimized Design",
                       desc: "Every website includes proper heading structure, meta tags, schema markup, fast load times, and internal linking from day one.",
+                      to: "/seo-services",
                     },
-                  ].map(({ title, desc }) => (
+                  ].map(({ title, desc, to }) => (
                     <div
                       key={title}
                       className="p-3 rounded-lg border border-border"
                     >
-                      <p className="font-semibold text-sm text-foreground">
+                      <Link
+                        to={to}
+                        className="font-semibold text-sm text-foreground hover:text-primary transition-colors"
+                      >
                         {title}
-                      </p>
+                      </Link>
                       <p className="text-xs text-muted-foreground mt-1">
                         {desc}
                       </p>
@@ -167,6 +175,50 @@ export default function WebsiteDesignPage() {
         </div>
       </section>
 
+      {/* Website Design Sub-Services */}
+      <section className="py-16 bg-[#E6F7F8]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="section-heading">Our Website Design Services</h2>
+            <p className="section-subheading">
+              Choose the right website type for your business needs.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            {[
+              {
+                title: "Business Website Design",
+                to: "/business-website-design",
+                desc: "Professional, SEO-ready business websites for local businesses, service providers, and consultants in Guntur and Hyderabad.",
+              },
+              {
+                title: "E-commerce Website Design",
+                to: "/ecommerce-website-design",
+                desc: "Feature-rich online stores with secure payments, product management, and mobile shopping optimization.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-bold text-foreground mb-3 font-display">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  {item.desc}
+                </p>
+                <Link
+                  to={item.to}
+                  className="text-primary font-semibold text-sm hover:text-primary/80 transition-colors inline-flex items-center gap-1"
+                >
+                  Learn More &rarr;
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 bg-gradient-to-r from-primary to-primary/80">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4 font-display">
@@ -178,7 +230,10 @@ export default function WebsiteDesignPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
-              <Button className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4">
+              <Button
+                style={{ backgroundColor: "#DC2626" }}
+                className="text-white font-bold px-8 py-4 hover:opacity-90"
+              >
                 Get Free Quote
               </Button>
             </Link>

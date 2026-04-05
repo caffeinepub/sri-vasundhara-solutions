@@ -19,7 +19,7 @@ export default function GoogleAdsGuidePage() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-accent/5 via-white to-orange-50 py-16">
+      <section className="bg-[#E6F7F8] py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <BreadcrumbNav
             crumbs={[
@@ -28,7 +28,7 @@ export default function GoogleAdsGuidePage() {
               { label: "Google Ads Guide" },
             ]}
           />
-          <Badge className="mb-4 bg-orange-100 text-accent border-accent/20">
+          <Badge className="mb-4 bg-[#E6F7F8] text-[#4FC3C7] border-[#4FC3C7]/30">
             Google Ads
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-display">
@@ -71,7 +71,10 @@ export default function GoogleAdsGuidePage() {
           <div className="overflow-x-auto mb-8">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="bg-primary text-white">
+                <tr
+                  style={{ backgroundColor: "#4FC3C7" }}
+                  className="text-white"
+                >
                   <th className="p-3 text-left text-sm">Factor</th>
                   <th className="p-3 text-left text-sm">Google Ads</th>
                   <th className="p-3 text-left text-sm">SEO</th>
@@ -100,7 +103,7 @@ export default function GoogleAdsGuidePage() {
                 ].map((row, i) => (
                   <tr
                     key={row[0]}
-                    className={i % 2 === 0 ? "bg-secondary/30" : "bg-white"}
+                    className={i % 2 === 0 ? "bg-[#E6F7F8]" : "bg-white"}
                   >
                     {row.map((cell) => (
                       <td
@@ -136,7 +139,7 @@ export default function GoogleAdsGuidePage() {
             ].map(({ title, desc }, _i) => (
               <div
                 key={title}
-                className="bg-orange-50 border border-orange-200 rounded-xl p-4"
+                className="bg-[#E6F7F8] border border-[#4FC3C7]/20 rounded-xl p-4"
               >
                 <h3 className="font-bold text-foreground text-sm mb-1">
                   ✅ {title}
@@ -206,7 +209,7 @@ export default function GoogleAdsGuidePage() {
             a="Key metrics to monitor: Click-Through Rate (CTR), Cost Per Click (CPC), Conversion Rate, Cost Per Lead, and Return on Ad Spend (ROAS). We provide detailed monthly reports for all our clients showing exactly how their campaigns are performing."
           />
 
-          <div className="mt-8 bg-secondary/30 rounded-2xl p-6">
+          <div className="mt-8 bg-[#E6F7F8] rounded-2xl p-6">
             <h3 className="font-bold text-foreground mb-3 font-display">
               Explore Our Services
             </h3>
@@ -234,7 +237,7 @@ export default function GoogleAdsGuidePage() {
         </div>
       </article>
 
-      <section className="py-16 bg-gradient-to-r from-accent to-accent/80">
+      <section className="py-16 bg-gradient-to-r from-primary to-primary/80">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4 font-display">
             Start Your Google Ads Campaign Today

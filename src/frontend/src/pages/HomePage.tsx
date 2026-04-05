@@ -20,49 +20,44 @@ import {
 } from "lucide-react";
 import { useEffect } from "react";
 import ContactForm from "../components/ContactForm";
+import { CtaButton } from "../components/CtaButtons";
 
 const services = [
   {
     icon: Search,
     title: "SEO Services in Guntur & Hyderabad",
-    desc: "Our search engine optimization services help businesses in Guntur and Hyderabad rank higher on Google. We conduct thorough keyword research to identify what your target customers are searching for. Our on-page optimization covers title tags, meta descriptions, header structure, and content quality. Technical SEO audits fix crawl errors, improve site speed, and ensure mobile-friendliness. We build high-quality backlinks from authoritative websites to strengthen your domain authority. Local SEO strategies help your business appear in Google Maps and local search results. Our transparent monthly reports show keyword rankings, traffic growth, and lead data. Whether you run a small local business or a growing enterprise, our SEO services in Guntur deliver consistent, measurable results.",
+    desc: "We help businesses in Guntur and Hyderabad rank higher on Google with keyword research, on-page optimization, technical SEO, and quality link building.",
     to: "/seo-services",
-    cta: "Explore SEO Services",
   },
   {
     icon: Target,
     title: "Google Ads & PPC Services in Hyderabad",
-    desc: "Our Google Ads management services help businesses in Hyderabad and Guntur generate high-quality leads through targeted pay-per-click campaigns. We research the most effective keywords for your industry and create compelling ad copy that drives clicks. Campaign setup includes Search Ads, Display Ads, and Remarketing to reach your audience at every stage. We continuously optimize bid strategies, ad groups, and landing pages to reduce cost-per-click and improve conversion rates. Our PPC experts monitor campaigns daily, making data-driven adjustments to maximize your return on investment. Detailed performance reports show impressions, clicks, conversions, and cost-per-lead so you always know where your budget is going.",
+    desc: "Generate high-quality leads fast with targeted Google Ads campaigns. We manage Search, Display, and Remarketing ads to maximize your ROI.",
     to: "/google-ads-services",
-    cta: "Explore Google Ads Services",
   },
   {
     icon: Monitor,
     title: "Website Design Company in Guntur",
-    desc: "We design and develop professional, SEO-friendly websites for businesses in Guntur and Hyderabad. Every website we build is mobile-responsive, fast-loading, and optimized for search engine ranking. Our design process starts with understanding your business goals and target audience. We create clean, modern layouts that guide visitors toward taking action — whether that's calling, filling a form, or making a purchase. We use best practices for Core Web Vitals including optimized images, minimal code, and efficient loading. Our websites come with on-page SEO built in: proper heading structure, meta tags, schema markup, and internal linking. We also provide website maintenance, content updates, and performance monitoring after launch.",
+    desc: "We design professional, mobile-responsive, SEO-friendly websites that convert visitors into leads and reflect your brand quality.",
     to: "/website-design",
-    cta: "Explore Website Design",
   },
   {
     icon: Share2,
     title: "Social Media Marketing Agency in Hyderabad",
-    desc: "Our social media marketing services help businesses in Hyderabad and Guntur build brand awareness, engage their audience, and generate leads. We manage accounts on Facebook, Instagram, LinkedIn, and YouTube with consistent, creative content that reflects your brand voice. Our team creates graphics, videos, and copy tailored to each platform's best practices. We run targeted social media ad campaigns to reach your ideal customers based on location, age, interests, and behavior. Regular performance reporting covers reach, engagement, follower growth, and lead metrics. Whether you're starting from zero or looking to improve existing accounts, we develop a social media strategy aligned with your business goals.",
+    desc: "Build brand awareness and generate leads on Facebook and Instagram with creative content and targeted ad campaigns.",
     to: "/social-media-marketing",
-    cta: "Explore Social Media Marketing",
   },
   {
     icon: MapPin,
     title: "Local SEO Services in Guntur & Hyderabad",
-    desc: "Local SEO helps your business appear when customers in Guntur or Hyderabad search for your services nearby. We optimize your Google Business Profile with accurate NAP details, service descriptions, photos, and regular posts. Our local keyword research targets location-based search terms that drive foot traffic and inquiries. We build local citations on relevant directories to strengthen your business's online presence. Review management strategies help you collect genuine customer feedback, which improves your local ranking. On-site local SEO ensures your website includes location-specific content, structured data, and geo-targeted pages. Businesses optimized for local search see significantly higher visibility in Google Maps and the local pack.",
+    desc: "Appear at the top of local searches in Guntur and Hyderabad. We optimize your Google Business Profile and build local citations.",
     to: "/local-seo-services",
-    cta: "Explore Local SEO Services",
   },
   {
     icon: TrendingUp,
     title: "Lead Generation Services for Businesses",
-    desc: "Generating consistent, qualified leads is the foundation of business growth. Our lead generation services combine SEO, Google Ads, social media marketing, and conversion rate optimization to build a steady pipeline of potential customers. We design high-converting landing pages with clear calls-to-action that turn visitors into inquiries. Lead capture forms, WhatsApp integration, and click-to-call features make it easy for prospects to contact you. We use data analytics to identify which channels deliver the best leads for your business and continuously refine the strategy. From awareness to conversion, our lead generation approach is designed to deliver measurable results and a strong return on your marketing investment.",
-    to: "/contact-us",
-    cta: "Get Free Consultation",
+    desc: "Drive consistent, qualified leads through SEO, Google Ads, social media, and high-converting landing pages tailored to your business.",
+    to: "/lead-generation",
   },
 ];
 
@@ -137,7 +132,7 @@ const testimonials = [
     business: "Real Estate Consultant, Guntur",
     text: "Google Ads campaigns managed by SVS brought us qualified leads within the first two weeks. The cost-per-lead is much lower than what we were spending before. Very happy with the results.",
     initials: "SR",
-    color: "bg-orange-500",
+    color: "bg-[#4FC3C7]",
   },
   {
     name: "Anitha Devi",
@@ -194,13 +189,13 @@ export default function HomePage() {
       {/* HERO */}
       <section
         id="hero"
-        className="relative bg-gradient-to-br from-primary/5 via-white to-accent/5 py-20 md:py-28"
+        className="relative bg-[#E6F7F8] py-20 md:py-28"
         data-ocid="hero.section"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-5 bg-primary/10 text-primary border-primary/20 hover:bg-primary/10 font-medium">
+              <Badge className="mb-5 bg-[#E6F7F8] text-[#4FC3C7] border-[#4FC3C7]/30 hover:bg-[#E6F7F8] font-medium">
                 Trusted Digital Marketing Agency in Guntur &amp; Hyderabad
               </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6 font-display">
@@ -294,8 +289,8 @@ export default function HomePage() {
                   className="service-card group"
                   data-ocid={`services.item.${i + 1}`}
                 >
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
-                    <Icon className="h-6 w-6 text-primary group-hover:text-white transition-colors" />
+                  <div className="h-12 w-12 rounded-xl bg-green-100 flex items-center justify-center mb-4 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                    <Icon className="h-6 w-6 text-green-600 group-hover:text-white transition-colors" />
                   </div>
                   <h3 className="font-bold text-foreground mb-3 font-display text-lg">
                     {service.title}
@@ -308,11 +303,18 @@ export default function HomePage() {
                     className="text-primary font-semibold text-sm hover:text-primary/80 transition-colors inline-flex items-center gap-1"
                     data-ocid={`services.link.${i + 1}`}
                   >
-                    {service.cta} &rarr;
+                    Read More &rarr;
                   </Link>
                 </div>
               );
             })}
+          </div>
+          <div className="text-center mt-10">
+            <CtaButton
+              to="/services"
+              label="View All Services"
+              ocid="services.view_all_button"
+            />
           </div>
         </div>
       </section>
@@ -320,7 +322,7 @@ export default function HomePage() {
       {/* WHY CHOOSE US */}
       <section
         id="why-choose-us"
-        className="py-20 bg-secondary/30"
+        className="py-20 bg-[#E6F7F8]"
         data-ocid="why_choose.section"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -340,8 +342,8 @@ export default function HomePage() {
                   className="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-shadow text-center"
                   data-ocid={`why_choose.item.${i + 1}`}
                 >
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <Icon className="h-6 w-6 text-primary" />
+                  <div className="h-12 w-12 rounded-xl bg-green-100 flex items-center justify-center mx-auto mb-4">
+                    <Icon className="h-6 w-6 text-green-600" />
                   </div>
                   <h3 className="font-bold text-foreground mb-2 font-display">
                     {item.title}
@@ -395,7 +397,7 @@ export default function HomePage() {
       {/* TESTIMONIALS */}
       <section
         id="testimonials"
-        className="py-20 bg-secondary/30"
+        className="py-20 bg-[#E6F7F8]"
         data-ocid="testimonials.section"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -479,7 +481,7 @@ export default function HomePage() {
       {/* AUTHOR / E-E-A-T */}
       <section
         id="expert"
-        className="py-20 bg-secondary/30"
+        className="py-20 bg-[#E6F7F8]"
         data-ocid="expert.section"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -559,7 +561,7 @@ export default function HomePage() {
                 </a>
               </div>
             </div>
-            <div className="bg-secondary/30 rounded-2xl p-6 border border-border">
+            <div className="bg-[#E6F7F8] rounded-2xl p-6 border border-border">
               <h3 className="text-xl font-bold text-foreground mb-6 font-display">
                 Send Us a Message
               </h3>

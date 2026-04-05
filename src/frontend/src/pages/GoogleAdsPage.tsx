@@ -19,16 +19,16 @@ export default function GoogleAdsPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-accent/5 via-white to-orange-50 py-16">
+      <section className="bg-[#E6F7F8] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BreadcrumbNav
             crumbs={[
               { label: "Home", href: "/" },
-              { label: "Services" },
+              { label: "Services", href: "/services" },
               { label: "Google Ads Services" },
             ]}
           />
-          <Badge className="mb-4 bg-orange-50 text-accent border-accent/20">
+          <Badge className="mb-4 bg-[#E6F7F8] text-[#4FC3C7] border-[#4FC3C7]/30">
             Google Ads / PPC
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-display">
@@ -62,24 +62,30 @@ export default function GoogleAdsPage() {
                   {
                     title: "Search Ads Campaigns",
                     desc: "Appear at the top of Google search results when potential customers in Guntur and Hyderabad search for your services. Highly targeted, intent-driven traffic.",
+                    to: "/search-ads",
                   },
                   {
                     title: "Display & Remarketing Ads",
                     desc: "Re-engage website visitors with targeted display ads across Google's network. Keep your brand visible and bring back potential customers.",
-                  },
-                  {
-                    title: "Shopping Campaigns",
-                    desc: "For e-commerce businesses, Google Shopping campaigns showcase your products directly in search results with images and prices.",
+                    to: "/display-ads",
                   },
                   {
                     title: "YouTube Ads",
                     desc: "Reach your audience with video advertising on YouTube. Cost-effective brand awareness and lead generation for Hyderabad businesses.",
+                    to: "/youtube-ads",
                   },
-                ].map(({ title, desc }) => (
+                ].map(({ title, desc, to }) => (
                   <div key={title} className="flex gap-3">
                     <CheckCircle className="h-5 w-5 text-accent mt-1 shrink-0" />
                     <div>
-                      <h3 className="font-semibold text-foreground">{title}</h3>
+                      <h3 className="font-semibold text-foreground">
+                        <Link
+                          to={to}
+                          className="hover:text-primary transition-colors"
+                        >
+                          {title}
+                        </Link>
+                      </h3>
                       <p className="text-sm text-muted-foreground mt-1">
                         {desc}
                       </p>
@@ -97,14 +103,15 @@ export default function GoogleAdsPage() {
                   "Detailed analytics",
                 ].map((b) => (
                   <div key={b} className="flex items-center gap-2 text-sm">
-                    <div className="h-1.5 w-1.5 rounded-full bg-accent" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" />
                     <span className="text-muted-foreground">{b}</span>
                   </div>
                 ))}
               </div>
               <Link to="/contact-us">
                 <Button
-                  className="bg-accent hover:bg-accent/90 text-white font-bold"
+                  style={{ backgroundColor: "#DC2626" }}
+                  className="text-white font-bold hover:opacity-90"
                   data-ocid="google_ads.cta_button"
                 >
                   Start Google Ads Campaign
@@ -126,7 +133,7 @@ export default function GoogleAdsPage() {
                     "Reporting",
                   ].map((step, i) => (
                     <div key={step} className="flex items-center gap-3">
-                      <div className="h-7 w-7 rounded-full bg-accent text-white text-xs font-bold flex items-center justify-center shrink-0">
+                      <div className="h-7 w-7 rounded-full bg-[#16A34A] text-white text-xs font-bold flex items-center justify-center shrink-0">
                         {i + 1}
                       </div>
                       <span className="text-sm font-medium text-foreground">
@@ -155,7 +162,7 @@ export default function GoogleAdsPage() {
                 q="What is included in your Google Ads management service?"
                 a="Our service includes campaign setup and strategy, keyword research, ad copywriting, bid management, A/B testing, landing page recommendations, conversion tracking, and detailed monthly reporting with transparent performance data."
               />
-              <div className="mt-6 p-4 bg-accent/5 border border-accent/20 rounded-xl">
+              <div className="mt-6 p-4 bg-[#E6F7F8] border border-[#4FC3C7]/20 rounded-xl">
                 <p className="text-sm font-medium text-accent mb-2">
                   Also explore our services:
                 </p>
@@ -187,7 +194,57 @@ export default function GoogleAdsPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-accent to-accent/80">
+      {/* Google Ads Sub-Services Section */}
+      <section className="py-16 bg-[#E6F7F8]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="section-heading">Our Google Ads Sub-Services</h2>
+            <p className="section-subheading">
+              Explore the specific campaign types we manage for businesses in
+              Guntur and Hyderabad.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Search Ads",
+                to: "/search-ads",
+                desc: "Appear at the top of Google when prospects actively search for your services. Immediate leads, pay per click.",
+              },
+              {
+                title: "Display Ads",
+                to: "/display-ads",
+                desc: "Reach millions with visually compelling banner ads across the Google Display Network and remarketing.",
+              },
+              {
+                title: "YouTube Ads",
+                to: "/youtube-ads",
+                desc: "Tell your brand story through video and reach your audience on India's largest video platform.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-bold text-foreground mb-3 font-display">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  {item.desc}
+                </p>
+                <Link
+                  to={item.to}
+                  className="text-primary font-semibold text-sm hover:text-primary/80 transition-colors inline-flex items-center gap-1"
+                >
+                  Learn More &rarr;
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-gradient-to-r from-primary to-primary/80">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4 font-display">
             Ready to Launch Your Google Ads Campaign?

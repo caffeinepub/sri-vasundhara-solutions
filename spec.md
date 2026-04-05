@@ -1,66 +1,79 @@
-# Sri Vasundhara Solutions – Website Rebuild & SEO Optimization
+# Sri Vasundhara Solutions — Complete Website Rebuild (Version 22)
 
 ## Current State
 
-The website is a fully-built React SPA with:
-- Multiple pages: Home, About, Services (SEO, Google Ads, Social Media, Website Design, Local SEO), Blog, Contact
-- Existing color theme: Blue primary (#1e40af), Orange accent (#f97316), white background — defined in OKLCH tokens
-- Layout with sticky header, footer with NAP, floating WhatsApp + call buttons
-- Privacy Policy and Terms & Conditions as footer dialogs
-- Schema markup, GA4, sitemap.xml, robots.txt all in place
-- Issues: emojis scattered in content, spammy/redundant sections like "Serving Businesses in Gorantla, Guntur & Hyderabad", keyword-stuffed text, overly promotional phrasing, inconsistent heading levels (H2 skipping to H4 in some sections), announcement banners removed in v18/v19
+The site is a React SPA (TanStack Router) with:
+- Homepage, About, SEO Services, Google Ads, Social Media, Website Design, Local SEO, Contact, Blog, and 4 blog post pages
+- Layout.tsx with sticky header, footer with NAP, floating WhatsApp + call buttons
+- Privacy Policy and Terms & Conditions in footer dialogs
+- Brand colors partially applied: teal #4FC3C7, green #16A34A, red #DC2626 for CTAs
+- Technical SEO: sitemap.xml, robots.txt, .ic-assets.json5 with security headers, JSON-LD schema in index.html
+- Google Analytics GA4 (G-97CDFPRMHZ) and Search Console verification
+- Missing pages: Services overview page, individual sub-service pages (On-Page SEO, Off-Page SEO, Technical SEO, Search Ads, Display Ads, YouTube Ads, Business Website, E-commerce Website, Facebook Marketing, Instagram Marketing), Lead Generation page, Privacy Policy and Terms as standalone pages
+- The current services section on homepage shows 150-200 word cards which are too long for homepage cards (should be 2-3 lines with Read More link)
+- No dedicated services overview page
+- Privacy Policy / Terms are in dialogs, not standalone pages (bad for SEO)
+- No sub-service pages at all
+- Missing: Lead Generation standalone service page
 
 ## Requested Changes (Diff)
 
 ### Add
-- Clean 150–200 word service descriptions for all 6 services (SEO, Google Ads, Website Design, Social Media Marketing, Local SEO, Lead Generation) on homepage — natural keyword usage, no stuffing
-- Lead Generation as a 6th service on homepage (currently missing)
-- Our Process section (5 steps: Business Analysis → Strategy Planning → Execution → Optimization → Growth)
-- Clean professional testimonials (3–5, short format, no copyright issues)
-- Updated FAQ: "How to rank business on Google?", "What services do you provide?", "Do you work with small businesses?"
-- Author/E-E-A-T section: Gajjalakonda Srinu, Digital Marketing Analyst
+- `/services/` — Services overview page listing all 6 main services with short descriptions and links
+- `/lead-generation/` — Lead Generation dedicated service page
+- `/on-page-seo/` — Sub-service page: On-Page SEO
+- `/off-page-seo/` — Sub-service page: Off-Page SEO  
+- `/technical-seo/` — Sub-service page: Technical SEO
+- `/search-ads/` — Sub-service page: Search Ads
+- `/display-ads/` — Sub-service page: Display Ads
+- `/youtube-ads/` — Sub-service page: YouTube Ads
+- `/business-website-design/` — Sub-service page: Business Website Design
+- `/ecommerce-website-design/` — Sub-service page: E-commerce Website Design
+- `/facebook-marketing/` — Sub-service page: Facebook Marketing
+- `/instagram-marketing/` — Sub-service page: Instagram Marketing
+- `/privacy-policy/` — Standalone Privacy Policy page (SEO-indexable)
+- `/terms-and-conditions/` — Standalone Terms & Conditions page (SEO-indexable)
+- All new routes registered in App.tsx
+- All new URLs added to sitemap.xml
+- Navigation updated: Services dropdown links to /services/ and shows sub-service categories
 
 ### Modify
-- Homepage H1: "Best Digital Marketing Agency in Guntur & Hyderabad" (keep exact)
-- Homepage intro paragraph: Replace with clean version provided (no keyword stuffing)
-- Remove ALL emojis sitewide (🔥 🚀 📍 🏆 etc.)
-- Remove section "Serving Businesses in Gorantla, Guntur & Hyderabad" from homepage
-- Remove all duplicate or spammy content from all pages
-- Improve spacing and alignment throughout — section padding consistency
-- Fix heading hierarchy: H1 → H2 → H3 only, no skipped levels
-- Keyword density: 0.8%–1.5%, natural variations only
-- CTA buttons: "Get Free Consultation", "Call Now: +91 9398241974", "WhatsApp Us" (consistent across site)
-- Contact section on homepage: phone +91 9398241974, location Gorantla, Guntur, Andhra Pradesh, India
-- Service pages: clean each with 150–200 word intros, remove keyword stuffing
+- Homepage services section: Shorten each card to 2-3 lines max + "Read More" link to service page (remove 150-200 word walls)
+- SeoServicesPage: Add sub-services list section linking to On-Page, Off-Page, Technical SEO sub-pages
+- GoogleAdsPage: Add sub-services list linking to Search Ads, Display Ads, YouTube Ads
+- WebsiteDesignPage: Add sub-services list linking to Business Website, E-commerce pages
+- SocialMediaPage: Add sub-services list linking to Facebook Marketing, Instagram Marketing
+- App.tsx: Add all new routes
+- sitemap.xml: Add all new page URLs
+- Layout.tsx: Services nav dropdown includes all service categories; Privacy Policy and Terms links in footer now route to standalone pages instead of dialogs
+- index.html: Canonical stays same, sitemap reference updated for new pages
 
 ### Remove
-- All emoji characters from all page content
-- "Serving Businesses in Gorantla, Guntur & Hyderabad" section
-- Duplicate content blocks
-- Keyword-stuffed or over-optimized text
-- Any announcement banners with emojis or promotional copy
+- Privacy Policy and Terms & Conditions dialog components from Layout.tsx footer (replaced with route links)
+- Overly long service descriptions from homepage service cards (replaced with 2-3 line summaries)
 
 ## Implementation Plan
 
-1. **HomePage.tsx** — Full content rewrite:
-   - Keep H1 exact, replace intro with clean version
-   - Services section: 6 service cards with 150–200 word clean descriptions
-   - Why Choose Us: 4 clean bullet points
-   - Our Process: 5-step numbered section (new)
-   - Testimonials: 3–5 short professional (AI-named, no copyright)
-   - FAQ: 3–5 clean questions per spec
-   - Contact mini-section: phone + location
-   - Remove all emojis, remove "Serving Businesses" section
-   - Ensure H1 → H2 → H3 hierarchy, no skips
+1. Update App.tsx — add 14 new routes
+2. Create ServicesPage.tsx — overview grid of all 6 main services
+3. Create LeadGenerationPage.tsx — full service page with H1, intro, benefits, process, CTA
+4. Create 10 sub-service pages (OnPageSeoPage, OffPageSeoPage, TechnicalSeoPage, SearchAdsPage, DisplayAdsPage, YoutubeAdsPage, BusinessWebsitePage, EcommerceWebsitePage, FacebookMarketingPage, InstagramMarketingPage)
+5. Create PrivacyPolicyPage.tsx and TermsConditionsPage.tsx as standalone pages
+6. Update SeoServicesPage — add sub-services section
+7. Update GoogleAdsPage — add sub-services section
+8. Update WebsiteDesignPage — add sub-services section
+9. Update SocialMediaPage — add sub-services section
+10. Update HomePage.tsx — shorten service cards to 2-3 lines + Read More links
+11. Update Layout.tsx — footer Privacy/Terms become route links; services nav updated
+12. Update sitemap.xml — all new URLs added
+13. Validate build
 
-2. **Layout.tsx** — Remove any emojis in nav/footer
-
-3. **Service pages** (SeoServicesPage, GoogleAdsPage, SocialMediaPage, WebsiteDesignPage, LocalSeoPage) — Remove emojis, fix heading hierarchy, clean up keyword stuffing
-
-4. **AboutPage.tsx** — Add/update author section for Gajjalakonda Srinu, remove emojis
-
-5. **ContactPage.tsx** — Verify clean content, correct address (Gorantla, Guntur)
-
-6. **BlogPage.tsx** — Remove emojis if present, clean content
-
-7. Keep index.html, sitemap.xml, robots.txt, index.css, tailwind.config.js EXACTLY AS-IS (already optimized)
+### Design constraints
+- Strict brand palette: #4FC3C7 teal, #16A34A green, #DC2626 red (CTA only), #15803D dark green hover, #E6F7F8 light teal bg, #F5F5F5 light gray, #1F2937 text, #FFFFFF white
+- No emojis anywhere
+- Alternating section backgrounds: white / #E6F7F8
+- Red only for CTA buttons, green for icons/highlights
+- H1 → H2 → H3 hierarchy only, no skips
+- Mobile responsive
+- All sub-service pages: short explanation (100-150 words), Benefits section, Use Case section, CTA
+- Service pages: H1, 100-150 word intro, Key Benefits, Process, Sub-services list, CTA

@@ -135,7 +135,7 @@ export default function DigitalMarketingStrategiesPage() {
                     <p className="text-muted-foreground text-sm leading-relaxed mb-3">
                       {desc}
                     </p>
-                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-3">
+                    <div className="bg-[#E6F7F8] border border-[#4FC3C7]/20 rounded-lg p-3">
                       <p className="text-xs font-semibold text-primary">
                         📋 {action}
                       </p>
@@ -152,7 +152,10 @@ export default function DigitalMarketingStrategiesPage() {
           <div className="overflow-x-auto mb-8">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="bg-primary text-white">
+                <tr
+                  style={{ backgroundColor: "#4FC3C7" }}
+                  className="text-white"
+                >
                   <th className="p-3 text-left text-sm">Monthly Budget</th>
                   <th className="p-3 text-left text-sm">
                     Recommended Allocation
@@ -185,7 +188,7 @@ export default function DigitalMarketingStrategiesPage() {
                 ].map((row, i) => (
                   <tr
                     key={row[0]}
-                    className={i % 2 === 0 ? "bg-secondary/30" : "bg-white"}
+                    className={i % 2 === 0 ? "bg-[#E6F7F8]" : "bg-white"}
                   >
                     {row.map((cell) => (
                       <td
@@ -217,7 +220,7 @@ export default function DigitalMarketingStrategiesPage() {
             a="Google Ads shows results within 24-48 hours. Social media marketing shows engagement within 2-4 weeks. Local SEO shows ranking improvements in 4-8 weeks. Organic SEO builds over 3-6 months. For new businesses in Guntur and Hyderabad, we recommend starting with Google Ads for quick wins while building organic channels."
           />
 
-          <div className="mt-8 bg-secondary/30 rounded-2xl p-6">
+          <div className="mt-8 bg-[#E6F7F8] rounded-2xl p-6">
             <h3 className="font-bold text-foreground mb-3 font-display">
               Ready to Start Your Digital Marketing Journey?
             </h3>
@@ -262,7 +265,10 @@ export default function DigitalMarketingStrategiesPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
-              <Button className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4">
+              <Button
+                style={{ backgroundColor: "#DC2626" }}
+                className="text-white font-bold px-8 py-4 hover:opacity-90"
+              >
                 Get Free Consultation 🚀
               </Button>
             </Link>

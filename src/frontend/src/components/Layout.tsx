@@ -1,11 +1,4 @@
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Link } from "@tanstack/react-router";
 import {
   ChevronDown,
@@ -26,128 +19,18 @@ import {
   SiYoutube,
 } from "react-icons/si";
 
-function PrivacyPolicyContent() {
-  return (
-    <div className="prose prose-sm max-w-none space-y-4 text-sm text-muted-foreground">
-      <p className="font-semibold text-foreground">Last Updated: March 2026</p>
-      <p>
-        Sri Vasundhara Solutions ("we," "us," or "our") operates the website
-        https://sri-vasundhara-solutions-382.caffeine.xyz. This Privacy Policy
-        explains how we collect, use, disclose, and safeguard your information
-        when you visit our Site.
-      </p>
-      <h3 className="font-bold text-foreground">1. Information We Collect</h3>
-      <p>
-        We may collect information you provide directly: name, email address,
-        phone number, business type, and service inquiries submitted through
-        contact forms. We also automatically collect: IP address, browser type,
-        pages visited, and time spent on pages via Google Analytics (GA4).
-      </p>
-      <h3 className="font-bold text-foreground">
-        2. How We Use Your Information
-      </h3>
-      <p>
-        We use collected information to: respond to inquiries and provide
-        services, send marketing communications (with consent), analyze website
-        usage to improve our services, comply with legal obligations.
-      </p>
-      <h3 className="font-bold text-foreground">3. Cookies &amp; Tracking</h3>
-      <p>
-        Our website uses cookies including Google Analytics cookies
-        (G-7QR6GE2QS4) to understand user behavior. You can opt out via your
-        browser settings or Google's opt-out tools.
-      </p>
-      <h3 className="font-bold text-foreground">4. Data Sharing</h3>
-      <p>
-        We do not sell your personal data. We may share data with trusted
-        service providers (Google Analytics, email services) under strict
-        confidentiality agreements.
-      </p>
-      <h3 className="font-bold text-foreground">5. Data Security</h3>
-      <p>
-        We implement appropriate technical and organizational measures to
-        protect your personal information from unauthorized access, use, or
-        disclosure.
-      </p>
-      <h3 className="font-bold text-foreground">6. Your Rights</h3>
-      <p>
-        You have the right to access, correct, or delete your personal data.
-        Contact us at srivasundharasolutions@gmail.com to exercise these rights.
-      </p>
-      <h3 className="font-bold text-foreground">7. Contact Us</h3>
-      <p>
-        Sri Vasundhara Solutions | KPHB Colony, Hyderabad – 500072 | Phone: +91
-        9398241974 | Email: srivasundharasolutions@gmail.com
-      </p>
-    </div>
-  );
-}
-
-function TermsContent() {
-  return (
-    <div className="prose prose-sm max-w-none space-y-4 text-sm text-muted-foreground">
-      <p className="font-semibold text-foreground">Last Updated: March 2026</p>
-      <p>
-        These Terms and Conditions govern your use of Sri Vasundhara Solutions
-        services. By engaging our services, you agree to these terms.
-      </p>
-      <h3 className="font-bold text-foreground">1. Services</h3>
-      <p>
-        Sri Vasundhara Solutions provides digital marketing services including
-        SEO, Google Ads management, social media marketing, website design, and
-        lead generation. Service scope and deliverables are defined in
-        individual service agreements.
-      </p>
-      <h3 className="font-bold text-foreground">2. Payment Terms</h3>
-      <p>
-        Payments are due as per the agreed schedule. Monthly retainer services
-        require advance payment. Ad spend budgets (Google Ads) are separate from
-        management fees and billed directly by the platform.
-      </p>
-      <h3 className="font-bold text-foreground">3. Intellectual Property</h3>
-      <p>
-        Upon full payment, clients own the deliverables (website code, content,
-        designs). We retain rights to our proprietary processes, tools, and
-        methodologies.
-      </p>
-      <h3 className="font-bold text-foreground">4. Results Disclaimer</h3>
-      <p>
-        Digital marketing results depend on multiple factors including market
-        conditions, competition, and budget. We cannot guarantee specific
-        rankings, traffic, or lead volumes, but we commit to best-practice
-        execution.
-      </p>
-      <h3 className="font-bold text-foreground">5. Confidentiality</h3>
-      <p>
-        Both parties agree to maintain confidentiality of proprietary business
-        information shared during the engagement.
-      </p>
-      <h3 className="font-bold text-foreground">6. Termination</h3>
-      <p>
-        Either party may terminate the agreement with 30 days written notice.
-        All work completed up to termination date is billable.
-      </p>
-      <h3 className="font-bold text-foreground">7. Governing Law</h3>
-      <p>
-        These terms are governed by the laws of India. Any disputes shall be
-        resolved in the courts of Hyderabad, Telangana.
-      </p>
-      <h3 className="font-bold text-foreground">8. Contact</h3>
-      <p>For questions: srivasundharasolutions@gmail.com | +91 9398241974</p>
-    </div>
-  );
-}
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
 
   const serviceLinks = [
+    { label: "All Services", to: "/services" },
     { label: "SEO Services", to: "/seo-services" },
     { label: "Google Ads Services", to: "/google-ads-services" },
     { label: "Social Media Marketing", to: "/social-media-marketing" },
     { label: "Website Design", to: "/website-design" },
     { label: "Local SEO Services", to: "/local-seo-services" },
+    { label: "Lead Generation", to: "/lead-generation" },
   ];
 
   return (
@@ -216,14 +99,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       tabIndex={0}
                     />
                     <div
-                      className="absolute top-full left-0 mt-2 w-56 bg-white border border-border rounded-xl shadow-lg py-2 z-50"
+                      className="absolute top-full left-0 mt-2 w-60 bg-white border border-border rounded-xl shadow-lg py-2 z-50"
                       data-ocid="nav.services_menu"
                     >
-                      {serviceLinks.map((s) => (
+                      {serviceLinks.map((s, i) => (
                         <Link
                           key={s.to}
                           to={s.to}
-                          className="block px-4 py-2 text-sm hover:bg-secondary hover:text-primary transition-colors"
+                          className={`block px-4 py-2 text-sm hover:bg-secondary hover:text-primary transition-colors ${
+                            i === 0
+                              ? "font-semibold text-primary border-b border-border mb-1"
+                              : ""
+                          }`}
                           onClick={() => setServicesDropdownOpen(false)}
                           data-ocid="nav.service_link"
                         >
@@ -262,7 +149,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </a>
               <Link to="/contact-us">
                 <Button
-                  className="bg-accent hover:bg-accent/90 text-white font-semibold text-sm px-4 py-2"
+                  style={{ backgroundColor: "#DC2626" }}
+                  className="text-white font-semibold text-sm px-4 py-2 rounded-lg hover:opacity-90 transition-colors"
                   data-ocid="header.get_audit_button"
                 >
                   Get Free Audit
@@ -309,10 +197,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             >
               About
             </Link>
-            <p className="py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            <Link
+              to="/services"
+              className="block py-2 text-sm font-semibold text-primary hover:text-primary/80"
+              onClick={() => setMobileMenuOpen(false)}
+              data-ocid="nav.mobile_all_services_link"
+            >
+              All Services
+            </Link>
+            <p className="py-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Services
             </p>
-            {serviceLinks.map((s) => (
+            {serviceLinks.slice(1).map((s) => (
               <Link
                 key={s.to}
                 to={s.to}
@@ -433,6 +329,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 {[
                   { label: "Home", to: "/" },
                   { label: "About Our Agency", to: "/about-us" },
+                  { label: "All Services", to: "/services" },
                   { label: "Blog", to: "/blog" },
                   { label: "Contact", to: "/contact-us" },
                 ].map(({ label, to }, i) => (
@@ -464,6 +361,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   },
                   { label: "Website Design", to: "/website-design" },
                   { label: "Local SEO Services", to: "/local-seo-services" },
+                  { label: "Lead Generation", to: "/lead-generation" },
                 ].map(({ label, to }, i) => (
                   <li key={to + label}>
                     <Link
@@ -503,15 +401,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="flex items-start gap-2 text-gray-400 text-sm">
                   <MapPin className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                   <div>
-                    <p>KPHB Colony, Hyderabad – 500072</p>
+                    <p>KPHB Colony, Hyderabad &ndash; 500072</p>
                     <p className="mt-1">
                       Sri Vasundhara Solutions, Gorantla, Guntur, Andhra Pradesh
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-gray-400 text-sm">
-                  <Clock className="h-4 w-4 text-primary shrink-0" /> Mon–Sat:
-                  9AM–6PM
+                  <Clock className="h-4 w-4 text-primary shrink-0" />{" "}
+                  Mon&ndash;Sat: 9AM&ndash;6PM
                 </div>
               </address>
               <a
@@ -529,62 +427,32 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* Bottom Bar */}
           <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} Sri Vasundhara Solutions. All Rights
-              Reserved.{" "}
+              &copy; {new Date().getFullYear()} Sri Vasundhara Solutions. All
+              Rights Reserved.{" "}
               <a
                 href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== "undefined" ? window.location.hostname : "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
               >
-                Built with ❤️ using caffeine.ai
+                Built with love using caffeine.ai
               </a>
             </p>
             <div className="flex gap-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <button
-                    type="button"
-                    className="text-gray-500 hover:text-white text-sm transition-colors"
-                    data-ocid="footer.privacy_policy_link"
-                  >
-                    Privacy Policy
-                  </button>
-                </DialogTrigger>
-                <DialogContent
-                  className="max-w-2xl max-h-[80vh] overflow-y-auto"
-                  data-ocid="privacy_policy.dialog"
-                >
-                  <DialogHeader>
-                    <DialogTitle className="font-display">
-                      Privacy Policy – Sri Vasundhara Solutions
-                    </DialogTitle>
-                  </DialogHeader>
-                  <PrivacyPolicyContent />
-                </DialogContent>
-              </Dialog>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <button
-                    type="button"
-                    className="text-gray-500 hover:text-white text-sm transition-colors"
-                    data-ocid="footer.terms_link"
-                  >
-                    Terms &amp; Conditions
-                  </button>
-                </DialogTrigger>
-                <DialogContent
-                  className="max-w-2xl max-h-[80vh] overflow-y-auto"
-                  data-ocid="terms.dialog"
-                >
-                  <DialogHeader>
-                    <DialogTitle className="font-display">
-                      Terms &amp; Conditions – Sri Vasundhara Solutions
-                    </DialogTitle>
-                  </DialogHeader>
-                  <TermsContent />
-                </DialogContent>
-              </Dialog>
+              <Link
+                to="/privacy-policy"
+                className="text-gray-500 hover:text-white text-sm transition-colors"
+                data-ocid="footer.privacy_policy_link"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                to="/terms-and-conditions"
+                className="text-gray-500 hover:text-white text-sm transition-colors"
+                data-ocid="footer.terms_link"
+              >
+                Terms &amp; Conditions
+              </Link>
             </div>
           </div>
         </div>
@@ -604,7 +472,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <a
         href="tel:+919398241974"
         aria-label="Call Sri Vasundhara Solutions"
-        className="fixed bottom-24 right-6 z-50 h-14 w-14 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
+        className="fixed bottom-24 right-6 z-50 h-14 w-14 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
+        style={{ backgroundColor: "#4FC3C7" }}
         data-ocid="floating.call_button"
       >
         <Phone className="h-6 w-6" />

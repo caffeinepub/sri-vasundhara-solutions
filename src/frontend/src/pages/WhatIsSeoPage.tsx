@@ -19,7 +19,7 @@ export default function WhatIsSeoPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-primary/5 via-white to-accent/5 py-16">
+      <section className="bg-[#E6F7F8] py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <BreadcrumbNav
             crumbs={[
@@ -79,7 +79,7 @@ export default function WhatIsSeoPage() {
                   desc: "Ensuring your website is technically sound: fast loading speed, mobile-friendly design, proper URL structure, XML sitemaps, robots.txt, Core Web Vitals, and structured data markup. Technical SEO is the foundation that allows Google to crawl and index your site effectively.",
                 },
               ].map(({ title, desc }, _i) => (
-                <div key={title} className="bg-secondary/30 rounded-xl p-5">
+                <div key={title} className="bg-[#E6F7F8] rounded-xl p-5">
                   <h3 className="font-bold text-foreground mb-2">{title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {desc}
@@ -158,7 +158,7 @@ export default function WhatIsSeoPage() {
               Starting with SEO can feel overwhelming, but here's a simple
               roadmap for businesses in Guntur and Hyderabad:
             </p>
-            <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 mb-8">
+            <div className="bg-[#E6F7F8] border border-[#4FC3C7]/20 rounded-xl p-6 mb-8">
               <ol className="space-y-3">
                 {[
                   "Conduct a comprehensive website audit to identify technical issues",
@@ -173,7 +173,7 @@ export default function WhatIsSeoPage() {
                     key={step}
                     className="flex items-start gap-3 text-sm text-foreground"
                   >
-                    <span className="h-6 w-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="h-6 w-6 rounded-full bg-[#4FC3C7] text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {i + 1}
                     </span>
                     {step}
@@ -200,7 +200,7 @@ export default function WhatIsSeoPage() {
               />
             </div>
 
-            <div className="bg-secondary/30 rounded-2xl p-6">
+            <div className="bg-[#E6F7F8] rounded-2xl p-6">
               <h3 className="font-bold text-foreground mb-3 font-display">
                 Related Services
               </h3>
@@ -246,7 +246,10 @@ export default function WhatIsSeoPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
-              <Button className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4">
+              <Button
+                style={{ backgroundColor: "#DC2626" }}
+                className="text-white font-bold px-8 py-4 hover:opacity-90"
+              >
                 Get Free SEO Audit 🚀
               </Button>
             </Link>

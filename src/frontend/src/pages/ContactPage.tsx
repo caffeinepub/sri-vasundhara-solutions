@@ -18,12 +18,12 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-primary/5 via-white to-accent/5 py-16">
+      <section className="bg-[#E6F7F8] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BreadcrumbNav
             crumbs={[{ label: "Home", href: "/" }, { label: "Contact Us" }]}
           />
-          <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+          <Badge className="mb-4 bg-[#E6F7F8] text-[#4FC3C7] border-[#4FC3C7]/30">
             Free Consultation Available
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-display">
@@ -50,7 +50,7 @@ export default function ContactPage() {
                   className="flex items-center gap-4 p-4 border border-border rounded-xl hover:bg-secondary/50 transition-colors group"
                   data-ocid="contact.phone_link"
                 >
-                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <div className="h-10 w-10 rounded-lg bg-green-100 flex items-center justify-center shrink-0">
                     <Phone className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -67,7 +67,7 @@ export default function ContactPage() {
                   className="flex items-center gap-4 p-4 border border-border rounded-xl hover:bg-secondary/50 transition-colors group"
                   data-ocid="contact.email_link"
                 >
-                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <div className="h-10 w-10 rounded-lg bg-green-100 flex items-center justify-center shrink-0">
                     <Mail className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -78,7 +78,7 @@ export default function ContactPage() {
                   </div>
                 </a>
                 <div className="flex items-start gap-4 p-4 border border-border rounded-xl">
-                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="h-10 w-10 rounded-lg bg-green-100 flex items-center justify-center shrink-0 mt-0.5">
                     <MapPin className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -95,7 +95,7 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-4 border border-border rounded-xl">
-                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <div className="h-10 w-10 rounded-lg bg-green-100 flex items-center justify-center shrink-0">
                     <Clock className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -159,7 +159,7 @@ export default function ContactPage() {
             </div>
 
             {/* Right: Form */}
-            <div className="bg-secondary/30 rounded-2xl p-6 border border-border">
+            <div className="bg-[#E6F7F8] rounded-2xl p-6 border border-border">
               <h2 className="text-xl font-bold text-foreground mb-6 font-display">
                 Book Your Free Consultation
               </h2>
