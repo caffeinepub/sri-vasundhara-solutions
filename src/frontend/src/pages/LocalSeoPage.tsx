@@ -15,12 +15,13 @@ import FAQItem from "../components/FAQItem";
 
 export default function LocalSeoPage() {
   useEffect(() => {
-    document.title = "Local SEO Services for Small Businesses | SVS";
+    document.title =
+      "Local SEO Services for Small Businesses in Guntur & Hyderabad | SVS";
     const meta = document.querySelector("meta[name='description']");
     if (meta)
       meta.setAttribute(
         "content",
-        "Dominate local search results in Guntur and Hyderabad. Local SEO services to rank on Google Maps and attract nearby customers.",
+        "Local SEO services for businesses in Guntur and Hyderabad. Rank on Google Maps and attract nearby customers. Free consultation available.",
       );
   }, []);
 
@@ -39,15 +40,12 @@ export default function LocalSeoPage() {
             Local SEO
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-display">
-            Local SEO Services for Small Businesses in Andhra Pradesh &amp;
-            Telangana
+            Local SEO Services for Businesses in Guntur &amp; Hyderabad
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Dominate local search and Google Maps in Guntur and Hyderabad.{" "}
-            <strong>
-              Local SEO services for small businesses in Andhra Pradesh
-            </strong>{" "}
-            that drive real foot traffic and calls.
+            Appear when local customers search for your services. Our{" "}
+            <strong>local SEO services in Guntur and Hyderabad</strong> drive
+            foot traffic, calls, and online inquiries from your target area.
           </p>
         </div>
       </section>
@@ -57,39 +55,34 @@ export default function LocalSeoPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
               <h2 className="section-heading mb-4">
-                Rank #1 in Local Search Results
+                Improve Your Local Search Rankings
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Dominate local search results with our{" "}
-                <strong>
-                  local SEO services for small businesses in Andhra Pradesh
-                </strong>
-                . We optimize your Google Business Profile, build local
-                citations, and help your business appear in the 'near me'
-                searches in Guntur, Hyderabad, and across India. As a leading{" "}
-                <strong>digital marketing agency in KPHB Hyderabad</strong>, we
-                understand the local market and help businesses stand out from
-                competitors.
+                Local SEO is essential for any business that serves customers in
+                a specific area. We help businesses in Guntur, Hyderabad, and
+                across Andhra Pradesh appear prominently in local search results
+                and Google Maps, making it easier for nearby customers to find
+                and contact you.
               </p>
               <div className="space-y-5 mb-8">
                 {[
                   {
                     title: "Google Business Profile Optimization",
-                    desc: "Complete optimization of your GBP listing including photos, posts, Q&A, categories, and attributes to rank in the Google Maps 3-pack.",
+                    desc: "Complete optimization of your GBP listing including photos, posts, Q&A, categories, and service descriptions to rank in the Google Maps 3-pack.",
                   },
                   {
                     title: "Local Citation Building",
-                    desc: "Build consistent NAP (Name, Address, Phone) citations across major directories like Justdial, Sulekha, IndiaMART, and 50+ local directories.",
+                    desc: "Build consistent NAP (Name, Address, Phone) citations across major directories like Justdial, Sulekha, IndiaMART, and local directories relevant to your industry.",
                   },
                   {
-                    title: "'Near Me' SEO",
-                    desc: "Optimize your website and content for location-based 'near me' searches in Guntur, Hyderabad, KPHB, and surrounding areas.",
+                    title: "Location-Based SEO",
+                    desc: "Optimize your website and content for location-based searches in Guntur, Hyderabad, and surrounding areas to attract nearby customers.",
                   },
                   {
                     title: "Review Management",
-                    desc: "Develop a systematic approach to generating and responding to Google reviews to build trust and improve local ranking signals.",
+                    desc: "Build a systematic approach to generating and responding to Google reviews, which improves trust signals and local ranking performance.",
                   },
-                ].map(({ title, desc }, _i) => (
+                ].map(({ title, desc }) => (
                   <div key={title} className="flex gap-3">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-1 shrink-0" />
                     <div>
@@ -115,7 +108,7 @@ export default function LocalSeoPage() {
                 {[
                   {
                     icon: MapPin,
-                    label: "Top 3 Google Maps pack",
+                    label: "Google Maps 3-pack visibility",
                     color: "text-green-600",
                   },
                   {
@@ -125,15 +118,15 @@ export default function LocalSeoPage() {
                   },
                   {
                     icon: TrendingUp,
-                    label: "Drive foot traffic",
+                    label: "Increased foot traffic",
                     color: "text-accent",
                   },
                   {
                     icon: Star,
-                    label: "Build local trust",
+                    label: "Stronger local reputation",
                     color: "text-yellow-500",
                   },
-                ].map(({ icon: Icon, label, color }, _i) => (
+                ].map(({ icon: Icon, label, color }) => (
                   <div
                     key={label}
                     className="bg-secondary/50 rounded-xl p-4 text-center"
@@ -150,19 +143,19 @@ export default function LocalSeoPage() {
               </h3>
               <FAQItem
                 q="What is Local SEO?"
-                a="Local SEO is the process of optimizing your online presence to attract more business from local searches. It includes Google Business Profile optimization, local citation building, and creating location-specific content to rank in searches like 'digital marketing agency near me'."
+                a="Local SEO is the process of optimizing your online presence to attract more business from local searches. It includes Google Business Profile optimization, local citation building, and creating location-specific content to rank in searches like 'digital marketing agency near me' in Guntur or Hyderabad."
               />
               <FAQItem
                 q="How do I rank on Google Maps in Guntur?"
-                a="To rank on Google Maps in Guntur, you need an optimized Google Business Profile, consistent NAP citations across directories, positive customer reviews, location-specific content on your website, and regular posts on your GBP listing."
+                a="To rank on Google Maps in Guntur, you need an optimized Google Business Profile, consistent NAP citations across directories, positive customer reviews, and location-specific content on your website."
               />
               <FAQItem
                 q="How long does Local SEO take?"
-                a="Local SEO shows faster results than organic SEO. Most businesses see improvements in Google Maps rankings within 4–8 weeks. Full results with significant ranking improvements typically take 3–4 months of consistent optimization."
+                a="Local SEO typically shows faster results than organic SEO. Most businesses see improvements in Google Maps rankings within 4–8 weeks. Significant ranking improvements typically occur within 3–4 months of consistent optimization."
               />
               <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl">
                 <p className="text-sm font-medium text-green-600 mb-2">
-                  🔗 Also explore our services:
+                  Also explore our services:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Link
@@ -195,7 +188,7 @@ export default function LocalSeoPage() {
       <section className="py-16 bg-gradient-to-r from-green-700 to-green-600">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4 font-display">
-            Dominate Local Search in Guntur &amp; Hyderabad
+            Improve Local Search Rankings in Guntur &amp; Hyderabad
           </h2>
           <p className="text-white/80 mb-8">
             Get found by local customers searching for your business. Start your
@@ -204,7 +197,7 @@ export default function LocalSeoPage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
               <Button className="bg-white text-green-700 hover:bg-white/90 font-bold px-8 py-4">
-                Get Local SEO Quote 🚀
+                Get Local SEO Quote
               </Button>
             </Link>
             <a

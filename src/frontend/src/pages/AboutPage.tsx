@@ -49,26 +49,23 @@ export default function AboutPage() {
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Sri Vasundhara Solutions is a results-driven{" "}
                 <strong>digital marketing agency in Guntur</strong> and
-                Hyderabad, founded in 2025 to help small businesses, startups,
-                and local enterprises grow their online presence. We specialize
-                in SEO, Google Ads, Social Media Marketing, Website Design, and
-                Local SEO.
+                Hyderabad, founded to help small businesses, startups, and local
+                enterprises grow their online presence. We specialize in SEO,
+                Google Ads, Social Media Marketing, Website Design, and Local
+                SEO.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                As a leading{" "}
-                <strong>digital marketing agency in KPHB Hyderabad</strong>, we
-                understand the local market dynamics and create customized
-                strategies that deliver measurable results. Our team of digital
-                marketing experts combines creativity with data to help
-                businesses rank higher on Google, generate more leads, and
-                increase revenue.
+                We understand the local market dynamics in Guntur and Hyderabad
+                and create customized strategies that deliver measurable
+                results. Our team of digital marketing experts combines
+                creativity with data to help businesses rank higher on Google,
+                generate more leads, and increase revenue.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-8">
                 Whether you're a restaurant in Guntur, a clinic in Hyderabad, or
-                a startup anywhere in India – we have the expertise to help you
-                succeed online. Our{" "}
-                <strong>affordable digital marketing services in Guntur</strong>{" "}
-                are designed to deliver maximum ROI for businesses of all sizes.
+                a startup anywhere in India, we have the expertise to help you
+                succeed online. Our affordable digital marketing services are
+                designed to deliver maximum ROI for businesses of all sizes.
               </p>
               <div className="space-y-3">
                 {[
@@ -78,7 +75,7 @@ export default function AboutPage() {
                   "Local expertise in Guntur and Hyderabad markets",
                   "Bilingual support in Telugu and English",
                   "Affordable pricing for small businesses and startups",
-                ].map((point, _i) => (
+                ].map((point) => (
                   <div key={point} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
                     <span className="text-muted-foreground">{point}</span>
@@ -93,7 +90,7 @@ export default function AboutPage() {
                 </h3>
                 <div className="space-y-5">
                   <div>
-                    <h4 className="font-bold text-accent mb-2">🎯 Mission</h4>
+                    <h4 className="font-bold text-accent mb-2">Mission</h4>
                     <p className="text-white/80 text-sm leading-relaxed">
                       To empower businesses in Guntur, Hyderabad, and across
                       India with affordable, results-driven digital marketing
@@ -101,7 +98,7 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-bold text-accent mb-2">🔭 Vision</h4>
+                    <h4 className="font-bold text-accent mb-2">Vision</h4>
                     <p className="text-white/80 text-sm leading-relaxed">
                       To be the most trusted{" "}
                       <strong className="text-white">
@@ -112,7 +109,7 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-bold text-accent mb-2">💎 Values</h4>
+                    <h4 className="font-bold text-accent mb-2">Values</h4>
                     <p className="text-white/80 text-sm leading-relaxed">
                       Integrity, innovation, accountability, and client success.
                       We treat every client's business as our own and work
@@ -143,7 +140,7 @@ export default function AboutPage() {
                     label: "Satisfaction Rate",
                     color: "text-primary",
                   },
-                ].map(({ value, label, color }, _i) => (
+                ].map(({ value, label, color }) => (
                   <div
                     key={label}
                     className="bg-secondary/50 rounded-xl p-5 text-center"
@@ -162,8 +159,33 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Services Overview */}
+      {/* Author / E-E-A-T Section */}
       <section className="py-16 bg-secondary/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="section-heading text-center mb-10">Meet Our Expert</h2>
+          <div className="max-w-2xl mx-auto bg-white rounded-2xl p-8 border border-border shadow-sm text-center">
+            <div className="h-20 w-20 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 font-display">
+              GS
+            </div>
+            <h3 className="text-xl font-bold text-foreground mb-1 font-display">
+              Gajjalakonda Srinu
+            </h3>
+            <p className="text-sm font-semibold text-primary mb-4">
+              Digital Marketing Analyst
+            </p>
+            <p className="text-muted-foreground leading-relaxed text-sm">
+              With hands-on experience in SEO, Google Ads, and performance
+              marketing, Gajjalakonda Srinu leads the strategy team at Sri
+              Vasundhara Solutions. He specializes in helping businesses in
+              Guntur and Hyderabad improve their online visibility and generate
+              consistent leads through data-driven digital marketing.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Overview */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="section-heading text-center mb-10">
             Our Digital Marketing Services
@@ -172,7 +194,7 @@ export default function AboutPage() {
             {[
               {
                 title: "SEO Services in Guntur & Hyderabad",
-                desc: "Rank #1 on Google with proven SEO strategies.",
+                desc: "Rank higher on Google with proven SEO strategies.",
                 to: "/seo-services",
               },
               {
@@ -192,7 +214,7 @@ export default function AboutPage() {
               },
               {
                 title: "Local SEO Services",
-                desc: "Dominate local search in Guntur & Hyderabad.",
+                desc: "Improve local rankings in Guntur and Hyderabad.",
                 to: "/local-seo-services",
               },
               {
@@ -231,7 +253,7 @@ export default function AboutPage() {
                 className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4 text-base"
                 data-ocid="about.cta_button"
               >
-                Get Free Audit 🚀
+                Get Free Audit
               </Button>
             </Link>
             <a

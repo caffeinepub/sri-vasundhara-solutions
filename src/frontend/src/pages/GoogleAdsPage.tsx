@@ -38,7 +38,7 @@ export default function GoogleAdsPage() {
             High-ROI{" "}
             <strong>Google Ads services in Hyderabad and Guntur</strong>. Expert
             PPC management that generates qualified leads and maximizes your
-            advertising ROI.
+            advertising return on investment.
           </p>
         </div>
       </section>
@@ -48,20 +48,14 @@ export default function GoogleAdsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
               <h2 className="section-heading mb-4">
-                Generate Leads Instantly with Google Ads
+                Generate Leads with Google Ads
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Need a{" "}
-                <strong>
-                  Google Ads expert in Hyderabad for lead generation
-                </strong>
-                ? We manage high-ROI Google Ads campaigns for businesses in
-                Guntur and Hyderabad. Our{" "}
-                <strong>low cost Google Ads services Hyderabad</strong> are
-                designed to maximize your advertising budget and deliver
-                qualified leads. Whether you need Search Ads, Display Ads, or
-                Shopping campaigns, we create data-driven strategies that
-                generate real business results.
+                Sri Vasundhara Solutions manages high-ROI Google Ads campaigns
+                for businesses in Guntur and Hyderabad. Our PPC approach focuses
+                on targeted keyword selection, compelling ad copy, and
+                continuous optimization to maximize your advertising budget and
+                deliver qualified leads consistently.
               </p>
               <div className="space-y-5 mb-8">
                 {[
@@ -71,7 +65,7 @@ export default function GoogleAdsPage() {
                   },
                   {
                     title: "Display & Remarketing Ads",
-                    desc: "Re-engage website visitors with targeted display ads across Google's network. Keep your brand top-of-mind and bring back potential customers.",
+                    desc: "Re-engage website visitors with targeted display ads across Google's network. Keep your brand visible and bring back potential customers.",
                   },
                   {
                     title: "Shopping Campaigns",
@@ -79,9 +73,9 @@ export default function GoogleAdsPage() {
                   },
                   {
                     title: "YouTube Ads",
-                    desc: "Reach your audience with video advertising on YouTube, the world's second-largest search engine. Cost-effective brand awareness for Hyderabad businesses.",
+                    desc: "Reach your audience with video advertising on YouTube. Cost-effective brand awareness and lead generation for Hyderabad businesses.",
                   },
-                ].map(({ title, desc }, _i) => (
+                ].map(({ title, desc }) => (
                   <div key={title} className="flex gap-3">
                     <CheckCircle className="h-5 w-5 text-accent mt-1 shrink-0" />
                     <div>
@@ -101,7 +95,7 @@ export default function GoogleAdsPage() {
                   "Budget control",
                   "Geographic targeting",
                   "Detailed analytics",
-                ].map((b, _i) => (
+                ].map((b) => (
                   <div key={b} className="flex items-center gap-2 text-sm">
                     <div className="h-1.5 w-1.5 rounded-full bg-accent" />
                     <span className="text-muted-foreground">{b}</span>
@@ -147,30 +141,30 @@ export default function GoogleAdsPage() {
               </h3>
               <FAQItem
                 q="How much budget do I need for Google Ads?"
-                a="For small businesses in Guntur and Hyderabad, we recommend starting with ₹5,000–₹10,000/month. Most businesses see good results with ₹15,000–₹50,000/month depending on industry and competition. The more competitive your market, the higher the budget needed."
+                a="For small businesses in Guntur and Hyderabad, we recommend starting with a modest monthly budget. The right budget depends on your industry, competition, and lead generation goals. We'll advise on the optimal spend during your free consultation."
               />
               <FAQItem
                 q="How soon will I see results with Google Ads?"
                 a="Google Ads shows results within 24–48 hours of campaign launch. You'll start seeing clicks and leads immediately, unlike SEO which takes months. This makes Google Ads ideal for businesses needing quick lead generation."
               />
               <FAQItem
-                q="Do you manage Google Ads for small businesses in Hyderabad?"
-                a="Yes! We specialize in Google Ads management for small and medium businesses in Hyderabad, Guntur, and across India. Our low cost Google Ads services Hyderabad are designed to maximize ROI for businesses with limited budgets."
+                q="Do you manage Google Ads for small businesses?"
+                a="Yes. We specialize in Google Ads management for small and medium businesses in Hyderabad, Guntur, and across India. Our PPC campaigns are designed to maximize ROI for businesses with limited budgets."
               />
               <FAQItem
-                q="What is your Google Ads management fee?"
-                a="Our Google Ads management fee starts from ₹4,999/month. The management fee is separate from the ad spend budget. We offer transparent pricing with no hidden charges and detailed monthly reporting."
+                q="What is included in your Google Ads management service?"
+                a="Our service includes campaign setup and strategy, keyword research, ad copywriting, bid management, A/B testing, landing page recommendations, conversion tracking, and detailed monthly reporting with transparent performance data."
               />
               <div className="mt-6 p-4 bg-accent/5 border border-accent/20 rounded-xl">
                 <p className="text-sm font-medium text-accent mb-2">
-                  🔗 Also explore our services:
+                  Also explore our services:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Link
                     to="/seo-services"
                     className="text-accent text-sm underline hover:no-underline"
                   >
-                    SEO Services
+                    SEO Services in Guntur
                   </Link>
                   <span className="text-muted-foreground">|</span>
                   <Link
@@ -205,7 +199,7 @@ export default function GoogleAdsPage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
               <Button className="bg-white text-accent hover:bg-white/90 font-bold px-8 py-4">
-                Get Free Consultation 🚀
+                Get Free Consultation
               </Button>
             </Link>
             <a

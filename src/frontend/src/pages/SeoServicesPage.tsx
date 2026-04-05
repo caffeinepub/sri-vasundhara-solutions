@@ -14,7 +14,7 @@ export default function SeoServicesPage() {
     if (meta)
       meta.setAttribute(
         "content",
-        "Affordable SEO services in Guntur and Hyderabad. Get on-page, off-page & technical SEO to rank #1 on Google. Free SEO audit available.",
+        "Affordable SEO services in Guntur and Hyderabad. Get on-page, off-page and technical SEO to rank higher on Google. Free SEO audit available.",
       );
   }, []);
 
@@ -36,9 +36,9 @@ export default function SeoServicesPage() {
             SEO Services in Guntur &amp; Hyderabad
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Rank your business #1 on Google with proven{" "}
-            <strong>SEO services in Guntur</strong> and Hyderabad. Affordable,
-            result-driven SEO for small businesses and startups.
+            Improve your Google rankings with professional{" "}
+            <strong>SEO services in Guntur</strong> and Hyderabad. Data-driven,
+            result-focused SEO for small businesses and growing enterprises.
           </p>
         </div>
       </section>
@@ -48,40 +48,35 @@ export default function SeoServicesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
               <h2 className="section-heading mb-4">
-                Rank Your Business #1 on Google
+                Rank Your Business Higher on Google
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Looking for the{" "}
-                <strong>best SEO company in Guntur for small business</strong>?
-                Sri Vasundhara Solutions offers affordable{" "}
-                <strong>SEO services in Guntur</strong> and Hyderabad that
-                deliver real results. Our SEO experts help businesses rank
-                higher on Google, drive organic traffic, and generate consistent
-                leads. Whether you're a startup or an established business, our{" "}
-                <strong>
-                  SEO services for small business in Andhra Pradesh
-                </strong>{" "}
-                are designed to deliver long-term, sustainable growth.
+                Sri Vasundhara Solutions offers comprehensive SEO services in
+                Guntur and Hyderabad that deliver consistent, measurable
+                results. Our SEO approach combines keyword research, on-page
+                optimization, technical audits, and quality link building to
+                help your business attract more organic traffic and generate
+                qualified leads.
               </p>
               <div className="space-y-5 mb-8">
                 {[
                   {
                     title: "On-Page SEO Optimization",
-                    desc: "We optimize title tags, meta descriptions, keyword placement, content structure, and internal linking to maximize your relevance for target keywords in Guntur and Hyderabad.",
+                    desc: "We optimize title tags, meta descriptions, keyword placement, content structure, and internal linking to improve your relevance for target keywords in Guntur and Hyderabad.",
                   },
                   {
                     title: "Off-Page SEO & Link Building",
-                    desc: "Build domain authority with high-quality backlinks from relevant, authoritative websites. Our link-building strategies improve your site's credibility and Google rankings.",
+                    desc: "Build domain authority with high-quality backlinks from relevant, authoritative websites. Our link-building strategies improve your site's credibility and search rankings.",
                   },
                   {
                     title: "Technical SEO",
-                    desc: "We audit and fix technical issues: site speed, mobile optimization, crawlability, Core Web Vitals, structured data, and XML sitemap to ensure Google can effectively index your site.",
+                    desc: "We audit and fix technical issues including site speed, mobile optimization, crawlability, Core Web Vitals, structured data, and XML sitemap to ensure search engines can effectively index your site.",
                   },
                   {
                     title: "Local SEO Integration",
-                    desc: "Optimize your Google Business Profile, build local citations, and maintain NAP consistency to rank in 'near me' searches in Guntur, Hyderabad, and Andhra Pradesh.",
+                    desc: "Optimize your Google Business Profile, build local citations, and maintain NAP consistency to appear in local searches and Google Maps for Guntur and Hyderabad.",
                   },
-                ].map(({ title, desc }, _i) => (
+                ].map(({ title, desc }) => (
                   <div key={title} className="flex gap-3">
                     <CheckCircle className="h-5 w-5 text-primary mt-1 shrink-0" />
                     <div>
@@ -101,7 +96,7 @@ export default function SeoServicesPage() {
                   "Brand credibility",
                   "Long-term results",
                   "Monthly reporting",
-                ].map((b, _i) => (
+                ].map((b) => (
                   <div key={b} className="flex items-center gap-2 text-sm">
                     <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                     <span className="text-muted-foreground">{b}</span>
@@ -146,15 +141,15 @@ export default function SeoServicesPage() {
               </h3>
               <FAQItem
                 q="How long does SEO take to show results?"
-                a="SEO typically takes 3–6 months to show significant results. However, you may see initial improvements in rankings and traffic within 4–8 weeks for less competitive keywords. Local SEO for Guntur businesses often shows faster results."
+                a="SEO typically takes 3–6 months to show significant results. Initial improvements in rankings and traffic can appear within 4–8 weeks for less competitive keywords. Local SEO for Guntur businesses often shows faster results."
               />
               <FAQItem
                 q="How much do SEO services cost in Guntur?"
-                a="Our affordable SEO packages start from ₹5,000/month for basic local SEO. Full SEO packages including on-page, off-page, and technical SEO start from ₹8,999/month. We offer customized pricing based on your business needs."
+                a="Our affordable SEO packages start from a competitive monthly rate for basic local SEO. Full SEO packages including on-page, off-page, and technical SEO are available at customized pricing based on your business needs."
               />
               <FAQItem
                 q="Do you provide local SEO for Guntur businesses?"
-                a="Yes! We specialize in local SEO services for businesses in Guntur, Hyderabad, and across Andhra Pradesh and Telangana. We optimize your Google Business Profile, build local citations, and target location-specific keywords."
+                a="Yes. We specialize in local SEO services for businesses in Guntur, Hyderabad, and across Andhra Pradesh and Telangana. We optimize your Google Business Profile, build local citations, and target location-specific keywords."
               />
               <FAQItem
                 q="What is included in your SEO package?"
@@ -162,7 +157,7 @@ export default function SeoServicesPage() {
               />
               <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-xl">
                 <p className="text-sm font-medium text-primary mb-2">
-                  🔗 Also explore our services:
+                  Also explore our services:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Link
@@ -198,13 +193,13 @@ export default function SeoServicesPage() {
             Get Your Free SEO Audit Today
           </h2>
           <p className="text-white/80 mb-8">
-            Discover how we can help your business rank #1 on Google in Guntur
-            and Hyderabad.
+            Discover how we can help your business rank higher on Google in
+            Guntur and Hyderabad.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
               <Button className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4">
-                Get Free SEO Audit 🚀
+                Get Free SEO Audit
               </Button>
             </Link>
             <a

@@ -13,7 +13,7 @@ export default function WebsiteDesignPage() {
     if (meta)
       meta.setAttribute(
         "content",
-        "Affordable website design in Guntur and Hyderabad. Fast, SEO-friendly, mobile-first websites for small businesses. Get a free quote.",
+        "Professional website design in Guntur and Hyderabad. Fast, SEO-friendly, mobile-first websites for small businesses. Get a free quote.",
       );
   }, []);
 
@@ -32,13 +32,13 @@ export default function WebsiteDesignPage() {
             Website Design
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-display">
-            Affordable Website Design Company in Guntur &amp; Hyderabad
+            Website Design Company in Guntur &amp; Hyderabad
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
             Fast, mobile-first, SEO-friendly websites that convert visitors into
-            customers.{" "}
-            <strong>Affordable website design with SEO in Guntur</strong> for
-            small businesses and startups.
+            customers. Professional{" "}
+            <strong>website design services in Guntur</strong> for businesses of
+            all sizes.
           </p>
         </div>
       </section>
@@ -51,24 +51,22 @@ export default function WebsiteDesignPage() {
                 Websites That Drive Business Growth
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Looking for a{" "}
-                <strong>website design company in Guntur affordable</strong>? We
-                build fast, mobile-first, SEO-friendly websites that convert
-                visitors into customers. Our{" "}
-                <strong>affordable website design with SEO in Guntur</strong> is
-                perfect for startups, small businesses, clinics, restaurants,
-                and retail stores. Every website we deliver is optimized for
-                speed, search engines, and lead generation.
+                We build professional, SEO-optimized websites for businesses in
+                Guntur and Hyderabad. Every website is mobile-responsive,
+                fast-loading, and built to convert visitors into customers.
+                Whether you need a business website, landing page, or e-commerce
+                store, our team delivers a complete solution from design to
+                launch.
               </p>
               <div className="grid grid-cols-2 gap-3 mb-8">
                 {[
                   "Mobile-first design",
-                  "Fast loading (<3s)",
+                  "Fast loading speeds",
                   "SEO-ready structure",
                   "Lead capture forms",
                   "Affordable pricing",
-                  "3 months support",
-                ].map((f, _i) => (
+                  "Post-launch support",
+                ].map((f) => (
                   <div key={f} className="flex items-center gap-2 text-sm">
                     <CheckCircle className="h-4 w-4 text-purple-500 shrink-0" />
                     <span className="text-muted-foreground">{f}</span>
@@ -85,28 +83,28 @@ export default function WebsiteDesignPage() {
               </Link>
               <div className="mt-6 p-4 bg-purple-50 border border-purple-200 rounded-xl">
                 <p className="text-sm font-medium text-purple-600 mb-2">
-                  🔗 Also explore our services:
+                  Also explore our services:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Link
                     to="/seo-services"
                     className="text-purple-600 text-sm underline hover:no-underline"
                   >
-                    SEO Services
+                    SEO Services in Guntur
                   </Link>
                   <span className="text-muted-foreground">|</span>
                   <Link
                     to="/local-seo-services"
                     className="text-purple-600 text-sm underline hover:no-underline"
                   >
-                    Local SEO
+                    Local SEO Services
                   </Link>
                   <span className="text-muted-foreground">|</span>
                   <Link
                     to="/contact-us"
                     className="text-purple-600 text-sm underline hover:no-underline"
                   >
-                    Free Quote
+                    Get Free Quote
                   </Link>
                 </div>
               </div>
@@ -120,7 +118,7 @@ export default function WebsiteDesignPage() {
                   {[
                     {
                       title: "Business Websites",
-                      desc: "Professional, fast-loading websites that showcase your business and convert visitors to customers.",
+                      desc: "Professional, fast-loading websites that showcase your business and convert visitors into customers.",
                     },
                     {
                       title: "E-Commerce Development",
@@ -128,13 +126,13 @@ export default function WebsiteDesignPage() {
                     },
                     {
                       title: "Landing Pages",
-                      desc: "High-converting landing pages designed specifically for Google Ads and lead generation campaigns.",
+                      desc: "High-converting landing pages designed for Google Ads and lead generation campaigns.",
                     },
                     {
                       title: "SEO-Optimized Design",
-                      desc: "Every website we build is SEO-ready from day one — fast load times, proper schema markup, and mobile-first design.",
+                      desc: "Every website includes proper heading structure, meta tags, schema markup, fast load times, and internal linking from day one.",
                     },
-                  ].map(({ title, desc }, _i) => (
+                  ].map(({ title, desc }) => (
                     <div
                       key={title}
                       className="p-3 rounded-lg border border-border"
@@ -154,15 +152,15 @@ export default function WebsiteDesignPage() {
               </h3>
               <FAQItem
                 q="How much does a website cost in Guntur?"
-                a="A basic business website starts from ₹8,999. E-commerce websites start from ₹19,999. All websites include mobile-responsive design, basic SEO setup, and 3 months of free support. We offer the most affordable website design with SEO in Guntur."
+                a="Website pricing depends on the scope and requirements. Basic business websites, e-commerce stores, and landing pages are available at different price points. Contact us for a free quote tailored to your specific needs."
               />
               <FAQItem
                 q="How long does it take to build a website?"
-                a="A standard business website takes 7–14 days. E-commerce websites take 15–30 days. Landing pages can be delivered within 3–5 days. Timeline depends on content readiness and revision cycles."
+                a="A standard business website takes 7–14 days. E-commerce websites take 15–30 days. Landing pages can be delivered within 3–5 days. The timeline depends on content readiness and revision cycles."
               />
               <FAQItem
                 q="Do you provide website maintenance?"
-                a="Yes, we offer monthly website maintenance packages starting from ₹1,999/month including security updates, performance optimization, content updates, and technical support."
+                a="Yes, we offer monthly website maintenance packages including security updates, performance optimization, content updates, and technical support."
               />
             </div>
           </div>
@@ -175,13 +173,13 @@ export default function WebsiteDesignPage() {
             Get Your Website Built Today
           </h2>
           <p className="text-white/80 mb-8">
-            Fast, affordable, SEO-optimized websites for small businesses in
-            Guntur and Hyderabad.
+            Fast, professional, SEO-optimized websites for businesses in Guntur
+            and Hyderabad.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
               <Button className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4">
-                Get Free Quote 🚀
+                Get Free Quote
               </Button>
             </Link>
             <a

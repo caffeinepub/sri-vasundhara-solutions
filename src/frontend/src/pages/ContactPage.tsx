@@ -12,7 +12,7 @@ export default function ContactPage() {
     if (meta)
       meta.setAttribute(
         "content",
-        "Contact Sri Vasundhara Solutions for a free digital marketing audit. Offices in KPHB Hyderabad and Guntur. Call +91 9398241974.",
+        "Contact Sri Vasundhara Solutions for a free digital marketing audit. Offices in Gorantla, Guntur and Hyderabad. Call +91 9398241974.",
       );
   }, []);
 
@@ -24,7 +24,7 @@ export default function ContactPage() {
             crumbs={[{ label: "Home", href: "/" }, { label: "Contact Us" }]}
           />
           <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
-            🔥 Limited Free Audit Offer
+            Free Consultation Available
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-display">
             Contact Sri Vasundhara Solutions
@@ -86,11 +86,11 @@ export default function ContactPage() {
                       Office Locations
                     </p>
                     <p className="font-semibold text-foreground text-sm">
-                      📍 KPHB Colony, Hyderabad, Telangana – 500072
+                      Sri Vasundhara Solutions, Gorantla, Guntur, Andhra Pradesh
+                      – 522034
                     </p>
                     <p className="font-semibold text-foreground text-sm mt-1">
-                      📍 Sri Vasundhara Solutions, Gorantla, Guntur, Andhra
-                      Pradesh
+                      KPHB Colony, Hyderabad, Telangana – 500072
                     </p>
                   </div>
                 </div>
@@ -116,29 +116,11 @@ export default function ContactPage() {
                 className="flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-xl transition-colors mb-6 w-full"
                 data-ocid="contact.whatsapp_cta"
               >
-                <MessageCircle className="h-5 w-5" /> Chat on WhatsApp – Quick
-                Response!
+                <MessageCircle className="h-5 w-5" /> Chat on WhatsApp
               </a>
 
               {/* Google Maps Embeds */}
               <div className="space-y-4">
-                <div>
-                  <p className="text-sm font-semibold text-foreground mb-2">
-                    KPHB Colony, Hyderabad Office
-                  </p>
-                  <div className="rounded-xl overflow-hidden border border-border">
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4!2d78.3915!3d17.4905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91e9!2sKPHB+Colony%2C+Hyderabad!5e0!3m2!1sen!2sin!4v1234567890"
-                      width="100%"
-                      height="200"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Sri Vasundhara Solutions – KPHB Colony, Hyderabad"
-                    />
-                  </div>
-                </div>
                 <div>
                   <p className="text-sm font-semibold text-foreground mb-2">
                     Gorantla, Guntur Office
@@ -153,6 +135,23 @@ export default function ContactPage() {
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       title="Sri Vasundhara Solutions – Gorantla, Guntur"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-foreground mb-2">
+                    KPHB Colony, Hyderabad Office
+                  </p>
+                  <div className="rounded-xl overflow-hidden border border-border">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4!2d78.3915!3d17.4905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91e9!2sKPHB+Colony%2C+Hyderabad!5e0!3m2!1sen!2sin!4v1234567890"
+                      width="100%"
+                      height="200"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Sri Vasundhara Solutions – KPHB Colony, Hyderabad"
                     />
                   </div>
                 </div>

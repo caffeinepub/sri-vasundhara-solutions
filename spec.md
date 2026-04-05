@@ -1,62 +1,66 @@
-# Sri Vasundhara Solutions – Full SEO & Technical Audit Fix
+# Sri Vasundhara Solutions – Website Rebuild & SEO Optimization
 
 ## Current State
 
-The site is a React SPA deployed on Caffeine. It has:
-- `index.html` with GA4 (G-97CDFPRMHZ), GSC verification meta tag, LocalBusiness JSON-LD schema (Gorantla, Guntur address), Open Graph/Twitter Card tags, and canonical URL.
-- Pages: HomePage, AboutPage, ContactPage, SeoServicesPage, GoogleAdsPage, SocialMediaPage, WebsiteDesignPage, LocalSeoPage, BlogPage, and several blog post pages.
-- Layout.tsx (footer with social links, NAP – Gorantla, Guntur).
-- ContactForm.tsx with proper labels already on text inputs, but Select components lack `id`/`htmlFor` label associations.
-- Sitemap.xml with 14 URLs (no trailing slashes). robots.txt correctly points to sitemap.
-- `.ic-assets.json5` for HTTP headers (Content-Type for sitemap, caching).
-- Floating WhatsApp + Call buttons already present in Layout.
-- Hero section uses a generated PNG image (not WebP, no srcset, no explicit width/height, no fetchpriority).
-- Heading structure: needs audit – some pages may skip H2→H4.
-- No explicit security headers (CSP, X-Frame-Options, etc.) in `.ic-assets.json5`.
-- Meta description does NOT include phone number (audit requirement).
-- GA4 tracking ID is G-97CDFPRMHZ but user's latest request uses G-7QR6GE2QS4 – keep G-97CDFPRMHZ (already verified).
-- Privacy Policy and Terms & Conditions pages exist (per project context).
-- Author section (Gajjalakonda Srinu) exists on homepage.
-- Old location (Amaravati Road / Nidamukkala) already removed.
+The website is a fully-built React SPA with:
+- Multiple pages: Home, About, Services (SEO, Google Ads, Social Media, Website Design, Local SEO), Blog, Contact
+- Existing color theme: Blue primary (#1e40af), Orange accent (#f97316), white background — defined in OKLCH tokens
+- Layout with sticky header, footer with NAP, floating WhatsApp + call buttons
+- Privacy Policy and Terms & Conditions as footer dialogs
+- Schema markup, GA4, sitemap.xml, robots.txt all in place
+- Issues: emojis scattered in content, spammy/redundant sections like "Serving Businesses in Gorantla, Guntur & Hyderabad", keyword-stuffed text, overly promotional phrasing, inconsistent heading levels (H2 skipping to H4 in some sections), announcement banners removed in v18/v19
 
 ## Requested Changes (Diff)
 
 ### Add
-- Security headers in `.ic-assets.json5`: Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy.
-- Updated meta description with phone number: "Best digital marketing agency in Guntur & Hyderabad. Get SEO, Google Ads, and website design services. Call +91 9398241974"
-- `fetchpriority="high"` and `loading="eager"` on hero/above-fold image; add explicit `width` and `height` attributes; add `srcset` for responsive sizes.
-- WebP versions of hero image (use picture element with WebP + PNG fallback).
-- `id` attributes on Select-based form fields + associated `htmlFor` on their Label elements for full accessibility.
-- Heading hierarchy audit: ensure all pages strictly follow H1→H2→H3→H4 (no skipping levels).
-- Natural keyword density enforcement across homepage content (0.8–1.5% for primary keywords).
-- Text-to-HTML ratio improvement: expand homepage content to 1200+ words with richer natural prose.
-- sitemap.xml: add trailing slashes to all URLs for canonical consistency, update lastmod to 2026-04-05.
-- `<link rel="alternate" hreflang="en-IN">` tag in index.html head.
-- Breadcrumb schema (BreadcrumbList) on service pages.
+- Clean 150–200 word service descriptions for all 6 services (SEO, Google Ads, Website Design, Social Media Marketing, Local SEO, Lead Generation) on homepage — natural keyword usage, no stuffing
+- Lead Generation as a 6th service on homepage (currently missing)
+- Our Process section (5 steps: Business Analysis → Strategy Planning → Execution → Optimization → Growth)
+- Clean professional testimonials (3–5, short format, no copyright issues)
+- Updated FAQ: "How to rank business on Google?", "What services do you provide?", "Do you work with small businesses?"
+- Author/E-E-A-T section: Gajjalakonda Srinu, Digital Marketing Analyst
 
 ### Modify
-- `index.html` – update meta description to include phone number; add hreflang; ensure single canonical with trailing slash.
-- `.ic-assets.json5` – add security headers (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) for all HTML responses.
-- Hero image in `HomePage.tsx` – wrap in `<picture>` with WebP source, add `width`, `height`, `loading="eager"`, `fetchpriority="high"`.
-- `ContactForm.tsx` – fix Select label associations with proper `id` on SelectTrigger and `htmlFor` on Label.
-- All anchor text using "click here" or weak text → replace with keyword-rich anchors.
-- Heading levels on all pages: fix any H2→H4 skips, ensure H1→H2→H3 only.
-- Homepage testimonials and benefits copy: reduce repetitive keyword use, make it more natural.
-- Footer: verify location shows Gorantla, Guntur (no Amaravati/Nidamukkala anywhere).
-- robots.txt: ensure `Disallow: /src/` is present (already is).
+- Homepage H1: "Best Digital Marketing Agency in Guntur & Hyderabad" (keep exact)
+- Homepage intro paragraph: Replace with clean version provided (no keyword stuffing)
+- Remove ALL emojis sitewide (🔥 🚀 📍 🏆 etc.)
+- Remove section "Serving Businesses in Gorantla, Guntur & Hyderabad" from homepage
+- Remove all duplicate or spammy content from all pages
+- Improve spacing and alignment throughout — section padding consistency
+- Fix heading hierarchy: H1 → H2 → H3 only, no skipped levels
+- Keyword density: 0.8%–1.5%, natural variations only
+- CTA buttons: "Get Free Consultation", "Call Now: +91 9398241974", "WhatsApp Us" (consistent across site)
+- Contact section on homepage: phone +91 9398241974, location Gorantla, Guntur, Andhra Pradesh, India
+- Service pages: clean each with 150–200 word intros, remove keyword stuffing
 
 ### Remove
-- Any remaining references to "Amaravati Road" or "Nidamukkala" anywhere in all files.
-- Duplicate keyword stuffing in homepage hero and service descriptions.
-- `loading="lazy"` from above-the-fold hero image.
+- All emoji characters from all page content
+- "Serving Businesses in Gorantla, Guntur & Hyderabad" section
+- Duplicate content blocks
+- Keyword-stuffed or over-optimized text
+- Any announcement banners with emojis or promotional copy
 
 ## Implementation Plan
 
-1. **`index.html`** – Update meta description to include phone number. Add `hreflang` link. Verify trailing slash canonical.
-2. **`.ic-assets.json5`** – Add security headers block for `/**/*.html` and `/*` routes: CSP (permissive for inline scripts/styles needed by Vite SPA), X-Frame-Options: SAMEORIGIN, X-Content-Type-Options: nosniff, Referrer-Policy: strict-origin-when-cross-origin, Permissions-Policy: camera=(), microphone=(), geolocation=().
-3. **`public/sitemap.xml`** – Add trailing slashes to all 14 URLs, update lastmod to 2026-04-05.
-4. **`HomePage.tsx`** – Fix hero image: use `<picture>` with WebP + PNG fallback, add width/height/fetchpriority/eager. Fix heading structure (no H4 skips). Expand text content naturally to 1200+ words. Fix weak anchor texts. Ensure keyword density is natural (< 1.5%).
-5. **`ContactForm.tsx`** – Add `id` to Select trigger components, add `htmlFor` to their Labels.
-6. **All service pages** – Audit and fix heading levels (H1→H2→H3 strict). Replace any weak anchor text. Verify no Amaravati/Nidamukkala references.
-7. **`Layout.tsx`** – Verify footer NAP, check for old location text.
-8. **Generate WebP** hero image asset for performance.
+1. **HomePage.tsx** — Full content rewrite:
+   - Keep H1 exact, replace intro with clean version
+   - Services section: 6 service cards with 150–200 word clean descriptions
+   - Why Choose Us: 4 clean bullet points
+   - Our Process: 5-step numbered section (new)
+   - Testimonials: 3–5 short professional (AI-named, no copyright)
+   - FAQ: 3–5 clean questions per spec
+   - Contact mini-section: phone + location
+   - Remove all emojis, remove "Serving Businesses" section
+   - Ensure H1 → H2 → H3 hierarchy, no skips
+
+2. **Layout.tsx** — Remove any emojis in nav/footer
+
+3. **Service pages** (SeoServicesPage, GoogleAdsPage, SocialMediaPage, WebsiteDesignPage, LocalSeoPage) — Remove emojis, fix heading hierarchy, clean up keyword stuffing
+
+4. **AboutPage.tsx** — Add/update author section for Gajjalakonda Srinu, remove emojis
+
+5. **ContactPage.tsx** — Verify clean content, correct address (Gorantla, Guntur)
+
+6. **BlogPage.tsx** — Remove emojis if present, clean content
+
+7. Keep index.html, sitemap.xml, robots.txt, index.css, tailwind.config.js EXACTLY AS-IS (already optimized)

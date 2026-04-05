@@ -36,11 +36,10 @@ export default function SocialMediaPage() {
             Guntur
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Grow your brand with{" "}
-            <strong>
-              social media marketing for local businesses in Hyderabad
-            </strong>
-            . Engaging content, targeted ads, and proven growth strategies.
+            Grow your brand with professional{" "}
+            <strong>social media marketing services in Hyderabad</strong>.
+            Engaging content, targeted ads, and proven growth strategies for
+            local businesses.
           </p>
         </div>
       </section>
@@ -53,22 +52,17 @@ export default function SocialMediaPage() {
                 Build Your Brand on Social Media
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Grow your brand with{" "}
-                <strong>
-                  social media marketing for local businesses in Hyderabad
-                </strong>
-                . Our team creates engaging content, manages your social
-                profiles, and runs targeted ad campaigns on Facebook, Instagram,
-                LinkedIn, and YouTube. As a leading{" "}
-                <strong>social media marketing agency Hyderabad</strong>, we
-                help businesses build a strong online presence and connect with
-                their local audience.
+                Our social media marketing team helps businesses in Hyderabad
+                and Guntur create a consistent, engaging online presence. We
+                manage profiles, create content, and run targeted ad campaigns
+                on Facebook, Instagram, LinkedIn, and YouTube — with a strategy
+                aligned to your business objectives and local market.
               </p>
               <div className="space-y-5 mb-8">
                 {[
                   {
                     title: "Facebook & Instagram Marketing",
-                    desc: "Create scroll-stopping content and run targeted ad campaigns to reach your ideal customers in Guntur, Hyderabad, and across India.",
+                    desc: "Create engaging content and run targeted ad campaigns to reach your ideal customers in Guntur, Hyderabad, and across India.",
                   },
                   {
                     title: "LinkedIn Marketing for B2B",
@@ -80,9 +74,9 @@ export default function SocialMediaPage() {
                   },
                   {
                     title: "Content Creation & Scheduling",
-                    desc: "We create, schedule, and publish SEO-friendly content in both English and Telugu, tailored for your local audience.",
+                    desc: "We create, schedule, and publish content in both English and Telugu, tailored for your local audience and platform best practices.",
                   },
-                ].map(({ title, desc }, _i) => (
+                ].map(({ title, desc }) => (
                   <div key={title} className="flex gap-3">
                     <CheckCircle className="h-5 w-5 text-pink-500 mt-1 shrink-0" />
                     <div>
@@ -106,7 +100,7 @@ export default function SocialMediaPage() {
             <div>
               <div className="bg-secondary/50 rounded-2xl p-6 mb-6">
                 <h3 className="font-bold text-foreground mb-3 font-display">
-                  Benefits
+                  What You Get
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
                   {[
@@ -116,7 +110,7 @@ export default function SocialMediaPage() {
                     "Cost-effective reach",
                     "Analytics & insights",
                     "Telugu & English content",
-                  ].map((b, _i) => (
+                  ].map((b) => (
                     <div key={b} className="flex items-center gap-2 text-sm">
                       <CheckCircle className="h-4 w-4 text-primary shrink-0" />
                       <span className="text-muted-foreground">{b}</span>
@@ -133,29 +127,29 @@ export default function SocialMediaPage() {
               />
               <FAQItem
                 q="How do you measure social media ROI?"
-                a="We track key metrics including reach, engagement rate, follower growth, website traffic from social, lead form submissions, and conversion rates. Monthly reports clearly show the ROI of your social media investment."
+                a="We track key metrics including reach, engagement rate, follower growth, website traffic from social, lead form submissions, and conversion rates. Monthly reports clearly show the performance of your social media investment."
               />
               <FAQItem
                 q="Do you create content in Telugu and English?"
-                a="Yes! We create engaging content in both Telugu and English to connect with local audiences in Guntur, Hyderabad, and Andhra Pradesh. Bilingual content significantly improves engagement for local businesses."
+                a="Yes. We create content in both Telugu and English to connect with local audiences in Guntur, Hyderabad, and Andhra Pradesh. Bilingual content improves engagement significantly for local businesses."
               />
               <div className="mt-6 p-4 bg-pink-50 border border-pink-200 rounded-xl">
                 <p className="text-sm font-medium text-pink-600 mb-2">
-                  🔗 Also explore our services:
+                  Also explore our services:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Link
                     to="/seo-services"
                     className="text-pink-600 text-sm underline hover:no-underline"
                   >
-                    SEO Services
+                    SEO Services in Guntur
                   </Link>
                   <span className="text-muted-foreground">|</span>
                   <Link
                     to="/google-ads-services"
                     className="text-pink-600 text-sm underline hover:no-underline"
                   >
-                    Google Ads
+                    Google Ads Services
                   </Link>
                   <span className="text-muted-foreground">|</span>
                   <Link
@@ -183,7 +177,7 @@ export default function SocialMediaPage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact-us">
               <Button className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4">
-                Get Free Strategy Call 🚀
+                Get Free Strategy Call
               </Button>
             </Link>
             <a

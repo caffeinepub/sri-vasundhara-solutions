@@ -41,7 +41,7 @@ const blogPosts = [
     catColor: "bg-green-100 text-green-600",
     title: "Local SEO Guide for Guntur Businesses",
     excerpt:
-      "Complete guide to dominating local search results in Guntur and Hyderabad. Step-by-step Local SEO strategies for small businesses.",
+      "Complete guide to improving local search results in Guntur and Hyderabad. Step-by-step Local SEO strategies for small businesses.",
     date: "Mar 8, 2026",
     readTime: "9 min read",
   },
